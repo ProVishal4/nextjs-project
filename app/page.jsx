@@ -6,11 +6,14 @@ import Sidebar from '@/components/ui/Sidebar'
 const page = () => {
   return (
     <>
-      <main className="flex md:w-[95vw] border-red-600 relative  md:left-[1.5vw] lg:w-[60vw] lg:left-[20vw] border   w-[95vw] left-[2.5vw]">
-        <div className="right-side-content border md:w-[30%] ">
-          <Sidebar />
-        </div>
-        <div className="left-Side-content flex flex-col overflow-y-auto border md:w-[70%] lg:w-[40vw] h-auto">
+      <main className="flex md:w-[95vw] relative md:left-[1.5vw] lg:w-[60vw] lg:left-[20vw] w-[95vw] left-[2.5vw] items-start">
+        <aside className="hidden md:block md:w-[30%] lg:w-[30%] pr-4">
+          <div className=" fixed top-20 self-start h-fit">
+            <Sidebar />
+          </div>
+        </aside>
+
+        <section className="flex-1 md:w-[70%] lg:w-[40vw] flex flex-col border h-auto">
           <AutoSlider />
           <AutoSlider />
           <AutoSlider />
@@ -18,8 +21,7 @@ const page = () => {
           <Section1 />
           {/* <Section2 /> */}
           {/* <div><Slider /></div> */}
-
-        </div>
+        </section>
       </main>
     </>
   );

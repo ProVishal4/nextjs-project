@@ -5,7 +5,7 @@ return (
   <>
     <aside
       className="hidden  md:flex justify-center 
-             md:w-[20vw] lg:w-[20vw] w-[20vw] h-screen p-6 shadow-lg overflow-y-auto
+             md:w-[20vw] lg:w-[20vw] w-[20vw] h-screen p-6 shadow-lg 
             bg-gradient-to-b from-[#fcf9e8] to-[#fae8ff]
             dark:bg-gradient-to-b dark:from-[#12061b] dark:to-[#161f15]
             dark:text-[#dad9d9] text-[#222]"
