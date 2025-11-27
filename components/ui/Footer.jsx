@@ -6,13 +6,13 @@ export default function Footer() {
     <>
       <div className="border border-[#474747] w-full"></div>
       <footer
-        className={`border-t  border-[#474747] md:w-[68vw] md:ml-[30vw] lg:w-[78.5vw] lg:ml-[20vw] w-fullbg-[#090a09] text-white`}
+        className={`border-t  border-[#474747] md:w-[68vw]  lg:w-[78.5vw]  w-full bg-[#090a09]  mx-auto  text-white`}
       >
         <div className="bg-[#090a09]  m-auto w-[90%] ">
-          <div className="md:flex justify-around my-[3rem] md:ml-0 ml-[5%]">
+          <div className="md:flex  justify-around my-[3rem] ">
             <div
               className=" text-2xl gap-2 font-semibold flex md:flex-col 
-  md:mb-0 mb-[1rem] items-center  h-full w-[80%] md:w-[40%] "
+  md:mb-0 mb-[1rem] items-center h-full w-[80%] md:w-[40%] "
             >
               <Link href="/">
                 <img

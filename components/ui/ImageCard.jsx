@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="w-full min-h-screen  flex flex-col md:flex-row items-center justify-center px-6 md:px-16 gap-10 py-16 relative">
+    
       {/* Left Image Grid */}
       <motion.div
         initial={{ opacity: 0, x: -60 }}
@@ -26,14 +27,14 @@ export default function Hero() {
         ></div> */}
       </motion.div>
 
-      {/* Center Image */}
-      <motion.div
+      {/* Center Image Todo:- this image bug */}
+      {/* <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
         className="w-60 h-80 bg-cover bg-center rounded-3xl  "
-        style={{ backgroundImage: "url('/img3.jpg')" }}
-      ></motion.div>
+        style={{ backgroundImage: "url('/card3.jpg')" }}
+      ></motion.div> */}
 
       {/* Text Section */}
       <motion.div

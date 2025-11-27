@@ -1,0 +1,22 @@
+ [
+    {
+      "title": "Mystic Mountains",
+      "button": "Explore Component",
+      "src": "card2.jpg"
+    },
+    {
+      "title": "Urban Dreams",
+      "button": "Explore Component",
+      "src": "card1.jpeg"
+    },
+    {
+      "title": "Neon Nights",
+      "button": "Explore Component",
+      "src": "card3.jpg"
+    },
+    {
+      "title": "Desert Whispers",
+      "button": "Explore Component",
+      "src": "card2.jpg"
+    }
+  ]
