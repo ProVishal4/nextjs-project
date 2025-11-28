@@ -5,6 +5,7 @@ import {Section1, Section2, Section3, Section5, Section4} from '@/components/sec
 import AutoSlider from '@/components/eliments/autoSlider/AutoSlider'
 import Sidebar from '@/components/ui/Sidebar'
 import ImageCard from '../components/ui/ImageCard'
+import NewSidebar from '@/components/ui/NewSidebar'
 
 
 const page = () => {
@@ -30,6 +31,7 @@ const page = () => {
       <ImageCard />
 <Section4 />
 <Section5 />
+
       </main>
     </>
   );

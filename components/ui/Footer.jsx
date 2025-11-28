@@ -17,13 +17,13 @@ export default function Footer() {
               <Link href="/">
                 <img
                   className="h-[2.2rem]  w-[2.2rem] md:h-[4rem] md:w-[4rem]"
-                  src="/Images/Logo1.jpg"
+                  src="/icons/Menu.png"
                   alt="pc part informer.com"
                 />
               </Link>
               <Link href="/">
                 <h4 className="text-[15px] md:text-[20px] text-[#cecece]">
-                  PC PART INFORMER
+                 CG x expoler
                 </h4>
               </Link>
             </div>
@@ -47,7 +47,7 @@ export default function Footer() {
    rounded-[5px] justify-center m-auto text-[#bdbcbc] font-medium"
           >
             <h4 className="text-[0.7em] md:text-[1.2em]">
-              Copyright © Recived by PC PART INFORMER
+              Copyright © Recived by cg x expoler
             </h4>
           </div>
         </div>

@@ -54,7 +54,7 @@ import React from "react";
        
       </div> */}
       <section className="w-full max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold mb-8  text-center dark:text-white">
+        <h2 className="text-3xl font-bold mb-8 text-[#3a3838]  text-center dark:text-white/80">
           Frequently Asked Questions
         </h2>
         <div className="space-y-4">

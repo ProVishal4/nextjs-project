@@ -12,8 +12,10 @@ const Section5 = () => {
       <motion.h1
         initial={{ x: -70, opacity: 0 }}
         whileInView={{ x: 70, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="md:text-3xl  mb-3 font-bold text-2xl text-black dark:text-white top-0  absolute left-[40%] -translate-x-1/2"
+        transition={{ duration: 0.8,
+delay:0.2
+         }}
+        className="md:text-3xl  mb-3 font-bold text-2xl text-gray-700 dark:text-zinc-300 top-0  absolute left-[40%] -translate-x-1/2"
       >
         Smooth Transition Text
       </motion.h1>

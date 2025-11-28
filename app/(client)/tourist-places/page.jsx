@@ -1,5 +1,7 @@
 "use client";
-import Sidebar from "@/components/ui/Sidebar";
+import NewSidebar from "@/components/ui/NewSidebar";
+import Sidebar2 from "@/components/ui/Sidebar2";
+import Sidebar3 from "@/components/ui/Sidebar3";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -20,7 +22,7 @@ export default function FieldPage() {
     <>
       <div className="flex w-screen justidfy-between">
         <div className="lg:w-[20%] md:w-[30%] ">
-          <Sidebar />
+          <Sidebar2 />
         </div>
         <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 md:w-[70%] lg:w-[80%]">
           <div className="max-w-6xl mx-auto">

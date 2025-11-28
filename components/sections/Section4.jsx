@@ -15,8 +15,11 @@ export default function Section4() {
       <motion.h1
         initial={{ x: -70, opacity: 0 }}
         whileInView={{ x: 70, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="md:text-3xl ml-[25%] mb-3 font-bold text-2xl text-black dark:text-white   left-1/2 -translate-x-1/2"
+        transition={{ duration: 0.8, 
+          delay:0.1
+        }}
+        
+        className="md:text-3xl ml-[25%] mb-3 font-bold text-2xl text-gray-700 dark:text-white/80   left-1/2 -translate-x-1/2"
       >
         Smooth Transition Text
       </motion.h1>

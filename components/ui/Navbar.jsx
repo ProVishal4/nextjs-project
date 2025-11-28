@@ -34,11 +34,11 @@ export default function Navbar() {
             type="text"
             placeholder="Search Place"
             className="
-              w-2/3   rounded-full 
+              w-2/3   rounded-full px-4
               text-gray-800 dark:text-zinc-300
                h-11 placeholder:text-white/50
               focus:outline-none focus:ring-2 focus:ring-lime-400
-              transition  hidden md:block indent-3 
+              transition  hidden md:block  
             "
           />
           <button
