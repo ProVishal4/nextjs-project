@@ -2,12 +2,16 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
     {
-         title: String,
+        title: String,
         description: String,
         slug: String,
-        imageAtl:String,
-        category: String,
-        image:String,
+        imageAtl: String,
+        popular:Boolean,
+        category: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "category"
+        },
+        image: String,
     },
     { timestamps: true }
 );

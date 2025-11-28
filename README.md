@@ -195,6 +195,32 @@ after installed aceternity UI components tailwindcss classes exmple - bg-zinc-10
 
 
 
-
+     {menuItems.map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <>
+              <div
+                key={i}
+                onClick={() => setCollapsed(!false)}
+                className={`flex items-center cursor-pointer group
+                mx-3 px-3 py-3 rounded-xl
+                transition-all duration-300
+                hover:bg-gray-100 dark:hover:bg-[#3b3d3d4d]
+              `}
+              >
+                <Icon onClick={() => setCollapsed(!true)} size={20} />
+                {!collapsed && (
+                  <span
+                    className={`ml-3 text-sm font-medium ${
+                      collapsed ? "block" : "hidden"
+                    } border`}
+                  >
+                    {item.name}
+                  </span>
+                )}
+              </div>
+            </>
+          );
+        })}
 
 
