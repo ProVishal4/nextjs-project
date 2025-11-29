@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import axios from "axios";
 import { articleStore } from "@/store/articleStore";
+import MiniSidebar from "./MiniSidebar";
 
 
 
@@ -47,6 +48,13 @@ const [flow, setFlow] = useState("")
        fetchArticles();
   }, []);
 //console.log(categorise)
+
+
+//const result = articles.filter(flow === articles.title);
+//console.log(articles.category)
+//console.log(result)
+
+console.log("flow stuta data sidebar:- ", flow)
   return (
     // <div>
     //   {categorise.map((e)=>(
@@ -112,11 +120,17 @@ const [flow, setFlow] = useState("")
         <div>{flow}</div>
       </div>
       <div className=" border border-amber-800">
-        
-        {articles.map((e) => (
+<MiniSidebar flows={flow} />
+        {/* {articles.map((e) => (
           <div key={e._id}>{e.title} </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );
 }
+
+
+  
+
+
+
