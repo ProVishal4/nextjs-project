@@ -1,12 +1,16 @@
 "use client"
 import React from "react";
+import { SearchBar } from "../search/SearchBar";
+import Link from "next/link";
+import SearchBar2 from "../search/SearchBar2.";
+//import { Link } from "next/link";
 
 
 
 // Navbar for all devieses
 export default function Navbar() {
 
-  
+
   return (
     <nav className="w-full px-6 py-4 flex justify-center z-4 fixed bg-transparent">
       <div
@@ -18,18 +22,20 @@ export default function Navbar() {
       >
         {/* Left: Logo div */}
         <div className="flex items-center  gap-3">
-          <div
-            className="
+          <Link href="/">
+            <div
+              className="
             bg-white/20 backdrop-blur-md px-5  py-2  w-15 h-8 
             rounded-full text-white font-semibold tracking-wide
           "
-          >
-            Logo
-          </div>
+            >
+              Logo
+            </div>
+          </Link>
         </div>
-
+{/* <div> Search Result:- {query}</div> */}
         {/* Right: Search bar container  */}
-        <div className="relative w-72 rounded-full bg-zinc-200/20 ">
+        {/* <div className="relative w-72 rounded-full bg-zinc-200/20 ">
           <input
             type="text"
             placeholder="Search Place"
@@ -53,7 +59,8 @@ export default function Navbar() {
          
             <img src="/icons/Menu.png" className="h-9 w-10 md:hidden absolute right-3  -mt-[16px]" alt="menu icon" />
          
-        </div>
+        </div> */}
+        <SearchBar2 />
       </div>
     </nav>
   );

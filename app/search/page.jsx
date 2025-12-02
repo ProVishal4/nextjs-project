@@ -1,69 +1,98 @@
-"use client"
-import SearchCard from "@/components/search/SearchCard";
-import React from "react";
-import { useState, useEffect, useRef } from "react";
-//import MovieList from "./MovieList";
-const page = () => {
-  const [article, setAriticle] = useState([]);
-  const [loading, setLoading] = useState(false);
-  //const [query, setQuery] = useState("")
-  const searchRef = useRef();
-  const fetchArticles = async (query) => {
-    // e.preventDefault();
 
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `http://localhost:3000/api/search/search?article=${query}`
-      );
-      if (!res.ok) throw new Error("Failed to fetch data");
-      //http://localhost:5000/api/search?movie=Ince
-      const data = await res.json();
-      //  console.log(data);
-      setAriticle(data || "No Article find");
 
-      //console.log("secound log",article)
-      setLoading(false);
-    } catch (error) {
-      console.log("Error Searching in article", error);
-    }
-  };
-  const hendleSearch = (e) => {
-    e.preventDefault();
-    try {
-      const query = searchRef.current.value.trim();
-      if (query) fetchArticles(query);
-    } catch (error) {
-      console.log("Error Searching in article", error);
-    }
-  };
-  useEffect(() => {
-    fetchArticles();
-  }, []);
+import axios from "axios";
+import { articleStore } from "@/store/articleStore";
+//import { useEffect } from "react";
+
+// //import Sidebar2 from "@/components/ui/Sidebar2";
+// import axios from "axios";
+// import React, { useEffect, useState } from "react";
+
+// export default function SearchCard({searchParams}) {
+
+//   let {title, description,image} = article
+//   //console.log(title)
+//   // const [cards, setCards] = useState([]);
+
+//   // useEffect(() => {
+//   //   axios
+//   //     .get("/api/search")
+//   //     .then((res) => {
+//   //       setCards(res.data);
+//   //     })
+//   //     .catch((err) => {
+//   //       console.log("Error in fetching articles Cards", err);
+//   //     });
+//   // }, []);
+//   // console.log(cards)
+//   return (
+//     <>
+     
+       
+//           <ul
+           
+//             className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-auto duration-300 overflow-hidden hover:-translate-y-1"
+//           >
+//             {}
+//             <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+//               <img
+//                 src={image}
+//                 alt={title}
+//                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+//               />
+//             </div>
+//             <div className="p-6">
+//               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 line-clamp-2">
+//                 {title}
+//               </h2>
+//               <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+//                 {description}
+//               </p>
+//               {/* <p className="text-gray-400 dark:text-gray-500 text-xs font-medium">
+//                 {new Date(item.createdAt).toLocaleDateString()}
+//               </p> */}
+//             </div>
+//          </ul>
+//     </>
+//   );
+// }
+
+
+export default async function SearchPage({ searchParams }) {
+  //  const { articles, fetchArticles } = articleStore();
+  // useEffect(() => {
+  //   fetchArticles(), fetchCategory();
+  // }, []);
+  
+  const query = searchParams.search || "";
+console.log(searchParams)
+  // Example API data 
+  // ,{
+  //   cache: "no-store",
+  // }
+  //const res = await fetch("http://localhost:3000/api/blog");
+//
+  //const {title} = await res.json();
+
+  const filtered = articles.filter((item) =>
+    item.articles.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
-    <>
-      <div className="w-1/2 mx-auto my-3">
-        <form className="flex justify-center" onClick={hendleSearch}>
-          <input
-            type="text"
-            className="bg-[#333030] focus:outline-none focus:ring focus:ring-blue-300 rounded-4xl pl-5 py-3 mr-4"
-            placeholder="Search for a movie..."
-            // onChange={(e) => setQuery(e.target.value)}
-            ref={searchRef}
-          />
+    <div className="p-6">
+      <h1 className="text-2xl">Results for: {query}</h1>
 
-          <button
-            type="submit"
-            className="py-3 px-6 rounded-3xl bg-amber-400 text-black active:scale-90 font-medium hover:bg-amber-600"
-          >
-            Search
-          </button>
-        </form>
-      </div>
-      {loading ? <p> Loading ...</p> : <SearchCard article={article} />}
-    </>
+      {filtered.length === 0 && (
+        <p className="mt-4 text-gray-500">No results found.</p>
+      )}
+
+      <ul className="mt-5 space-y-2">
+        {filtered.map((p) => (
+          <li key={p._id} className="border p-2 rounded">
+            {p.title}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
-};
-
-export default page;
+}

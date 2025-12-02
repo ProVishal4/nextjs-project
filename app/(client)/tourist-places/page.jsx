@@ -3,11 +3,11 @@ import NewSidebar from "@/components/ui/NewSidebar";
 import Sidebar2 from "@/components/ui/Sidebar2";
 import Sidebar3 from "@/components/ui/Sidebar3";
 import axios from "axios";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export default function FieldPage() {
   const [cards, setCards] = useState([]);
-
   useEffect(() => {
     axios
       .get("/api/blog")
@@ -18,6 +18,7 @@ export default function FieldPage() {
         console.log("Error in fetching articles Cards", err);
       });
   }, []);
+  //console.log(cards.slug)
   return (
     <>
       <div className="flex w-screen justidfy-between">
@@ -31,6 +32,7 @@ export default function FieldPage() {
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {cards.map((item) => (
+<Link href={`/tourist-places/${item.slug} `}>
                 <div
                   key={item._id}
                   className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-auto duration-300 overflow-hidden hover:-translate-y-1"
@@ -52,8 +54,9 @@ export default function FieldPage() {
                     <p className="text-gray-400 dark:text-gray-500 text-xs font-medium">
                       {new Date(item.createdAt).toLocaleDateString()}
                     </p>
+                    <p>{item.slug}</p>
                   </div>
-                </div>
+                </div></Link>
               ))}
             </div>
           </div>
