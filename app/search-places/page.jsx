@@ -32,7 +32,7 @@
 import SearchBar3 from "@/components/search/SearchBar3";
 
 export default function Home() {
-  return (
+  return ( 
     <main className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Search Example</h1>
       <SearchBar3 />

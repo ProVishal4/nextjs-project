@@ -60,7 +60,7 @@ export default function Navbar() {
             <img src="/icons/Menu.png" className="h-9 w-10 md:hidden absolute right-3  -mt-[16px]" alt="menu icon" />
          
         </div> */}
-        <SearchBar />
+        {/* <SearchBar /> */}
       </div>
     </nav>
   );

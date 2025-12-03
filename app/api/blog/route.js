@@ -4,7 +4,7 @@ import Database from "@/models/database";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  await connectDB();
+  await connectDB(); 
   const artical = await Database.find();
   return NextResponse.json(artical);
 }
