@@ -9,9 +9,9 @@ import {
   Section4,
 } from "@/components/sections/index.js";
 import AutoSlider from "@/components/eliments/autoSlider/AutoSlider";
-import Sidebar from "@/components/ui/Sidebar";
+import Sidebar from "@/components/sidebar-menu/Sidebar";
 import ImageCard from "../components/ui/ImageCard";
-import NewSidebar from "@/components/ui/NewSidebar";
+import NewSidebar from "@/components/sidebar-menu/NewSidebar";
 
 const page = () => {
   return (

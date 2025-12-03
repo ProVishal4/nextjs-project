@@ -1,5 +1,5 @@
 import ProductList from "./ProductList"
-// thapa YT
+// thapa YT 
  const Products = async ({searchParams})=>{
     // const searchParam = await props.searchParams; (props)
     // console.log(searchParam)

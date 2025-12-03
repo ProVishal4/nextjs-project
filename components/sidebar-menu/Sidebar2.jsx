@@ -1,15 +1,20 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import {
   Home,
-  Grid2x2,  Star,  Compass,  BarChart2,  FileText,  BookOpen,  RefreshCcw,  Menu,  ChevronLeft,
+  Grid2x2,
+  Star,
+  Compass,
+  BarChart2,
+  FileText,
+  BookOpen,
+  RefreshCcw,
+  Menu,
+  ChevronLeft,
 } from "lucide-react";
 import axios from "axios";
 import { articleStore } from "@/store/articleStore";
 import MiniSidebar from "./MiniSidebar";
-
-
-
 
 // const menuItems = [
 //   { name: "Home", icon: Home },
@@ -25,7 +30,7 @@ import MiniSidebar from "./MiniSidebar";
 export default function Sidebar2() {
   const { articles, loading, fetchArticles } = articleStore();
   const [collapsed, setCollapsed] = useState(false);
-const [flow, setFlow] = useState("")
+  const [flow, setFlow] = useState("");
   const [categorise, setCategorise] = useState([]);
 
   useEffect(() => {
@@ -37,16 +42,15 @@ const [flow, setFlow] = useState("")
       .catch((err) => {
         console.log("Error in fetching categorise", err);
       });
-       fetchArticles();
+    fetchArticles();
   }, []);
-//console.log(categorise)
+  //console.log(categorise)
 
+  //const result = articles.filter(flow === articles.title);
+  //console.log(articles.category)
+  //console.log(result)
 
-//const result = articles.filter(flow === articles.title);
-//console.log(articles.category)
-//console.log(result)
-
-//console.log("flow stutas data sidebar:- ", flow)
+  //console.log("flow stutas data sidebar:- ", flow)
   const matchesCategory = (article, flowValue) => {
     if (!flowValue) return true; // no filter, show all
     if (!article) return false;
@@ -59,8 +63,16 @@ const [flow, setFlow] = useState("")
 
     // article.category as object (e.g. { _id, field })
     if (article.category && typeof article.category === "object") {
-      if (article.category.field && String(article.category.field).toLowerCase() === f) return true;
-      if (article.category._id && String(article.category._id).toLowerCase() === f) return true;
+      if (
+        article.category.field &&
+        String(article.category.field).toLowerCase() === f
+      )
+        return true;
+      if (
+        article.category._id &&
+        String(article.category._id).toLowerCase() === f
+      )
+        return true;
     }
 
     // article.categories as array of objects or strings
@@ -79,13 +91,16 @@ const [flow, setFlow] = useState("")
     }
 
     // other possible field names
-    if (article.categoryId && String(article.categoryId).toLowerCase() === f) return true;
+    if (article.categoryId && String(article.categoryId).toLowerCase() === f)
+      return true;
     if (article.type && String(article.type).toLowerCase() === f) return true;
 
     return false;
   };
 
-  const filteredArticles = Array.isArray(articles) ? articles.filter((a) => matchesCategory(a, flow)) : [];
+  const filteredArticles = Array.isArray(articles)
+    ? articles.filter((a) => matchesCategory(a, flow))
+    : [];
 
   return (
     <div className="sticky top-0 flex ">
@@ -148,9 +163,3 @@ const [flow, setFlow] = useState("")
     </div>
   );
 }
-
-
-  
-
-
-

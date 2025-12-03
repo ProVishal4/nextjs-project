@@ -1,57 +1,51 @@
 "use client"
-import SearchCard from "@/components/search/SearchCard";
+//import SearchCard from "@/components/search/SearchCard";
 import axios from "axios";
 import Link from "next/link";
 // import { Link } from "lucide-react";
-import React from "react";
+
 import { useState, useEffect, useRef } from "react";
 //import MovieList from "./MovieList";
 
-
-
-
-
-
-
-
 export const SearchBar = () => {
-  const [article, setAriticle] = useState([]);
-  const [loading, setLoading] = useState(false);
-  //const [query, setQuery] = useState("")
-  const searchRef = useRef();
-  const fetchArticles = async (query) => {
-    // e.preventDefault();
+   const [article, setAriticle] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // //const [query, setQuery] = useState("")
+   const searchRef = useRef();
+  // const fetchArticles = async (query) => {
+  //   // e.preventDefault();
 
-    //setLoading(true);
-    try {
-      const res = await axios
-        .get(`/api/search?article=${query}`)
-        .then((res) => {
-          setAriticle(res.data);
-        })
+  //   //setLoading(true);
+  //   try {
+  //     const res = await axios
+  //      // .get(`/api/search?article=${query}`)
+  //       .get(`/api/blog`)
+  //       .then((res) => {
+  //         setAriticle(res.data);
+  //       });
   
      
-      console.log("secound log",article)
+  //     console.log("secound log",article)
 
-    } catch (error) {
-      console.log("Error Searching in article SearchBar", error);
-    }
-      console.log(query)
+  //   } catch (error) {
+  //     console.log("Error Searching in article SearchBar", error);
+  //   }
+  //     //console.log(query)
 
-  };
+  // };
   
   const hendleSearch = (e) => {
     e.preventDefault();
     try {
       const query = searchRef.current.value.trim();
-      if (query) fetchArticles(query);
+   //   if (query) fetchArticles(query);
     } catch (error) {
       console.log("Error Searching in article", error);
     }
   };
-  useEffect(() => {
-    fetchArticles();
-  }, []);
+  // useEffect(() => {
+  //   fetchArticles();
+  // }, []);
 
   return (
     <>
@@ -87,9 +81,9 @@ export const SearchBar = () => {
             "
             ref={searchRef}
           />
-          <Link href={"/search"}>
+      
             <button
-              type="submit"
+         
               className="
             absolute right-1 top-1/2 -translate-y-1/2
             bg-zinc-300/20 hover:bg-lime-400 
@@ -98,7 +92,7 @@ export const SearchBar = () => {
             >
               ➜
             </button>
-          </Link>
+      
         </form>
         <img
           src="/icons/Menu.png"

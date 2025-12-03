@@ -58,14 +58,14 @@ import { articleStore } from "@/store/articleStore";
 // }
 
 
-export default async function SearchPage({ searchParams }) {
+//export default async function SearchPage({ searchParams }) {
   //  const { articles, fetchArticles } = articleStore();
   // useEffect(() => {
   //   fetchArticles(), fetchCategory();
   // }, []);
   
-  const query = searchParams.search || "";
-console.log(searchParams)
+//  const query = searchParams.search || "";
+//console.log(searchParams)
   // Example API data 
   // ,{
   //   cache: "no-store",
@@ -74,25 +74,25 @@ console.log(searchParams)
 //
   //const {title} = await res.json();
 
-  const filtered = articles.filter((item) =>
-    item.articles.toLowerCase().includes(query.toLowerCase())
-  );
+//   const filtered = articles.filter((item) =>
+//     item.articles.toLowerCase().includes(query.toLowerCase())
+//   );
 
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl">Results for: {query}</h1>
+//   return (
+//     <div className="p-6">
+//       <h1 className="text-2xl">Results for: {query}</h1>
 
-      {filtered.length === 0 && (
-        <p className="mt-4 text-gray-500">No results found.</p>
-      )}
+//       {filtered.length === 0 && (
+//         <p className="mt-4 text-gray-500">No results found.</p>
+//       )}
 
-      <ul className="mt-5 space-y-2">
-        {filtered.map((p) => (
-          <li key={p._id} className="border p-2 rounded">
-            {p.title}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+//       <ul className="mt-5 space-y-2">
+//         {filtered.map((p) => (
+//           <li key={p._id} className="border p-2 rounded">
+//             {p.title}
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }

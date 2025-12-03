@@ -1,8 +1,8 @@
 "use client"
 import React from "react";
-import { SearchBar } from "../search/SearchBar";
+import  SearchBar  from "../search/SearchBar";
 import Link from "next/link";
-import SearchBar2 from "../search/SearchBar2.";
+//import SearchBar2 from "../search/SearchBar2.";
 //import { Link } from "next/link";
 
 
@@ -60,7 +60,7 @@ export default function Navbar() {
             <img src="/icons/Menu.png" className="h-9 w-10 md:hidden absolute right-3  -mt-[16px]" alt="menu icon" />
          
         </div> */}
-        <SearchBar2 />
+        <SearchBar />
       </div>
     </nav>
   );
