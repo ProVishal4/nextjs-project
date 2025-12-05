@@ -1,6 +1,6 @@
-import { connectDB } from "@/lib/mongodb";
-import database from "@/models/database";
-import { NextResponse } from "next/server";
+// import { connectDB } from "@/lib/mongodb";
+// import database from "@/models/database";
+// import { NextResponse } from "next/server";
 
 // export async function GET(req) {
 //     const { searchParams } = new URL(req.url);
@@ -20,10 +20,10 @@ import { NextResponse } from "next/server";
 //     return Response.json({ results: filtered });
 // }
 
-export async function GET(req) {
-    await connectDB(); 
-    const { searchParams } = new URL(req.url);
-    const q = searchParams.get("q")?.toLowerCase() || "";
+// export async function GET(req) {
+//     await connectDB(); 
+//     const { searchParams } = new URL(req.url);
+//     const q = searchParams.get("q")?.toLowerCase() || "";
 
     // const items = [
     //     "Apple",
@@ -33,15 +33,15 @@ export async function GET(req) {
     //     "Pineapple",
     //     "Watermelon",
     // ];
-    const items = (await database.find()).map(({ title }) => title);
-    console.log("Items from database:", items);
-   // return NextResponse.json(artical)
-    const filtered = items.filter((item) =>
-        item.toLowerCase().includes(q)
-    );
+//     const items = (await database.find()).map(({ title }) => title);
+//     console.log("Items from database:", items);
+//    // return NextResponse.json(artical)
+//     const filtered = items.filter((item) =>
+//         item.toLowerCase().includes(q)
+//     );
 
-    return NextResponse.json({ results: filtered });
-}
+//     return NextResponse.json({ results: filtered });
+// }
 
 // import database from "@/models/database";
 
@@ -74,3 +74,25 @@ export async function GET(req) {
 //         });
 //     }
 // }
+
+
+import { connectDB } from "@/lib/mongodb";
+import database from "@/models/database";
+import { NextResponse } from "next/server";
+
+export async function GET(req) {
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const q = searchParams.get("q")?.toLowerCase() || "";
+
+    const items = (await database.find()).map(({ title }) => title);
+    console.log("Items from database:", items);
+    // return NextResponse.json(artical)
+
+
+    const filtered = items.filter((item) =>
+        item.toLowerCase().includes(q)
+    );
+
+    return NextResponse.json({ results: filtered });
+}

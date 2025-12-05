@@ -3,15 +3,37 @@
 import axios from "axios";
 import { X } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
 export const SearchBar = () => {
+   
+
   const [query, setQuery] = useState("");
+const router = useRouter();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 const [increas, setIncreas] = useState(false)
 
-    // Debounce logic
+      
+  const handleSearch = () => {
+    if (!query.trim()) return;
+    router.push(`/search-results?search=${encodeURIComponent(query)}`);
+    setIncreas(false);
+    //router.push(`/search?q=${encodeURIComponent(query)}`);
+  };
+
+    async function search() {
+      setLoading(true);
+      const res = await fetch(`/search-route?q=${query}`);
+      const data = await res.json();
+
+      setResults(data.results);
+      setLoading(false);
+      console.log("searchBar3 data is:- ", results);
+    }
+
+// Debounce logic
     useEffect(() => {
       const timeout = setTimeout(() => {
         if (query.trim().length > 0) {
@@ -24,20 +46,16 @@ const [increas, setIncreas] = useState(false)
     }, [query]);
 
 
-    async function search(q) {
-      setLoading(true);
-      const res = await fetch(`/search-route?q=${q}`);
-      const data = await res.json();
-
-      setResults(data.results);
-      setLoading(false);
-      console.log("searchBar3 data is:- ", results);
-    }
     const increase = () =>{
        
         setIncreas(false)
          setQuery("")
     }
+  const formHandle = (e) =>{
+        e.preventDefault()
+    setIncreas(!increas) 
+
+  }
   return (
     <>
       <div
@@ -45,10 +63,13 @@ const [increas, setIncreas] = useState(false)
           increas ? "w-3/4" : " w-72"
         } relative rounded-full bg-zinc-200/20  transition-all decoration-2 ease-in `}
       >
-        <form className="w-full relative" onClick={() => setIncreas(true)}>
+        <form className="w-full relative" onClick={(e) => {e.preventDefault(); formHandle(e)}}>
           <input
             type="text"
             placeholder="Search Place"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             className={`
 
              ${increas ? "md:w-[60%] lg:w-[80%]" : "w-2/3"}  rounded-full px-4
@@ -57,8 +78,7 @@ const [increas, setIncreas] = useState(false)
               focus:outline-none 
               transition-all decoration-2 ease-in hidden md:block  
             `}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+        
           />
           {/* {loading && <div className="mt-2 text-sm">Searching...</div>} */}
           {results.length > 0 && (
@@ -84,6 +104,7 @@ const [increas, setIncreas] = useState(false)
             bg-zinc-300/20 hover:bg-lime-400 
             rounded-full h-full transition hidden w-20 md:block
           "
+            onClick={() => handleSearch()}
           >
             ➜
           </button>
@@ -91,7 +112,7 @@ const [increas, setIncreas] = useState(false)
         <div
           className={` ${increas ? "md:block" : "hidden"}
             absolute right-1/6 top-1/2  -translate-y-1/2
-            bg-zinc-300/20 hover:bg-lime-400 
+           
             rounded-full h-[90%] transition  ease-in hidden w-20 
           `}
           onClick={() => increase()}
