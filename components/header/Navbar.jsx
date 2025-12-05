@@ -33,34 +33,7 @@ export default function Navbar() {
             </div>
           </Link>
         </div>
-{/* <div> Search Result:- {query}</div> */}
-        {/* Right: Search bar container  */}
-        {/* <div className="relative w-72 rounded-full bg-zinc-200/20 ">
-          <input
-            type="text"
-            placeholder="Search Place"
-            className="
-              w-2/3   rounded-full px-4
-              text-gray-800 dark:text-zinc-300
-               h-11 placeholder:text-white/50
-              focus:outline-none focus:ring-2 focus:ring-lime-400
-              transition  hidden md:block  
-            "
-          />
-          <button
-            className="
-            absolute right-1 top-1/2 -translate-y-1/2
-            bg-zinc-300/20 hover:bg-lime-400 
-            rounded-full h-full transition hidden w-20 md:block
-          "
-          >
-            ➜
-          </button>
-         
-            <img src="/icons/Menu.png" className="h-9 w-10 md:hidden absolute right-3  -mt-[16px]" alt="menu icon" />
-         
-        </div> */}
-        {/* <SearchBar /> */}
+<SearchBar />
       </div>
     </nav>
   );

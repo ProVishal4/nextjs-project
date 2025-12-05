@@ -826,19 +826,205 @@ Stack Overflow ·
 2y
 I want to be able to display the query results that the user typed in the search input field. This is the product card component that maps through all the ...  
 More
-React with NextJS and Search Bar
 
-Stack Overflow ·
-1 answer
-·
-2y
-How would you add a search input that filters data fetched on the server?
-
-Reddit ·
-r/nextjs
-·
-5 comments
-·
-1y
 
 http://localhost:3000/datafetch/servercomp?movie=Interstellar
+
+
+
+
+
+Below is the **cleanest and correct Next.js pattern** for:
+
+# ✅ **Search bar → send query to `/search-results` page → show all results in card format**
+
+Works with **Next.js App Router (13–15)**.
+
+---
+
+# ✅ **1. Search Bar sends query to `/search-results?q=keyword`**
+
+### `components/SearchBar.jsx`
+
+👉 When user presses Enter OR clicks Search, redirect using `useRouter`.
+
+```jsx
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+export default function SearchBar() {
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+
+  const handleSearch = () => {
+    if (!query.trim()) return;
+
+    router.push(`/search-results?q=${encodeURIComponent(query)}`);
+  };
+
+  return (
+    <div className="flex gap-2 w-full max-w-md mx-auto">
+      <input
+        type="text"
+        placeholder="Search..."
+        className="border w-full px-4 py-2 rounded"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+      />
+
+      <button
+        onClick={handleSearch}
+        className="px-4 py-2 bg-blue-600 text-white rounded"
+      >
+        Search
+      </button>
+    </div>
+  );
+}
+```
+
+---
+
+# ✅ **2. The `/search-results` route fetches data from API using URL query**
+
+### Create this file:
+
+```
+app/search-results/page.jsx
+```
+
+```jsx
+import SearchResultsList from "@/components/SearchResultsList";
+
+export default function SearchResultsPage({ searchParams }) {
+  const query = searchParams.q || "";
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-semibold mb-4">
+        Results for: <span className="text-blue-600">"{query}"</span>
+      </h1>
+
+      <SearchResultsList query={query} />
+    </div>
+  );
+}
+```
+
+---
+
+# ✅ **3. Component that fetches search results & shows cards**
+
+### `components/SearchResultsList.jsx`
+
+```jsx
+"use client";
+
+import { useEffect, useState } from "react";
+
+export default function SearchResultsList({ query }) {
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch(`/search-route?q=${query}`);
+        const data = await res.json();
+        setResults(data.results);
+      } catch (err) {
+        console.error("❌ Error loading results:", err);
+      }
+      setLoading(false);
+    }
+    load();
+  }, [query]);
+
+  if (loading) return <p>Loading...</p>;
+
+  if (results.length === 0)
+    return <p className="text-gray-500">No results found.</p>;
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {results.map((item, i) => (
+        <div
+          key={i}
+          className="border rounded p-4 shadow bg-white dark:bg-zinc-700"
+        >
+          <h2 className="text-lg font-bold mb-2">{item.title}</h2>
+
+          <p className="text-sm text-gray-600">
+            Description about <strong>{item.title}</strong> goes here.
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+---
+
+# 🔥 **4. Your existing API route already works**
+
+(Only ensure this path is correct):
+
+```
+app/search-route/route.js
+```
+
+And fetch uses:
+
+```js
+fetch(`/search-route?q=${query}`);
+```
+
+If you moved it into `/api/search-route`, change both fetch and file path accordingly.
+
+---
+
+# 🎉 **Now your flow works like this:**
+
+### 1️⃣ User types: `"apple"`
+
+### 2️⃣ Presses Enter → redirected to:
+
+```
+/search-results?q=apple
+```
+
+### 3️⃣ `search-results` page loads
+
+### 4️⃣ It fetches server API
+
+### 5️⃣ Displays results in **beautiful card layout**
+
+---
+
+# Want extra features?
+
+I can add any of these:
+
+✅ Pagination
+✅ Highlight matched text
+✅ Image thumbnails in cards
+✅ "No results" animation
+✅ Auto-complete dropdown
+✅ Server-side search (no client fetching)
+✅ Prisma / MongoDB integration
+
+Just tell me!
+
+
+
+
+
+
+
+
+
+

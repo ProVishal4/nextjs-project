@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
-export const SearchBar = () => {
+export const SearchMobile = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,6 +20,7 @@ const [increas, setIncreas] = useState(false)
           setResults([]);
         }
       }, 300);
+  
       return () => clearTimeout(timeout);
     }, [query]);
 
@@ -41,21 +42,26 @@ const [increas, setIncreas] = useState(false)
   return (
     <>
       <div
-        className={`${
-          increas ? "w-3/4" : " w-72"
-        } relative rounded-full bg-zinc-200/20  transition-all decoration-2 ease-in `}
+        className={`   ${
+          increas ? "w-full" : "ml-[20%] w-72"
+        } relative rounded-full bg-zinc-200/20 border border-green-700 transition-all decoration-2 ease-in `}
       >
-        <form className="w-full relative" onClick={() => setIncreas(true)}>
+        <form
+          className="w-full relative "
+          onClick={() => setIncreas(true)}
+        >
           <input
             type="text"
             placeholder="Search Place"
             className={`
 
-             ${increas ? "md:w-[60%] lg:w-[80%]" : "w-2/3"}  rounded-full px-4
+             ${
+               increas ? "w-[66%]" : "w-2/3"
+             } border border-purple-700 rounded-full px-4
               text-gray-800 dark:text-zinc-300
                h-11 placeholder:text-white/50
               focus:outline-none 
-              transition-all decoration-2 ease-in hidden md:block  
+              transition-all decoration-2 ease-in  md:hidden
             `}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -63,7 +69,7 @@ const [increas, setIncreas] = useState(false)
           {/* {loading && <div className="mt-2 text-sm">Searching...</div>} */}
           {results.length > 0 && (
             <ul
-              className={`border absolute md:w-[60%] lg:w-[80%] border-purple-700 rounded mt-2  bg-white/10 dark:bg-zinc-600/90 shadow ${
+              className={`absolute w-[100%] border border-purple-700 rounded-2xl mt-2  bg-white/10 dark:bg-zinc-600/90 shadow ${
                 increas ? "block" : "hidden"
               } `}
             >
@@ -81,31 +87,26 @@ const [increas, setIncreas] = useState(false)
           <button
             className="
             absolute right-1 top-1/2 -translate-y-1/2
-            bg-zinc-300/20 hover:bg-lime-400 
-            rounded-full h-full transition hidden w-20 md:block
+            bg-zinc-300/20 hover:bg-lime-400 active:bg-lime-400
+            rounded-full h-full transition  w-20 md:hidden
           "
           >
             ➜
           </button>
         </form>
         <div
-          className={` ${increas ? "md:block" : "hidden"}
+          className={` ${increas ? "block" : "hidden"}
             absolute right-1/6 top-1/2  -translate-y-1/2
             bg-zinc-300/20 hover:bg-lime-400 
-            rounded-full h-[90%] transition  ease-in hidden w-20 
+            rounded-full h-[90%] transition  ease-in md:hidden w-20 
           `}
           onClick={() => increase()}
         >
           <X className="mx-auto mt-3" size={20} />
         </div>
-        <img
-          src="/icons/Menu.png"
-          className="h-9 w-10 md:hidden absolute right-3  -mt-[16px]"
-          alt="menu icon"
-        />
       </div>
     </>
   );
 };
 
-export default SearchBar;
+export default SearchMobile;

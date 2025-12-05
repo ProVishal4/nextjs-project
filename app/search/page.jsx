@@ -96,3 +96,29 @@ import { articleStore } from "@/store/articleStore";
 //     </div>
 //   );
 // }
+
+
+
+
+
+// app/page.jsx (or any page where you want search results)
+import SearchInput from './components/SearchInput';
+
+export default async function HomePage({ searchParams }) {
+  const query = searchParams?.query || '';
+
+  // Fetch data based on 'query' on the server
+  const data = await fetchData(query); // Replace with your actual data fetching logic
+
+  return (
+    <div>
+      <SearchInput />
+      {/* Display search results based on 'data' */}
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}

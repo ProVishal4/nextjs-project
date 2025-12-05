@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning >
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {/* <Navbar /> */}
+          <Navbar />
           {/* <Navbar2 /> */}
           {children}
           <Footer />

@@ -14,12 +14,15 @@ import style from  "./AutoSlider.module.css";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import Sidebar from "@/components/sidebar-menu/NewSidebar";
+import SearchBar from "@/components/search/SearchBar";
+import { SearchMobile } from "@/components/search/SearchMobile";
 
 export default function AutoSlider() {
   return (
     <>
-      <div className="relative md:hidden w-72 border top-[14vh] h-10 z-20 rounded-full bg-zinc-200/20 left-[20vw]">
-        <input
+      <div className="relative md:hidden w-[95%] mx-auto  top-[14vh] h-auto z-20 rounded-full  ">
+        {/* <input
           type="text"
           placeholder="Search Place"
           className="
@@ -38,7 +41,8 @@ export default function AutoSlider() {
           "
         >
           ➜
-        </button>
+        </button> */}
+        <SearchMobile />
       </div>
       <Swiper
         spaceBetween={30}
