@@ -2,6 +2,7 @@
 import NewSidebar from "@/components/sidebar-menu/NewSidebar";
 import Sidebar2 from "@/components/sidebar-menu/Sidebar2";
 import Sidebar3 from "@/components/sidebar-menu/Sidebar3";
+import Sidebar4 from "@/components/sidebar-menu/Sidebar4";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -23,8 +24,8 @@ export default function FieldPage() {
     <>
       <div className="flex w-screen justidfy-between">
         <div className="lg:w-[20%] md:w-[30%] ">
-          <Sidebar2 />
-        </div>
+          <Sidebar4 />
+        </div> 
         <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 md:w-[70%] lg:w-[80%]">
           <div className="max-w-6xl mx-auto">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">

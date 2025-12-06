@@ -17,16 +17,16 @@ export default function Navbar() {
         className="
          max-w-6xl flex items-center justify-between   
         backdrop-blur-xl bg-white/10  absolute top-4 z-10  md:h-13 md:w-2/3 w-7/8
-        rounded-full px-1 py-3 shadow-lg border border-white/20
+        rounded-full px-1 py-3 shadow-lg border border-zinc-300  dark:border-white/20
       "
       >
         {/* Left: Logo div */}
-        <div className="flex items-center  gap-3">
+        <div className="flex  gap-3">
           <Link href="/">
             <div
               className="
             bg-white/20 backdrop-blur-md px-5  py-2  w-15 h-8 
-            rounded-full text-white font-semibold tracking-wide
+            rounded-full  dark:text-white font-semibold tracking-wide
           "
             >
               Logo

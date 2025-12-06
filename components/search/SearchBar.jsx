@@ -20,7 +20,7 @@ const [increas, setIncreas] = useState(false)
     if (!query.trim()) return;
     router.push(`/search-results?search=${encodeURIComponent(query)}`);
     setIncreas(false);
-    //router.push(`/search?q=${encodeURIComponent(query)}`);
+  
   };
 
     async function search() {
@@ -61,9 +61,15 @@ const [increas, setIncreas] = useState(false)
       <div
         className={`${
           increas ? "w-3/4" : " w-72"
-        } relative rounded-full bg-zinc-200/20  transition-all decoration-2 ease-in `}
+        } relative rounded-full dark:bg-zinc-200/20 bg-zinc-200/40  transition-all decoration-2 ease-in `}
       >
-        <form className="w-full relative" onClick={(e) => {e.preventDefault(); formHandle(e)}}>
+        <form
+          className="w-full relative"
+          onClick={(e) => {
+            e.preventDefault();
+            formHandle(e);
+          }}
+        >
           <input
             type="text"
             placeholder="Search Place"
@@ -74,23 +80,22 @@ const [increas, setIncreas] = useState(false)
 
              ${increas ? "md:w-[60%] lg:w-[80%]" : "w-2/3"}  rounded-full px-4
               text-gray-800 dark:text-zinc-300
-               h-11 placeholder:text-white/50
+               h-11 placeholder:dark:text-white/50 placeholder:text-black/60
               focus:outline-none 
               transition-all decoration-2 ease-in hidden md:block  
             `}
-        
           />
           {/* {loading && <div className="mt-2 text-sm">Searching...</div>} */}
           {results.length > 0 && (
             <ul
-              className={`border absolute md:w-[60%] lg:w-[80%] border-purple-700 rounded mt-2  bg-white/10 dark:bg-zinc-600/90 shadow ${
+              className={`absolute w-[100%] overflow-hidden rounded-2xl mt-2  bg-white/20  dark:bg-zinc-600/90 shadow ${
                 increas ? "block" : "hidden"
               } `}
             >
               {results.map((r, i) => (
                 <li
                   key={i}
-                  className="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 dark:active:bg-gray-100/20 dark:hover:bg-gray-100/20  cursor-pointer dark:text-white/60 text-black/80 hover:text-white/90"
+                  className="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 dark:active:bg-gray-100/20 dark:hover:bg-gray-100/20  cursor-pointer dark:text-white/60 active:text-zinc-500 hover:text-zinc-500  dark:hover:text-black/90 text-blue-100 "
                 >
                   {r}
                 </li>
@@ -112,16 +117,16 @@ const [increas, setIncreas] = useState(false)
         <div
           className={` ${increas ? "md:block" : "hidden"}
             absolute right-1/6 top-1/2  -translate-y-1/2
-           
+           content-center
             rounded-full h-[90%] transition  ease-in hidden w-20 
           `}
           onClick={() => increase()}
         >
-          <X className="mx-auto mt-3" size={20} />
+          <X className="mx-auto " size={20} />
         </div>
         <img
           src="/icons/Menu.png"
-          className="h-9 w-10 md:hidden absolute right-3  -mt-[16px]"
+          className="h-9 w-10 md:hidden absolute right-3 dark:invert-0 invert -mt-[16px]"
           alt="menu icon"
         />
       </div>
