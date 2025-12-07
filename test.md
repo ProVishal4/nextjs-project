@@ -392,9 +392,9 @@ category is other scheme object but how to save category field object data in da
 
 
 
+how to match flow status data to articles category. articles is array of objects inside of category if clicked data (flow) matched in articles category to display all matched category articles
 
-
-
+How to match flow status data to article category. The article is an array of objects inside the category if the clicked data (flow) matches the article category then how to display all the matched category articles
 
 
 
