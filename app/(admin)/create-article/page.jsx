@@ -4,23 +4,23 @@ import React, { useState, useRef } from 'react'
 export default function page() {
 const [dwonMenu, setDwonMenu] = useState(true)
 const [imgSection, setImgSection] = useState(true)
-const imgSrc = useRef(null)
+//const imgSrc = useRef(null)
 const arrowUp = "/icons/arrowup.png"
 const arrowDown = "/icons/arrow-down.png"
-const changeSrc = ()=> {
-  imgSrc.current.src = "/icons/arrowup.png"
-}
+// const changeSrc = ()=> {
+//   imgSrc.current.src = "/icons/arrowup.png"
+// }
 const change = ()=> {
 setDwonMenu(!dwonMenu);
-changeSrc()
+//changeSrc()
 }
 const imgHendel = ()=>{
   setImgSection(!imgSection);
   
-  changeSrc();
-if()
-}
+//  changeSrc();
+
 //imgSection ? arrowDown : arrowUp
+}
   return (
     <div>
       {/* <h1 className="text-2xl font-semibold w-full mb-1">Add New Article</h1> */}
@@ -97,13 +97,12 @@ if()
               >
                 <h2 className="w-[70%] ">SCO Section</h2>
                 <img
-                  src="/icons/arrow-down.png"
-                  ref={imgSrc}
+                  src={`${dwonMenu ? arrowDown : arrowUp}`}
                   alt="arrow key"
                   className="h-5 w-4 dark:invert"
                 />
               </div>
-              {/* border border-red-700 */}
+              {/* border border-red-700  ref={imgSrc} "/icons/arrow-down.png"*/}
               <div className={` ${dwonMenu ? "hidden" : "block"}`}>
                 <div className="slugName mt-3 flex flex-col ">
                   <label for="slugname" className=" pl-3 w-full">
@@ -153,17 +152,12 @@ if()
               >
                 <h2 className="w-[70%] ">image Section</h2>
                 <img
-                  src="/icons/arrow-down.png"
-                  ref={imgSrc}
+                  src={`${imgSection ? arrowDown : arrowUp}`}
                   alt="arrow key"
                   className="h-5 w-4 dark:invert"
                 />
               </div>
-              <div
-                className={` ${
-                  imgSection ? "hidden" : "block"
-                }`}
-              >
+              <div className={` ${imgSection ? "hidden" : "block"}`}>
                 <div className="mt-3 flex flex-col">
                   <label for="article_image" className="pl-3">
                     Uplaod png/jpg image
