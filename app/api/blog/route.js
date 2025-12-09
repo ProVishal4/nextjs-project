@@ -12,11 +12,11 @@ export async function GET() {
 export async function POST(request) {
   await connectDB();
   try {
-    const { title, description, slug, popular, category, imageAtl, image } = await request.json();
-    
+    const { title, description, slug, metaContent, popular, category, imageAtl, image } = await request.json();
+    const artical = await Database.find();
     
     // for each article, if category has _id, move it into 'field' (if missing) and remove _id
-    artical = artical.map(a => {
+    await  artical.map(a => {
       if (a.category && a.category._id) {
       a.category.field = a.category.field ?? String(a.category._id);
       delete a.category._id;
@@ -56,10 +56,11 @@ export async function POST(request) {
       imageAtl,
       popular,
       image,
+      metaContent
     });
 
-    console.log(newData);
-    return NextResponse.json({ success: "successfully created article", data: newData }, { status: 201 });
+    //console.log(newData);
+    return NextResponse.json({ success: "successfully created article", data: newData }, { status: 200 });
   } catch (error) {
     console.error("error in create blog page:- ", error);
     return NextResponse.json({ error: "Failed to create article", details: error.message }, { status: 500 });

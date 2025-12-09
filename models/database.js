@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema(
             ref: "category"
         },
         image: String,
+        metaContent: String
     },
     { timestamps: true }
 );

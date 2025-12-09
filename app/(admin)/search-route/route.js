@@ -86,7 +86,7 @@ export async function GET(req) {
     const q = searchParams.get("q")?.toLowerCase() || "";
 
     const items = (await database.find()).map(({ title }) => title);
-    console.log("Items from database:", items);
+   // console.log("Items from database:", items);
     // return NextResponse.json(artical)
 
 

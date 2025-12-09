@@ -30,7 +30,7 @@ const [increas, setIncreas] = useState(false)
 
       setResults(data.results);
       setLoading(false);
-      console.log("searchBar3 data is:- ", results);
+      //console.log("searchBar3 data is:- ", results);
     }
 
 // Debounce logic
@@ -80,7 +80,7 @@ const [increas, setIncreas] = useState(false)
 
              ${increas ? "md:w-[60%] lg:w-[80%]" : "w-2/3"}  rounded-full px-4
               text-gray-800 dark:text-zinc-300
-               h-11 placeholder:dark:text-white/50 placeholder:text-black/60
+               h-11 dark:placeholder:text-white/50 placeholder:text-black/60 
               focus:outline-none 
               transition-all decoration-2 ease-in hidden md:block  
             `}

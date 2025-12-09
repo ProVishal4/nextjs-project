@@ -1,15 +1,38 @@
 "use client"
-import React, { useState, useRef } from 'react'
+import { categoryStore } from '@/store/categoryStore'
+import axios from 'axios'
+import React, { useState, useRef, useEffect } from 'react'
 
-export default function page() {
+export default function page({id}) {
+  const { category, fetchCategory } = categoryStore();
 const [dwonMenu, setDwonMenu] = useState(true)
 const [imgSection, setImgSection] = useState(true)
+const [form, setForm] = useState({
+  title: "",
+  description: "",
+  slug: "",
+  // popular: false,---seltact---
+  category: "",
+  imageAtl: "",
+  // image: null,
+  
+});
+
 //const imgSrc = useRef(null)
 const arrowUp = "/icons/arrowup.png"
 const arrowDown = "/icons/arrow-down.png"
 // const changeSrc = ()=> {
 //   imgSrc.current.src = "/icons/arrowup.png"
 // }
+
+useEffect(() => {
+ if(id){
+  axios.get(`/api/blog/${id}`).then((res) => setForm(res.data))
+ }
+ fetchCategory()
+}, [id])
+
+
 const change = ()=> {
 setDwonMenu(!dwonMenu);
 //changeSrc()
@@ -21,16 +44,40 @@ const imgHendel = ()=>{
 
 //imgSection ? arrowDown : arrowUp
 }
+
+const hedleSubmit  = async (e)=>{
+  e.preventDefault()
+  console.log("form submitted",e)
+  if(id){
+   await axios.put(`/api/blog/${id}`, form)
+} else{
+    await axios.post('/api/blog', form)
+}
+
+setForm({
+  title: "",
+  description: "",
+  slug: "",
+//  popular: false,
+  category: "",
+  imageAtl: "",
+// image: null,
+});
+}
+const handleChange =  (e) => {
+  setForm({...form, [e.target.name]: e.target.value})
+}
+console.log(form)
   return (
     <div>
       {/* <h1 className="text-2xl font-semibold w-full mb-1">Add New Article</h1> */}
       <div className="relative md:h-[80vh]   md:mt-8 w-[95%] m-auto  bg-[linear-gradient(45deg,#e8f5f6,#f9decc)] dark:bg-[linear-gradient(220deg,#100358,#302F2F)] dark:bg-[#201d1d] border-[0.5px] border-[#dbdbdb] dark:border-[#312f2f] rounded-2xl">
         <div className="w-[98%] m-auto ">
+          {/*     action="/admin/add-article" enctype="multipart/form-data"
+            method="post" */}
           <form
-            action="/admin/add-article"
             className="content  w-[100%] md:flex text-gray-500 dark:text-white/80 dark:bg-transparent"
-            enctype="multipart/form-data"
-            method="post"
+            onSubmit={hedleSubmit}
           >
             {/* left side content  */}
             <div className="leftSideContent overflow-y-auto overflow-x-hidden dark:bg-[linear-gradient(0deg,gray,black)] bg-[linear-gradient(0deg,#ffebcc,#fbf6fd)] md:h-[78vh] mt-[1vh] rounded-2xl pt-1   md:w-[24.8%]">
@@ -39,7 +86,7 @@ const imgHendel = ()=>{
               </h3>
               {/* <div className="border-[0.5px] border-[#dbdbdb] "></div> */}
               <div className="mt-3 flex flex-col ">
-                <label for="article_title" className=" ml-4 w-full">
+                <label htmlFor="article_title" className=" ml-4 w-full">
                   Title
                 </label>
                 <input
@@ -48,29 +95,38 @@ const imgHendel = ()=>{
                   id="article_title"
                   className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] "
                   placeholder="Title for article"
+                  value={form.title}
+                  onChange={handleChange}
                 />
               </div>
               <div className="mt-3 flex flex-col gap-2">
-                <label for="article_category" className="pl-3">
+                <label htmlFor="article_category" className="pl-3">
                   Category
                 </label>
                 <select
                   className="py-1  outline-[#dbdbdb] dark:bg-[#353434]    h-10 pl-3 w-[90%] mx-auto  rounded-4xl bg-[#ebe3e3] ] "
                   name="category"
                   id="article_category"
+                  value={form.category}
+                  onChange={handleChange}
                 >
                   <option
                     value=""
                     className=" h-10 pl-3 w-[90%] mx-auto  bg-[#ebe3e3] dark:bg-[#201414] "
                   >
-                    test
+                    ---Selact---
                   </option>
-                  <option
-                    value=""
-                    className=" h-10 pl-3 w-[90%] mx-auto  bg-[#ebe3e3] dark:bg-[#201414] "
-                  >
-                    test
-                  </option>
+                  {category.map((item) => (
+                    <option
+                      key={item._id}
+                      value={item._id}
+                      className=" h-10 pl-3 w-[90%] mx-auto  bg-[#ebe3e3] dark:bg-[#201414] "
+                    >
+                      {item.field}
+                    </option>
+                  ))}
+
+                  {/*  */}
                   {/* <% category.forEach((categoryname)=> { %>
                                 <option value="<%= categoryname._id %>">
                                     <%= categoryname.name %>
@@ -79,7 +135,7 @@ const imgHendel = ()=>{
                 </select>
               </div>
               {/* <div className="scoName mt-3 flex flex-col ">
-                <label for="sconame" className=" pl-3 w-full">
+                <label htmlFor="sconame" className=" pl-3 w-full">
                   sco Keywords
                 </label>
                 <input
@@ -105,42 +161,45 @@ const imgHendel = ()=>{
               {/* border border-red-700  ref={imgSrc} "/icons/arrow-down.png"*/}
               <div className={` ${dwonMenu ? "hidden" : "block"}`}>
                 <div className="slugName mt-3 flex flex-col ">
-                  <label for="slugname" className=" pl-3 w-full">
+                  <label htmlFor="slugname" className=" pl-3 w-full">
                     sco slug Keywords
                   </label>
                   <input
                     type="text"
-                    name="scoName"
+                    name="slug"
                     id="slugname"
                     className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
-                    autocomplete="off"
                     placeholder="SCO for Routes"
+                    value={form.slug}
+                    onChange={handleChange}
                   />
                 </div>
-                <div className="metaContent mt-3 flex flex-col ">
-                  <label for="meta_desc" className=" pl-3 w-full">
+                <div className="description mt-3 flex flex-col ">
+                  <label htmlFor="meta_desc" className=" pl-3 w-full">
                     Meta Description
                   </label>
                   <input
                     type="text"
-                    name="metaContent"
+                    name="description"
                     id="meta_desc"
                     className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
-                    autocomplete="off"
                     placeholder="Page meta Dec for SCO"
+                    value={form.description}
+                    onChange={handleChange}
                   />
                 </div>
 
-                <div className="imgAtl mt-3 flex flex-col ">
-                  <label for="imgAtl_desc" className=" pl-3 w-full">
+                <div className="imageAtl mt-3 flex flex-col ">
+                  <label htmlFor="imageAtl_desc" className=" pl-3 w-full">
                     Image Name
                   </label>
                   <input
                     type="text"
-                    name="imgAtl"
-                    id="imgAtl_desc"
+                    name="imageAtl"
+                    id="imageAtl_desc"
                     className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
-                    autocomplete="off"
+                    value={form.imageAtl}
+                    onChange={handleChange}
                     placeholder="Image Name for SCO"
                   />
                 </div>
@@ -159,7 +218,7 @@ const imgHendel = ()=>{
               </div>
               <div className={` ${imgSection ? "hidden" : "block"}`}>
                 <div className="mt-3 flex flex-col">
-                  <label for="article_image" className="pl-3">
+                  <label htmlFor="article_image" className="pl-3">
                     Uplaod png/jpg image
                   </label>
                   <input
@@ -170,7 +229,7 @@ const imgHendel = ()=>{
                   />
                 </div>
                 <div className="mt-3 flex flex-col">
-                  <label for="article_image_webp" className="pl-3">
+                  <label htmlFor="article_image_webp" className="pl-3">
                     Uplaod webP image
                   </label>
                   <input
@@ -196,7 +255,7 @@ const imgHendel = ()=>{
             <div className="rightSideContent mx-auto rounded-2xl bg-[linear-gradient(220deg,#deecf7,#f3d0cf)] dark:bg-[linear-gradient(180deg,#100358,#302F2F)] md:mt-[1vh] md:h-[78vh] md:w-[73.9%] ">
               <div className="mt-3 w-[100%]  flex flex-col gap-2 blogbox">
                 <label
-                  for="summernote"
+                  htmlFor="summernote"
                   className="font-medium text-center py-1 rounded-2xl md:w-[20%] px-4 mx-auto bg-[#ecebea]"
                 >
                   Blog Description
@@ -208,6 +267,10 @@ const imgHendel = ()=>{
                   className="outline-[#dbdbdb] break-after-all border-[0.5px] border-[#dbdbdb] rounded-[4px]"
                   rows="5"
                 ></textarea>
+                {/* <div>{form || "no data avaliable"}</div> */}
+                {/* <div>{form.map((i) => (
+                  <p>{i.title}</p>
+                ))}</div> */}
               </div>
             </div>
           </form>

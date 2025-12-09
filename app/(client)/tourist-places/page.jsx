@@ -56,7 +56,7 @@ export default function FieldPage() {
                       <p className="text-gray-400 dark:text-gray-500 text-xs font-medium">
                         {new Date(item.createdAt).toLocaleDateString()}
                       </p>
-                      <p>{item.slug}</p>
+                      {/* <p>{item._id}</p> */}
                     </div>
                   </div>
                 </Link>

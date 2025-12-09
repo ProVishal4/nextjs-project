@@ -14,7 +14,7 @@ export default function SearchResultsPage() {
       const res = await fetch(`/api/search?search=${search}`, { cache: "no-store" });
       const data = await res.json();
       setResults(data); // filtered
-      console.log(results);
+     // console.log(results);
     }
     load();
   }, [search]);
