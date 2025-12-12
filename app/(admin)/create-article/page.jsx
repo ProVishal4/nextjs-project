@@ -1,5 +1,7 @@
 "use client"
 import { categoryStore } from '@/store/categoryStore'
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import axios from 'axios'
 import React, { useState, useRef, useEffect } from 'react'
 
@@ -67,7 +69,23 @@ setForm({
 const handleChange =  (e) => {
   setForm({...form, [e.target.name]: e.target.value})
 }
-console.log(form)
+
+const editor = useEditor({
+    extensions: [StarterKit],
+    content: "<p>Hello Tiptap!</p>",
+    immediatelyRender: false,
+    onUpdate: ({ editor }) => {
+      // Every time user types → update blog field
+      setForm((prev) => ({
+        ...prev,
+        description: editor.getHTML(),
+      }));
+    },
+    
+   });
+
+   if (!editor) return null;
+//console.log(form)
   return (
     <div>
       {/* <h1 className="text-2xl font-semibold w-full mb-1">Add New Article</h1> */}
@@ -174,7 +192,7 @@ console.log(form)
                     onChange={handleChange}
                   />
                 </div>
-                <div className="description mt-3 flex flex-col ">
+                {/* <div className="description mt-3 flex flex-col ">
                   <label htmlFor="meta_desc" className=" pl-3 w-full">
                     Meta Description
                   </label>
@@ -187,7 +205,7 @@ console.log(form)
                     value={form.description}
                     onChange={handleChange}
                   />
-                </div>
+                </div> */}
 
                 <div className="imageAtl mt-3 flex flex-col ">
                   <label htmlFor="imageAtl_desc" className=" pl-3 w-full">
@@ -254,7 +272,7 @@ console.log(form)
             {/* <div className="border-l-1 w-[2px] h-[100%] mx-[1%] hidden md:block bg-[#dd2424] border-[#dbdbdb]"></div> */}
             <div className="rightSideContent mx-auto rounded-2xl bg-[linear-gradient(220deg,#deecf7,#f3d0cf)] dark:bg-[linear-gradient(180deg,#100358,#302F2F)] md:mt-[1vh] md:h-[78vh] md:w-[73.9%] ">
               <div className="mt-3 w-[100%]  flex flex-col gap-2 blogbox">
-                <label
+                {/* <label
                   htmlFor="summernote"
                   className="font-medium text-center py-1 rounded-2xl md:w-[20%] px-4 mx-auto bg-[#ecebea]"
                 >
@@ -266,11 +284,87 @@ console.log(form)
                   id="summernote"
                   className="outline-[#dbdbdb] break-after-all border-[0.5px] border-[#dbdbdb] rounded-[4px]"
                   rows="5"
-                ></textarea>
+                ></textarea> */}
                 {/* <div>{form || "no data avaliable"}</div> */}
                 {/* <div>{form.map((i) => (
                   <p>{i.title}</p>
                 ))}</div> */}
+                <div>
+                  {/* Toolbar */}
+                  <div className="flex gap-2 mb-3 md:h-12 flex-wrap  justify-evenly border-zinc-600/50 items-center text-zinc-800/90 border  rounded-md bg-[#e2ecfa] dark:bg-zinc-800 dark:text-white/80">
+                    <div
+                      onClick={() => editor.chain().focus().toggleBold().run()}
+                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                    >
+                      Bold
+                    </div>
+
+                    <div
+                      onClick={() =>
+                        editor.chain().focus().toggleItalic().run()
+                      }
+                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                    >
+                      Italic
+                    </div>
+
+                    <div
+                      onClick={() =>
+                        editor.chain().focus().toggleStrike().run()
+                      }
+                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                    >
+                      Strike
+                    </div>
+
+                    <div
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 2 }).run()
+                      }
+                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                    >
+                      H2
+                    </div>
+
+                    <div
+                      onClick={() =>
+                        editor.chain().focus().toggleBulletList().run()
+                      }
+                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                    >
+                      • List
+                    </div>
+
+                    <div
+                      onClick={() =>
+                        editor.chain().focus().toggleOrderedList().run()
+                      }
+                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                    >
+                      1. List
+                    </div>
+                    <div className="w-[20%] flex gap-2">
+                      <div
+                        onClick={() => editor.chain().focus().undo().run()}
+                        className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#767879] bg-black/90 dark:bg-[#fcfbfb] font-medium rounded-full text-white/90 dark:text-black/90 active:scale-95 cursor-pointer"
+                      >
+                        Undo
+                      </div>
+
+                      <div
+                        onClick={() => editor.chain().focus().redo().run()}
+                        className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#767879] bg-black/90 dark:bg-[#fcfbfb] font-medium text-white/90 dark:text-black/90 rounded-full active:scale-95 cursor-pointer"
+                      >
+                        Redo
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Editor */}
+                  <div className="border p-4 h-[15rem] rounded border-amber-600">
+                    <EditorContent className="border h-[90%]" editor={editor} />
+                  </div>
+                </div>
               </div>
             </div>
           </form>
