@@ -1,3 +1,5 @@
+
+
 Pagination in Next.js (App Router) is usually done in 3 common ways.
 Since you are using JavaScript (not TypeScript) and pnpm, I’ll keep everything simple and practical.
 
@@ -93,7 +95,7 @@ export default function Pagination({ page, total, limit }) {
 
 ✅ Method 2: Pagination using useSearchParams (Client Side)
 
-```Best when data is fetched on the client side.
+Best when data is fetched on the client side.
 
 "use client";
 
@@ -114,7 +116,7 @@ export default function Page() {
   );
 }
 
-```
+
 ---
 
 ✅ Method 3: API-based Pagination (MongoDB example)
@@ -174,6 +176,10 @@ If you want:
 Tell me 👍
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+======================================================================
+======================================================================
+
+======== Pagination + Search + Category filter ========
 
 Below is a clean + real-world explanation of
 
@@ -232,10 +238,10 @@ models/Product.js
 
 ---
 
-🚀 API: Pagination + Search + Category
+## 🚀 API: Pagination + Search + Category
 
-app/api/products/route.js
-
+### app/api/products/route.js
+```jsx
 import { connectDB } from "@/lib/mongodb";
 import Product from "@/models/Product";
 
@@ -277,7 +283,7 @@ export async function GET(req) {
   });
 }
 
-
+```
 ---
 
 🧠 Why dynamic query?
@@ -299,7 +305,7 @@ MongoDB query becomes smart and flexible
 🖥️ Frontend Page
 
 app/products/page.jsx (Server Component)
-
+```jsx
 export default async function ProductsPage({ searchParams }) {
   const page = searchParams.page || 1;
   const q = searchParams.q || "";
@@ -341,13 +347,12 @@ export default async function ProductsPage({ searchParams }) {
   );
 }
 
-
----
+```
 
 🎛️ Filters Component
 
 app/products/Filters.jsx
-
+```jsx
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -387,8 +392,8 @@ export default function Filters({ q, category }) {
 }
 
 
----
 
+```
 🔄 How Everything Works Together
 
 1️⃣ User types search or selects category
@@ -500,13 +505,13 @@ lib/
  └─ mongodb.js
 models/
  └─ Product.js
-
-```
-
+✅
 
 
-🔗 MongoDB Connection (lib/mongodb.js)
+---
 
+ ## 🔗 MongoDB Connection (lib/mongodb.js)
+```jsx
 import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -535,8 +540,9 @@ export async function connectDB() {
 
 
 ```
+---
 📦 Product Model (models/Product.js)
-
+```jsx
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
@@ -551,7 +557,7 @@ const productSchema = new mongoose.Schema(
 export default mongoose.models.Product ||
   mongoose.model("Product", productSchema);
 
-
+❎❎✅
 ---
 
 🚀 API Route (app/api/products/route.js)
@@ -583,7 +589,7 @@ export async function GET(req) {
     totalPages: Math.ceil(total / limit),
   });
 }
-
+✅
 
 ---
 
@@ -641,7 +647,7 @@ export default async function ProductsPage({ searchParams }) {
   );
 }
 
-
+✅
 ---
 
 ⚠️ Important Notes

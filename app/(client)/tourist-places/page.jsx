@@ -10,16 +10,22 @@ import React, { useEffect, useState } from "react";
 
 export default function FieldPage() {
   const [cards, setCards] = useState([]);
+  const [articles, setArticles] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const limit = 5
   useEffect(() => {
     axios
-      .get("/api/blog")
+      .get(`/api/v1-limit?page=${page}&limit=${limit}`)
       .then((res) => {
-        setCards(res.data);
+        setArticles(res.data.articles);
+        setTotalPages(res.data.totalPages);
       })
       .catch((err) => {
         console.log("Error in fetching articles Cards", err);
       });
-  }, []);
+      //  fetchArticles();
+  }, [page]);
 //const datas =   new DOMParser().parseFromString(cards, "text/html");
 
 function htmlToText(html) {
@@ -34,14 +40,14 @@ function htmlToText(html) {
       <div className="flex w-screen justidfy-between">
         <div className="lg:w-[20%] md:w-[30%] ">
           <Sidebar5 />
-        </div> 
+        </div>
         <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 md:w-[70%] lg:w-[80%]">
           <div className="max-w-6xl mx-auto">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
               Tourist Places
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {cards.map((item) => (
+              {articles.map((item) => (
                 <Link href={`/tourist-places/${item.slug} `}>
                   <div
                     key={item._id}
@@ -69,6 +75,30 @@ function htmlToText(html) {
                   </div>
                 </Link>
               ))}
+            </div>
+
+{/* pagination btn:-  */}
+
+            <div className="flex justify-center items-center gap-4 mt-10">
+              <button
+                disabled={page === 1}
+                onClick={() => setPage((p) => p - 1)}
+                className="px-4 py-2 dark:bg-zinc-700 bg-gray-200 rounded disabled:opacity-50"
+              >
+                Prev
+              </button>
+
+              <span>
+                Page <b>{page}</b> of <b>{totalPages}</b>
+              </span>
+
+              <button
+                disabled={page === totalPages}
+                onClick={() => setPage((p) => p + 1)}
+                className="px-4 py-2 bg-gray-200 dark:bg-zinc-700 rounded disabled:opacity-50"
+              >
+                Next
+              </button>
             </div>
           </div>
         </div>
