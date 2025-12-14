@@ -1,6 +1,7 @@
+
 import { connectDB } from "@/lib/mongodb";
 import database from "@/models/database";
-
+//const Product = database.title;
 export async function GET(req) {
     await connectDB();
 
@@ -8,22 +9,21 @@ export async function GET(req) {
 
     const page = Number(searchParams.get("page")) || 1;
     const limit = Number(searchParams.get("limit")) || 5;
-    const category = searchParams.get("category");
 
     const skip = (page - 1) * limit;
 
-    const query = category ? { category } : {};
-    // .find({_id: query})
     const articles = await database
-        .find(query)
+        .find()
         .skip(skip)
         .limit(limit)
         .sort({ createdAt: -1 });
 
-    const total = await database.countDocuments(query);
+    const total = await database
+        .countDocuments();
 
     return Response.json({
         articles,
+        total,
         page,
         totalPages: Math.ceil(total / limit),
     });

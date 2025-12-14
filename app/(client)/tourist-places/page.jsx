@@ -1,22 +1,26 @@
 "use client";
-import NewSidebar from "@/components/sidebar-menu/NewSidebar";
-import Sidebar2 from "@/components/sidebar-menu/Sidebar2";
-import Sidebar3 from "@/components/sidebar-menu/Sidebar3";
-import Sidebar4 from "@/components/sidebar-menu/Sidebar4";
+
 import Sidebar5 from "@/components/sidebar-menu/Sidebar5.";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
+import { categoryStore } from "@/store/categoryStore";
 export default function FieldPage() {
   const [cards, setCards] = useState([]);
   const [articles, setArticles] = useState([]);
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const limit = 5
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [activeCategory, setActiveCategory] = useState("Mountain");
+const { category, fetchCategory } = categoryStore();
+const [flow, setFlow] = useState("")
+  const limit = 5;
   useEffect(() => {
+
+    const categoryQuery =
+      activeCategory !== "Mountain" ? `&category=${activeCategory}` : "";
+
     axios
-      .get(`/api/v1-limit?page=${page}&limit=${limit}`)
+      .get(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`)
       .then((res) => {
         setArticles(res.data.articles);
         setTotalPages(res.data.totalPages);
@@ -24,35 +28,57 @@ export default function FieldPage() {
       .catch((err) => {
         console.log("Error in fetching articles Cards", err);
       });
-      //  fetchArticles();
-  }, [page]);
-//const datas =   new DOMParser().parseFromString(cards, "text/html");
+    //  fetchArticles();
+     fetchCategory();
+  }, [page, activeCategory]);
+  //const datas =   new DOMParser().parseFromString(cards, "text/html");
 
-function htmlToText(html) {
-  const doc = new DOMParser().parseFromString(html, "text/html");
-  return doc.body.textContent || "";
-}
+  const handleCategoryClick = (cat) => {
+    //let result = cat.replace("%20", "")
+    setActiveCategory(cat);
+    setPage(1); // reset pagination when category changes
+    console.log("This is cat data: - " , cat)
+  };
 
+  function htmlToText(html) {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  }
 
   //console.log(cards.slug)
   return (
     <>
-      <div className="flex w-screen justidfy-between">
-        <div className="lg:w-[20%] md:w-[30%] ">
-          <Sidebar5 />
-        </div>
+      <div className="flex w-full justidfy-between ">
+        <aside className="lg:w-[20%] md:w-[30%] hidden md:block border-r border-gray-300 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 min-h-screen">
+          <ul className="space-y-2">
+            {category.map((cat) => (
+              <li
+                key={cat._id}
+                onClick={() => {
+                  handleCategoryClick(cat._id);
+                  setFlow(cat.field);
+                }}
+                className={`cursor-pointer px-3 py-2 rounded text-sm
+                    ${
+                      activeCategory === cat.field
+                        ? "bg-blue-600 text-white"
+                        : "hover:bg-gray-100/20"
+                    }`}
+              >
+                {cat.field}
+              </li>
+            ))}
+          </ul>
+        </aside>
         <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 md:w-[70%] lg:w-[80%]">
-          <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
-              Tourist Places
+          <div className="max-w-6xl mx-auto h-screen   relative">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 mt-10 text-center">
+              {flow ? flow : "Tourist Places"}
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-8 ">
               {articles.map((item) => (
-                <Link href={`/tourist-places/${item.slug} `}>
-                  <div
-                    key={item._id}
-                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-auto duration-300 overflow-hidden hover:-translate-y-1"
-                  >
+                <Link key={item._id} href={`/tourist-places/${item.slug} `}>
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-auto duration-300 overflow-hidden hover:-translate-y-1">
                     <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
                       <img
                         src={item.image}
@@ -77,9 +103,9 @@ function htmlToText(html) {
               ))}
             </div>
 
-{/* pagination btn:-  */}
+            {/* pagination btn:-  */}
 
-            <div className="flex justify-center items-center gap-4 mt-10">
+            <div className="  md:absolute bottom-[14%] left-[40%] flex justify-center items-center gap-4 mt-10">
               <button
                 disabled={page === 1}
                 onClick={() => setPage((p) => p - 1)}
