@@ -9,7 +9,7 @@ export const articleStore = create((set) => ({
         set({ loading: true });
 
         try {
-            const res = await axios.get("http://localhost:3000/api/blog");
+            const res = await axios.get("http://localhost:3000/api/blog", {cache: "no-store"});
     
             set({
                

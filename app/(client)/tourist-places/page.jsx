@@ -20,6 +20,14 @@ export default function FieldPage() {
         console.log("Error in fetching articles Cards", err);
       });
   }, []);
+//const datas =   new DOMParser().parseFromString(cards, "text/html");
+
+function htmlToText(html) {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return doc.body.textContent || "";
+}
+
+
   //console.log(cards.slug)
   return (
     <>
@@ -51,7 +59,7 @@ export default function FieldPage() {
                         {item.title}
                       </h2>
                       <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
-                        {item.description}
+                        {htmlToText(item.description)}
                       </p>
                       <p className="text-gray-400 dark:text-gray-500 text-xs font-medium">
                         {new Date(item.createdAt).toLocaleDateString()}

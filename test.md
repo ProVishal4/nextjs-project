@@ -24,6 +24,7 @@ To add/remove/update cart items.
 
 🟦 models/Product.js
 
+```
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
@@ -37,7 +38,8 @@ export default mongoose.models.Product || mongoose.model("Product", productSchem
 🟩 models/User.js
 
 Here we save multiple cart items inside user schema:
-
+---
+_____________________________________________________________
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
@@ -59,6 +61,9 @@ default: 1
 });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);
+```
+
+---
 
 ---
 
@@ -189,6 +194,7 @@ setCart(res.data.cart);
 }, []);
 
 return (
+
 <div>
 <h2>Your Cart</h2>
 {cart.map((item) => (
@@ -233,7 +239,7 @@ I can build:
 
 Just tell me “yes continue”.
 
----_________________________--------____________________________________------
+---\***\*\*\*\*\*\*\***\_\***\*\*\*\*\*\*\***--------**\*\***\*\*\*\***\*\***\_\_\_\_**\*\***\*\*\*\***\*\***------
 
 complex form data:-
 Here’s the correct, simple, JavaScript-only way to create forms in Next.js App Router (app/ directory) — including how to submit, validate, and send data to an API route.
@@ -275,6 +281,7 @@ e.preventDefault();
 };
 
 return (
+
 <div className="max-w-xl mx-auto p-6">
 <h1 className="text-2xl font-bold mb-4">Contact Form</h1>
 
@@ -373,30 +380,11 @@ If you want, I can show:
 
 Just tell me which one you want next.
 
-
-
-
-
-
-
-
-
-
-
 category is other scheme object but how to save category field object data in database scheme
 
-@1 make sidebar components inside function(component) send  Prop to second info sidebar
+@1 make sidebar components inside function(component) send Prop to second info sidebar
 @2 or make inside tourist-places route page second info sidebar
-
-
-
-
 
 how to match flow status data to articles category. articles is array of objects inside of category if clicked data (flow) matched in articles category to display all matched category articles
 
 How to match flow status data to article category. The article is an array of objects inside the category if the clicked data (flow) matches the article category then how to display all the matched category articles
-
-
-
-
-
