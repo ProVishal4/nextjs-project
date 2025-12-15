@@ -1,5 +1,5 @@
 "use client"
-//import SearchCard from "@/components/search/SearchCard";
+//import SearchCard from "@/components/search/SearchCard"; ✅
 import axios from "axios";
 import { X } from "lucide-react";
 import Link from "next/link";

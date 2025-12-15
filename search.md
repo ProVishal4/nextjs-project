@@ -92,7 +92,7 @@ return (
 📌 3. Use Query to Filter Data (Example)
 
 Let’s say you fetch products:
-
+```jsx
 export default async function Home({ searchParams }) {
 const query = searchParams.q || "";
 

@@ -4,20 +4,26 @@ import Sidebar5 from "@/components/sidebar-menu/Sidebar5.";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { categoryStore } from "@/store/categoryStore";
 export default function FieldPage() {
   const [cards, setCards] = useState([]);
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [activeCategory, setActiveCategory] = useState("Mountain");
+  const [activeCategory, setActiveCategory] = useState("All");
 const { category, fetchCategory } = categoryStore();
+const router = useRouter()
+
+
+
+
 const [flow, setFlow] = useState("")
   const limit = 5;
   useEffect(() => {
 
     const categoryQuery =
-      activeCategory !== "Mountain" ? `&category=${activeCategory}` : "";
+      activeCategory !== "All" ? `&category=${activeCategory}` : "";
 
     axios
       .get(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`)
@@ -31,6 +37,8 @@ const [flow, setFlow] = useState("")
     //  fetchArticles();
      fetchCategory();
   }, [page, activeCategory]);
+
+
   //const datas =   new DOMParser().parseFromString(cards, "text/html");
 
   const handleCategoryClick = (cat) => {
@@ -44,6 +52,13 @@ const [flow, setFlow] = useState("")
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
   }
+
+
+const handlePush = (e) => {
+  router.push(`/api/find-one/${e}`, { cache: 'no-store' })
+  console.log(e)
+}
+
 
   //console.log(cards.slug)
   return (
@@ -77,28 +92,34 @@ const [flow, setFlow] = useState("")
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-8 ">
               {articles.map((item) => (
-                <Link key={item._id} href={`/tourist-places/${item.slug} `}>
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-auto duration-300 overflow-hidden hover:-translate-y-1">
-                    <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
+                //
+                <Link key={item._id}
+                  href={`/tourist-places/${item.slug} `}
+                  onClick={(e) => handlePush(e)}
+                >
+                
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-auto duration-300 overflow-hidden hover:-translate-y-1">
+                      <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 line-clamp-2">
+                          {item.title}
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+                          {htmlToText(item.description)}
+                        </p>
+                        <p className="text-gray-400 dark:text-gray-500 text-xs font-medium">
+                          {new Date(item.createdAt).toLocaleDateString()}
+                        </p>
+                        {/* <p>{item._id}</p> */}
+                      </div>
                     </div>
-                    <div className="p-6">
-                      <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 line-clamp-2">
-                        {item.title}
-                      </h2>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
-                        {htmlToText(item.description)}
-                      </p>
-                      <p className="text-gray-400 dark:text-gray-500 text-xs font-medium">
-                        {new Date(item.createdAt).toLocaleDateString()}
-                      </p>
-                      {/* <p>{item._id}</p> */}
-                    </div>
-                  </div>
+                 
                 </Link>
               ))}
             </div>

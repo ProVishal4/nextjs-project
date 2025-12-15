@@ -250,7 +250,7 @@ Here’s the correct, simple, JavaScript-only way to create forms in Next.js App
 
 Create a component inside:
 app/contact/page.js
-
+```jsx
 "use client";
 
 import { useState } from "react";
