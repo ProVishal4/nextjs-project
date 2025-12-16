@@ -18,7 +18,7 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, context) {
     await connectDB();
-    const {id} = await context.params
+    const {id} = await context.params;
     await Database.findByIdAndDelete(id);
     return Response.json({ message: "Query deleted succesfully!" });
 }
