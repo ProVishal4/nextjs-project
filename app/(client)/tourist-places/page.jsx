@@ -101,7 +101,7 @@ const handlePush = (e) => {
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-auto duration-300 overflow-hidden hover:-translate-y-1">
                       <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
                         <img
-                          src={item.image}
+                          src={item.imageUrl}
                           alt={item.title}
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         />

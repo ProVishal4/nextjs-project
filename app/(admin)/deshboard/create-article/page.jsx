@@ -1,76 +1,71 @@
-"use client"
-import { categoryStore } from '@/store/categoryStore'
+"use client";
+import { categoryStore } from "@/store/categoryStore";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import axios from 'axios'
-import React, { useState, useRef, useEffect } from 'react'
+import axios from "axios";
+import React, { useState, useRef, useEffect } from "react";
 
-export default function page({id}) {
+export default function page({ id }) {
   const { category, fetchCategory } = categoryStore();
-const [dwonMenu, setDwonMenu] = useState(true)
-const [imgSection, setImgSection] = useState(true)
-const [form, setForm] = useState({
-  title: "",
-  description: "",
-  slug: "",
-  // popular: false,---seltact---
-  category: "",
-  imageAtl: "",
-  // image: null,
-  
-});
+  const [dwonMenu, setDwonMenu] = useState(true);
+  const [imgSection, setImgSection] = useState(true);
+ 
 
-//const imgSrc = useRef(null)
-const arrowUp = "/icons/arrowup.png"
-const arrowDown = "/icons/arrow-down.png"
-// const changeSrc = ()=> {
-//   imgSrc.current.src = "/icons/arrowup.png"
-// }
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    slug: "",
+    // popular: false,
+    category: "",
+    imageAtl: "",
+    imageUrl: "",
+  });
 
-useEffect(() => {
- if(id){
-  axios.get(`/api/blog/${id}`).then((res) => setForm(res.data))
- }
- fetchCategory()
-}, [id])
+  const arrowUp = "/icons/arrowup.png";
+  const arrowDown = "/icons/arrow-down.png";
+
+  useEffect(() => {
+    if (id) {
+      axios.get(`/api/blog/${id}`).then((res) => setForm(res.data));
+    }
+    fetchCategory();
+  }, [id]);
+
+  const change = () => {
+    setDwonMenu(!dwonMenu);
+  };
+  const imgHendel = () => {
+    setImgSection(!imgSection);
+  };
+
+ 
+ const hedleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("form submitted", e);
+    if (id) {
+      await axios.put(`/api/blog/${id}`, form);
+    } else {
+      await axios.post("/api/blog", form);
+    }
+
+    // setForm({
+    //   title: "",
+    //   description: "",
+    //   slug: "",
+    //   //  popular: false,
+    //   category: "",
+    //   imageAtl: "",
+    //   imageUrl: "",
+    // });
+
+  };
 
 
-const change = ()=> {
-setDwonMenu(!dwonMenu);
-//changeSrc()
-}
-const imgHendel = ()=>{
-  setImgSection(!imgSection);
-  
-//  changeSrc();
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-//imgSection ? arrowDown : arrowUp
-}
-
-const hedleSubmit  = async (e)=>{
-  e.preventDefault()
-  console.log("form submitted",e)
-  if(id){
-   await axios.put(`/api/blog/${id}`, form)
-} else{
-    await axios.post('/api/blog', form)
-}
-
-setForm({
-  title: "",
-  description: "",
-  slug: "",
-//  popular: false,
-  category: "",
-  imageAtl: "",
-// image: null,
-});
-}
-const handleChange =  (e) => {
-  setForm({...form, [e.target.name]: e.target.value})
-}
-
-const editor = useEditor({
+  const editor = useEditor({
     extensions: [StarterKit],
     content: "<p>Hello Tiptap!</p>",
     immediatelyRender: false,
@@ -81,11 +76,12 @@ const editor = useEditor({
         description: editor.getHTML(),
       }));
     },
-    
-   });
+  });
 
-   if (!editor) return null;
-//console.log(form)
+console.log(form)
+  
+  if (!editor) return null;
+
   return (
     <div>
       {/* <h1 className="text-2xl font-semibold w-full mb-1">Add New Article</h1> */}
@@ -102,7 +98,7 @@ const editor = useEditor({
               <h3 className="bg-[#faecf4] dark:bg-[#201414] text-md ml-[5%] rounded-2xl h-[3rem] pt-3 w-[90%] text-center items-center mt-3 font-medium">
                 Add new article
               </h3>
-              {/* <div className="border-[0.5px] border-[#dbdbdb] "></div> */}
+
               <div className="mt-3 flex flex-col ">
                 <label htmlFor="article_title" className=" ml-4 w-full">
                   Title
@@ -143,13 +139,6 @@ const editor = useEditor({
                       {item.field}
                     </option>
                   ))}
-
-                  {/*  */}
-                  {/* <% category.forEach((categoryname)=> { %>
-                                <option value="<%= categoryname._id %>">
-                                    <%= categoryname.name %>
-                                </option>
-                                <% }) %> */}
                 </select>
               </div>
               {/* <div className="scoName mt-3 flex flex-col ">
@@ -237,16 +226,25 @@ const editor = useEditor({
               <div className={` ${imgSection ? "hidden" : "block"}`}>
                 <div className="mt-3 flex flex-col">
                   <label htmlFor="article_image" className="pl-3">
-                    Uplaod png/jpg image
+                    Upload Image
                   </label>
                   <input
-                    type="file"
-                    name="imageJpg"
+                    type="text"
+                    name="imageUrl"
                     id="article_image"
-                    className="outline-[#dbdbdb] pt-2 h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
+                    className="outline-[#dbdbdb]  h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
+                    onChange={handleChange}
+                    placeholder="Enter Image URL "
                   />
+                  <div className="mx-auto border rounded-lg overflow-hidden border-lime-500 mt-3 h-40 w-[90%] lg:h-40">
+                    <img
+                      src={`${form.imageUrl}` || "/card1.jpeg"}
+                      alt="uploaded"
+                      className="w-full h-full"
+                    />
+                  </div>
                 </div>
-                <div className="mt-3 flex flex-col">
+                {/* <div className="mt-3 flex flex-col">
                   <label htmlFor="article_image_webp" className="pl-3">
                     Uplaod webP image
                   </label>
@@ -256,7 +254,7 @@ const editor = useEditor({
                     id="article_image_webp"
                     className="outline-[#dbdbdb] pt-2 h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
                   />
-                </div>
+                </div> */}
               </div>
               <button
                 type="submit"
@@ -289,6 +287,9 @@ const editor = useEditor({
                 {/* <div>{form.map((i) => (
                   <p>{i.title}</p>
                 ))}</div> */}
+
+                {/* ======================================================================================================================================================================================================== */}
+
                 <div>
                   {/* Toolbar */}
                   <div className="flex gap-2 mb-3 md:h-12 flex-wrap  justify-evenly border-zinc-600/50 items-center text-zinc-800/90 border  rounded-md bg-[#e2ecfa] dark:bg-zinc-800 dark:text-white/80">

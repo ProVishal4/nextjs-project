@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "category"
         },
-        image: String,
+        imageUrl: String,
         metaContent: String
     },
     { timestamps: true }
