@@ -11,10 +11,10 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning >
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {/* <Navbar /> */}
+          <Navbar />
        
           {children}
-          {/* <Footer /> */}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

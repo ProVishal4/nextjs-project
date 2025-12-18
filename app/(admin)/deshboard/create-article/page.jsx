@@ -48,15 +48,15 @@ export default function page({ id }) {
       await axios.post("/api/blog", form);
     }
 
-    // setForm({
-    //   title: "",
-    //   description: "",
-    //   slug: "",
-    //   //  popular: false,
-    //   category: "",
-    //   imageAtl: "",
-    //   imageUrl: "",
-    // });
+    setForm({
+      title: "",
+      description: "",
+      slug: "",
+      //  popular: false,
+      category: "",
+      imageAtl: "",
+      imageUrl: "",
+    });
 
   };
 

@@ -45,7 +45,7 @@ const [flow, setFlow] = useState("")
     //let result = cat.replace("%20", "")
     setActiveCategory(cat);
     setPage(1); // reset pagination when category changes
-    console.log("This is cat data: - " , cat)
+    //console.log("This is cat data: - " , cat)
   };
 
   function htmlToText(html) {
@@ -54,17 +54,17 @@ const [flow, setFlow] = useState("")
   }
 
 
-const handlePush = (e) => {
-  router.push(`/api/find-one/${e}`, { cache: 'no-store' })
-  console.log(e)
-}
+// const handlePush = (e) => {
+//  // router.push(`/api/find-one/${e}`, { cache: 'no-store' })
+//   console.log(e)
+// }
 
 
-  //console.log(cards.slug)
+  //console.log(cards.slug)min-h-screen
   return (
     <>
-      <div className="flex w-full justidfy-between ">
-        <aside className="lg:w-[20%] md:w-[30%] hidden md:block border-r border-gray-300 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 min-h-screen">
+      <div className="flex w-full justify-evenly ">
+        <aside className="lg:w-[20%] md:w-[30%] hidden md:block border-r border-gray-300 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 h-full">
           <ul className="space-y-2">
             {category.map((cat) => (
               <li
@@ -85,9 +85,9 @@ const handlePush = (e) => {
             ))}
           </ul>
         </aside>
-        <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 md:w-[70%] lg:w-[80%]">
-          <div className="max-w-6xl mx-auto h-screen   relative">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 mt-10 text-center">
+        <div className="  w-full bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 md:w-[70%] lg:w-[80%]">
+          <div className="max-w-6xl mx-auto h-full   relative">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white md:mb-6 my-12   text-center">
               {flow ? flow : "Tourist Places"}
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-8 ">
@@ -95,10 +95,10 @@ const handlePush = (e) => {
                 //
                 <Link key={item._id}
                   href={`/tourist-places/${item.slug} `}
-                  onClick={(e) => handlePush(e)}
+               //   onClick={(e) => handlePush(e)}
                 >
                 
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-auto duration-300 overflow-hidden hover:-translate-y-1">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-[23rem] duration-300 overflow-hidden hover:-translate-y-1">
                       <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
                         <img
                           src={item.imageUrl}
@@ -121,12 +121,14 @@ const handlePush = (e) => {
                     </div>
                  
                 </Link>
-              ))}
+              ))
+            
+            }
             </div>
 
             {/* pagination btn:-  */}
 
-            <div className="  md:absolute bottom-[14%] left-[40%] flex justify-center items-center gap-4 mt-10">
+            <div className="   flex justify-center items-center gap-4 mt-10">
               <button
                 disabled={page === 1}
                 onClick={() => setPage((p) => p - 1)}

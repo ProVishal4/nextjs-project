@@ -15,7 +15,7 @@ export async function GET(req) {
     const skip = (page - 1) * limit;
 
     //const query = category ? { _id } : {};
-    console.log("this is query of category:- ", category)
+    //console.log("this is query of category:- ", category)
     // .find({_id: query})
     // build a filter that matches articles whose `category` field equals the category _id (if provided)
     const filter = {};

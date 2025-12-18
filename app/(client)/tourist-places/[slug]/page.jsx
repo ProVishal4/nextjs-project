@@ -3,6 +3,8 @@ import { connectDB } from "@/lib/mongodb";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import Description from "./description";
+import { HomeIcon } from "lucide-react";
 
 export default async function FieldPage(context) {
   connectDB();
@@ -11,12 +13,16 @@ export default async function FieldPage(context) {
   if (!article) {
     notFound();
   }
+
+  const {description} = article
+
+  
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors">
       {/* Hero Section */}
       <div className="relative w-full mx-auto lg:w-[65vw] h-64 md:h-96 lg:h-[500px] overflow-hidden bg-gray-200 dark:bg-slate-800">
         <img
-          src={article.image}
+          src={article.imageUrl || "/card1.jpeg"}
           alt={article.slugImage}
           className="w-full h-full object-cover"
         />
@@ -39,19 +45,21 @@ export default async function FieldPage(context) {
             })}
           </time>
         </div>
+        <div className="flex">
         <Link href="/tourist-places">
-          <button className="py-3 px-6 w-28 border border-red-500 rounded-lg bg-amber-400 text-black active:scale-90 hover:bg-amber-600 flex  justify-center items-center text-center">
-           
+          <button className="py-3 px-6 w-28 border border-red-500 rounded-lg bg-amber-400 text-black active:scale-90 gap-2 hover:bg-amber-600 flex  justify-center items-center text-center">
             <ArrowLeft size={20} /> <p>Back</p>
           </button>
         </Link>
+        <Link href="/">
+          <button className="py-3 px-6 w-28 border border-red-500 rounded-lg bg-amber-400 text-black active:scale-90 gap-2 hover:bg-amber-600 flex  justify-center items-center text-center">
+            <HomeIcon size={20} className="text-2xl" /> <p>Home</p>
+          </button>
+        </Link></div>
         <div className="border-b mb-6 mt-4 border-slate-200 dark:border-slate-700 w-full"></div>
-        {/* Description */}
-        <div className="prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none">
-          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
-            {article.description}
-          </p>
-        </div>
+
+        {/* <div className="text-lime-400 font-bold">{description}</div> */}
+        <Description description={description} />
       </article>
     </div>
   );
