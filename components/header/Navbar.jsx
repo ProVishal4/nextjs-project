@@ -8,7 +8,7 @@ import Link from "next/link";
 
 
 // Navbar for all devieses ✅
-export default function Navbar() {
+export default function Navbar() { 
 
 
   return (

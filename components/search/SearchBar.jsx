@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
+import NewSidebar from "../sidebar-menu/NewSidebar";
 
 export const SearchBar = () => {
    
@@ -124,11 +125,12 @@ const [increas, setIncreas] = useState(false)
         >
           <X className="mx-auto " size={20} />
         </div>
-        <img
+        {/* <img
           src="/icons/Menu.png"
           className="h-9 w-10 md:hidden absolute right-3 dark:invert-0 invert -mt-[16px]"
           alt="menu icon"
-        />
+        /> */}
+     <NewSidebar />
       </div>
     </>
   );
