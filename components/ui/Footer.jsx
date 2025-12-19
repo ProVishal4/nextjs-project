@@ -6,7 +6,7 @@ export default function Footer() {
     <>
       <div className="border border-[#474747] w-full"></div>
       <footer
-        className={`border-t  border-[#474747] md:w-[68vw]  lg:w-[78.5vw]  w-full bg-[#090a09]  mx-auto  text-white`}
+        className={`border-t  border-[#474747]   w-full bg-[#090a09]  mx-auto  text-white`}
       >
         <div className="bg-[#090a09]  m-auto w-[90%] ">
           <div className="md:flex  justify-around my-[3rem] ">

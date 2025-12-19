@@ -6,22 +6,24 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { categoryStore } from "@/store/categoryStore";
+import { ArrowBigDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 export default function FieldPage() {
   const [cards, setCards] = useState([]);
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [activeCategory, setActiveCategory] = useState("All");
-const { category, fetchCategory } = categoryStore();
-const router = useRouter()
+  const { category, fetchCategory } = categoryStore();
+  const router = useRouter();
+const [filter, setFilter] = useState(false)
+const [placeHolder, setPlaceHolder] = useState("")
 
-
-
-
-const [flow, setFlow] = useState("")
+  const [flow, setFlow] = useState(""); 
   const limit = 5;
   useEffect(() => {
-
     const categoryQuery =
       activeCategory !== "All" ? `&category=${activeCategory}` : "";
 
@@ -35,9 +37,8 @@ const [flow, setFlow] = useState("")
         console.log("Error in fetching articles Cards", err);
       });
     //  fetchArticles();
-     fetchCategory();
+    fetchCategory();
   }, [page, activeCategory]);
-
 
   //const datas =   new DOMParser().parseFromString(cards, "text/html");
 
@@ -53,12 +54,15 @@ const [flow, setFlow] = useState("")
     return doc.body.textContent || "";
   }
 
+  // const handlePush = (e) => {
+  //  // router.push(`/api/find-one/${e}`, { cache: 'no-store' })
+  //   console.log(e)
+  // }
 
-// const handlePush = (e) => {
-//  // router.push(`/api/find-one/${e}`, { cache: 'no-store' })
-//   console.log(e)
-// }
-
+const fillterMenu = () =>{
+setFilter(!filter)
+  return 
+}
 
   //console.log(cards.slug)min-h-screen
   return (
@@ -72,6 +76,7 @@ const [flow, setFlow] = useState("")
                 onClick={() => {
                   handleCategoryClick(cat._id);
                   setFlow(cat.field);
+                  setPlaceHolder(cat.field);
                 }}
                 className={`cursor-pointer px-3 py-2 rounded text-sm
                     ${
@@ -87,17 +92,57 @@ const [flow, setFlow] = useState("")
         </aside>
         <div className="  w-full bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 md:w-[70%] lg:w-[80%]">
           <div className="max-w-6xl mx-auto h-full   relative">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white md:mb-6 my-12   text-center">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white/90 md:mb-6 my-12   text-center">
               {flow ? flow : "Tourist Places"}
             </h1>
+
+            <div
+              className={`md:hidden w-full border border-zinc-500/20 rounded-md h-10 flex flex-col mb-6   ${
+                filter
+                  ? "bg-[#d1cccc] dark:bg-zinc-700/60"
+                  : "bg-blue-200/10 dark:bg-zinc-600/30"
+              }`}
+              onClick={() => fillterMenu()}
+            >
+              <div
+                className={`flex px-5 py-3 items-center justify-between  w-full h-10 `}
+              >
+                <h4 className="text-zinc-600 dark:text-zinc-100/90">
+                 
+                  {flow ? flow : "Filter Category"}
+                </h4>
+                {filter ? <ChevronUp /> : <ChevronDown />}
+              </div>
+              {filter && (
+                <ul className="space-y-2  md:hidden z-10  bg-zinc-200 dark:bg-zinc-600 rounded-md text-zinc-600 dark:text-zinc-100/90">
+                  {category.map((cat) => (
+                    <li
+                      key={cat._id}
+                      onClick={() => {
+                        handleCategoryClick(cat._id);
+                        setFlow(cat.field);
+                      }}
+                      className={`cursor-pointer active::bg-gray-100/20 px-3 py-2  text-sm 
+                    ${
+                      flow === cat.field
+                        ? "bg-[#d4d2d296] dark:bg-[#d4d2d22a] text-white/60 rounded-md"
+                        : "hover:bg-gray-100/20"
+                    }`}
+                    >
+                      {cat.field}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-8 ">
-              {articles.map((item) => (
-                //
-                <Link key={item._id}
-                  href={`/tourist-places/${item.slug} `}
-               //   onClick={(e) => handlePush(e)}
-                >
-                
+              {articles.length != 0 ? (
+                articles.map((item) => (
+                  <Link
+                    key={item._id}
+                    href={`/tourist-places/${item.slug} `}
+                    //   onClick={(e) => handlePush(e)}
+                  >
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-[23rem] duration-300 overflow-hidden hover:-translate-y-1">
                       <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
                         <img
@@ -119,16 +164,18 @@ const [flow, setFlow] = useState("")
                         {/* <p>{item._id}</p> */}
                       </div>
                     </div>
-                 
-                </Link>
-              ))
-            
-            }
+                  </Link>
+                ))
+              ) : (
+                <div className="flex md:ml-[20vw] h-40 items-center justify-center rounded-lg border w-full border-dashed text-gray-400 mb-[50vh]">
+                  No Article available
+                </div>
+              )}
             </div>
 
             {/* pagination btn:-  */}
 
-            <div className="   flex justify-center items-center gap-4 mt-10">
+            <div className="flex justify-center items-center gap-4 mt-10">
               <button
                 disabled={page === 1}
                 onClick={() => setPage((p) => p - 1)}
@@ -142,7 +189,7 @@ const [flow, setFlow] = useState("")
               </span>
 
               <button
-                disabled={page === totalPages}
+                disabled={page === totalPages || totalPages == 0}
                 onClick={() => setPage((p) => p + 1)}
                 className="px-4 py-2 bg-gray-200 dark:bg-zinc-700 rounded disabled:opacity-50"
               >

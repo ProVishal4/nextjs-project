@@ -4,22 +4,31 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Home, User, Settings } from "lucide-react";
 import { categoryStore } from "@/store/categoryStore";
-
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 const menuItems = [
-  { id: "home", label: "Home", icon: <Home className="w-5 h-5" /> },
-  { id: "profile", label: "Profile", icon: <User className="w-5 h-5" /> },
-  { id: "settings", label: "Settings", icon: <Settings className="w-5 h-5" /> },
+  { id: 1, label: "Waterfall", link: "/tourist-places/url3-test-slug" },
+  { id: 2, label: "Mountain", link: "" },
+  { id: 3, label: "Temple", link: "" },
+  { id: 4, label: "Rivers", link: "" },
+  {
+    id: 5,
+    label: "Archaeologicle Places",
+  link: ""
+  },
+  { id: 6, label: "Histrorical", link: "/tourist-places/test-img" },
 ];
 
 export default function NewSidebar() {
-  const {category, fetchCategory} = categoryStore()
+    const router = useRouter();
+  const { category, fetchCategory } = categoryStore();
   const [open, setOpen] = useState(false);
   const firstLinkRef = useRef(null);
-
+const [saveCategory, setSaveCategory] = useState("")
   // prevent background scroll when menu is open on mobile
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-    fetchCategory()
+    fetchCategory();
     return () => {
       document.body.style.overflow = "";
     };
@@ -27,7 +36,7 @@ export default function NewSidebar() {
 
   // close on Esc
   useEffect(() => {
-    const onKey = (e= KeyboardEvent) => {
+    const onKey = (e = KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
@@ -49,6 +58,18 @@ export default function NewSidebar() {
   const sidebarVariants = {
     closed: { x: "200%" },
     open: { x: "60%" },
+  };
+
+  //router.push(`/search-results?search=${encodeURIComponent(query)}`);
+  //`/api/v1-limit?page=${page}&limit=${limit}&category=${categoryQuery}`
+  const handleSearch = () => {
+    if (!query.trim()) return;
+    router.push(
+      `/api/v1-limit?page=1&limit=5&category=${encodeURIComponent(
+        saveCategory
+      )}`
+    );
+    setIncreas(false);
   };
 
   return (
@@ -134,19 +155,24 @@ export default function NewSidebar() {
 
               <nav className="p-4 space-y-2">
                 {category.map((it, i) => (
-                  <motion.a
-                    key={it.id}
-                    href={"#" + it.id}
+                  <motion.div
+                    key={it._id}
+                    // href={it._id}
                     ref={i === 0 ? firstLinkRef : null}
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                      setSaveCategory(it.field)
+                    }}
                     whileTap={{ scale: 0.98 }}
                     className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 dark:text-white transition"
                   >
-                    <span className="text-zinc-600 dark:text-zinc-300">
+                    {/* <span className="text-zinc-600 dark:text-zinc-300">
                       {it.icon}
-                    </span>
-                    <span className="font-medium">{it.label}</span>
-                  </motion.a>
+                    </span> */}
+                    <Link href={`/tourist-places`}>
+                      <span className="font-medium">{it.field}</span>
+                    </Link>
+                  </motion.div>
                 ))}
               </nav>
 

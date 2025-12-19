@@ -15,7 +15,7 @@ export const SearchMobile = () => {
 const [increas, setIncreas] = useState(false)
 
 
-
+ 
   const handleSearch = () => {
     if (!query.trim()) return;
     router.push(`/search-results?search=${encodeURIComponent(query)}`);
