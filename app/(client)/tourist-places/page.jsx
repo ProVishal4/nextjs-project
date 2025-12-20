@@ -19,7 +19,7 @@ export default function FieldPage() {
   const { category, fetchCategory } = categoryStore();
   const router = useRouter();
 const [filter, setFilter] = useState(false)
-const [placeHolder, setPlaceHolder] = useState("")
+const [reload, setReload] = useState("")
 
   const [flow, setFlow] = useState(""); 
   const limit = 5;
@@ -49,6 +49,11 @@ const [placeHolder, setPlaceHolder] = useState("")
     //console.log("This is cat data: - " , cat)
   };
 
+const reloads = () =>{
+setActiveCategory("All");
+setFlow("")
+}
+
   function htmlToText(html) {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
@@ -68,20 +73,27 @@ setFilter(!filter)
   return (
     <>
       <div className="flex w-full justify-evenly ">
-        <aside className="lg:w-[20%] md:w-[30%] hidden md:block border-r border-gray-300 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 h-full">
+        <aside className="lg:w-[20%] md:w-[30%] hidden md:block border-r border-gray-300 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 h-auto">
           <ul className="space-y-2">
+            <li
+              className={`cursor-pointer px-3 py-2 rounded text-sm ${
+                flow ? "" : "bg-zinc-300/10 text-white"
+              }`}
+              onClick={() => reloads()}
+            >
+              All Category
+            </li>
             {category.map((cat) => (
               <li
                 key={cat._id}
                 onClick={() => {
                   handleCategoryClick(cat._id);
                   setFlow(cat.field);
-                  setPlaceHolder(cat.field);
                 }}
                 className={`cursor-pointer px-3 py-2 rounded text-sm
                     ${
-                      activeCategory === cat.field
-                        ? "bg-blue-600 text-white"
+                      flow === cat.field
+                        ? "bg-zinc-300/10 text-white"
                         : "hover:bg-gray-100/20"
                     }`}
               >
@@ -108,13 +120,20 @@ setFilter(!filter)
                 className={`flex px-5 py-3 items-center justify-between  w-full h-10 `}
               >
                 <h4 className="text-zinc-600 dark:text-zinc-100/90">
-                 
                   {flow ? flow : "Filter Category"}
                 </h4>
                 {filter ? <ChevronUp /> : <ChevronDown />}
               </div>
               {filter && (
                 <ul className="space-y-2  md:hidden z-10  bg-zinc-200 dark:bg-zinc-600 rounded-md text-zinc-600 dark:text-zinc-100/90">
+                  <li
+                    className={`cursor-pointer px-3 py-2 active:bg-gray-100/20  rounded text-sm ${
+                      flow ? "" : "bg-zinc-300/10 text-white"
+                    }`}
+                    onClick={() => reloads()}
+                  >
+                    All Category
+                  </li>
                   {category.map((cat) => (
                     <li
                       key={cat._id}
@@ -122,11 +141,11 @@ setFilter(!filter)
                         handleCategoryClick(cat._id);
                         setFlow(cat.field);
                       }}
-                      className={`cursor-pointer active::bg-gray-100/20 px-3 py-2  text-sm 
+                      className={`cursor-pointer active:bg-gray-100/20 px-3 py-2  text-sm 
                     ${
                       flow === cat.field
                         ? "bg-[#d4d2d296] dark:bg-[#d4d2d22a] text-white/60 rounded-md"
-                        : "hover:bg-gray-100/20"
+                        : "active:bg-gray-100/20"
                     }`}
                     >
                       {cat.field}
