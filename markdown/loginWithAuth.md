@@ -200,7 +200,7 @@ const UserSchema = new mongoose.Schema(
 );
 
 export default mongoose.models.User || mongoose.model("User", UserSchema);
-
+✅
 
 ---
 
@@ -272,7 +272,7 @@ export const authOptions = {
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
-
+✅
 
 ---
 
@@ -284,7 +284,7 @@ import { handlers } from "@/auth";
 
 export const { GET, POST } = handlers;
 
-
+✅
 ---
 
 5️⃣ Sign In / Sign Up Page (Single Page)
@@ -401,4 +401,260 @@ JWT custom fields
 
 
 Just tell me 👍
+```
+---------------------------------------------------
+=====================================================================
+
+
+Below is a **complete, simple GitHub login setup using NextAuth (Auth.js v5)** for **Next.js App Router**, **JavaScript (JSX)**, **TailwindCSS**, and **pnpm** — exactly matching your stack.
+
+---
+
+## 1️⃣ Install NextAuth (Auth.js)
+
+```bash
+pnpm add next-auth
+```
+
+---
+
+## 2️⃣ Create GitHub OAuth App
+
+1. Go to 👉 [https://github.com/settings/developers](https://github.com/settings/developers)
+2. **New OAuth App**
+3. Fill:
+
+   * **Application name**: Your app name
+   * **Homepage URL**: `http://localhost:3000`
+   * **Authorization callback URL**:
+
+     ```
+     http://localhost:3000/deshboard 
+     http://localhost:3000/api/auth/callback/github
+     
+     ```
+4. Save and copy:
+
+   * **Client ID**
+   * **Client Secret**
+
+---
+============
+
+Application name:-
+nextjs-project
+
+Homepage URL:-
+ http://localhost:3000/deshboard
+
+Application description:-
+This is next auth
+
+Authorization callback URL:-
+ http://localhost:3000/api/auth/callback/github
+
+Client ID:-
+Ov23lixLcdQ8vzNezHw7
+
+secret key:-
+d36945cfdfdc78bf77511602f07d482fa9b59a40
+==============
+
+
+## 3️⃣ Add Environment Variables
+
+Create **`.env.local`**
+
+```env
+GITHUB_CLIENT_ID=your_client_id
+GITHUB_CLIENT_SECRET=your_client_secret
+
+NEXTAUTH_SECRET=super-secret-key
+NEXTAUTH_URL=http://localhost:3000
+```
+
+Generate secret:
+
+```bash
+openssl rand -base64 32
+```
+
+---
+
+## 4️⃣ Configure NextAuth (App Router)
+
+Create file:
+
+📁 `app/api/auth/[...nextauth]/route.js`
+
+```js
+import NextAuth from "next-auth";
+import GitHubProvider from "next-auth/providers/github";
+
+const handler = NextAuth({
+  providers: [
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
+  ],
+  pages: {
+    signIn: "/login",
+  },
+  session: {
+    strategy: "jwt",
+  },
+});
+
+export { handler as GET, handler as POST };
+```
+
+---
+
+## 5️⃣ Wrap App with Session Provider
+
+📁 `app/providers.jsx`
+
+```jsx
+"use client";
+
+import { SessionProvider } from "next-auth/react";
+
+export default function Providers({ children }) {
+  return <SessionProvider>{children}</SessionProvider>;
+}
+``` 
+
+📁 `app/layout.jsx`
+
+```jsx
+import Providers from "./providers";
+import "./globals.css";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+---
+
+## 6️⃣ Create Login Page (Tailwind UI)
+
+📁 `app/login/page.jsx`
+
+```jsx
+"use client";
+
+import { signIn } from "next-auth/react";
+
+export default function LoginPage() {
+  return (
+    <div className="flex h-screen items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-md w-80 text-center">
+        <h1 className="text-2xl font-bold mb-6">Sign In</h1>
+
+        <button
+          onClick={() => signIn("github", { callbackUrl: "/" })}
+          className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+        >
+          Sign in with GitHub
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+## 7️⃣ Get Logged-in User Data
+
+### Client Component
+
+```jsx
+"use client";
+import { useSession } from "next-auth/react";
+
+export default function Profile() {
+  const { data: session } = useSession();
+
+  if (!session) return <p>Not logged in</p>;
+
+  return (
+    <div>
+      <p>{session.user.name}</p>
+      <p>{session.user.email}</p>
+      <img src={session.user.image} width={40} />
+    </div>
+  );
+}
+```
+
+---
+
+## 8️⃣ Protect Routes (Server Component)
+
+📁 `app/dashboard/page.jsx`
+
+```js
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+
+export default async function Dashboard() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/login");
+
+  return <h1>Dashboard (Protected)</h1>;
+}
+```
+
+---
+
+## 9️⃣ Logout Button
+
+```jsx
+"use client";
+import { signOut } from "next-auth/react";
+
+<button onClick={() => signOut()}>
+  Logout
+</button>
+```
+
+---
+
+## ✅ Final Flow
+
+```
+Login Page → GitHub OAuth → Session Stored → Protected Routes Access
+```
+
+---
+
+If you want next:
+
+* 🔒 **Role-based access**
+* 🗄️ **MongoDB user save**
+* 🔁 **Middleware route protection**
+* 🎨 **Better Tailwind login UI**
+
+Tell me 👍
+
+
+
+
+
+
+
+
+
+
 

@@ -5,19 +5,21 @@ import "./globals.css";
 import Footer from "@/components/ui/Footer";
 import { ThemeProvider } from "next-themes";
 import Footer2 from "@/components/ui/Footer2";
-
+import { SessionProvider } from "next-auth/react";
+import Providers from "@/components/eliments/providers";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning >
+      <Providers>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
        
           {children}
-          <Footer2 />
+          {/* <Footer2 /> */}
         </ThemeProvider>
-      </body>
+      </body></Providers>
     </html>
   );
 }
