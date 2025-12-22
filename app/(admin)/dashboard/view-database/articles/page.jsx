@@ -6,7 +6,7 @@ export default function Deshboard() {
   const { data: session} = useSession()
   console.log(session)
   if (session) {
-    return (
+    return ( 
       <>
         Signed In as {session.user.email} 
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-zinc-400/30 rounded-2xl h-[90vh] md:h-[60vh] w-[90vw] mx-auto md:w-[50vw] flex items-end justify-center">

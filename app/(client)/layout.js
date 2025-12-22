@@ -1,6 +1,6 @@
 
 import Navbar from "@/components/header/Navbar";
-import "./globals.css";
+import "../globals.css";
 //import Sidebar from "@/components/sidebar-menu/Sidebar";
 import Footer from "@/components/ui/Footer";
 import { ThemeProvider } from "next-themes";
@@ -8,18 +8,18 @@ import Footer2 from "@/components/ui/Footer2";
 import { SessionProvider } from "next-auth/react";
 import Providers from "@/components/eliments/providers";
 
-export default function RootLayout({ children }) {
+export default function ClinetLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning >
-      <Providers>
+    
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {/* <Navbar /> */}
+     
+          <Navbar />
        
           {children}
-          {/* <Footer2 /> */}
-        </ThemeProvider>
-      </body></Providers>
+          <Footer2 />
+    
+      </body>
     </html>
   );
 }
