@@ -21,7 +21,7 @@ import { SearchMobile } from "@/components/search/SearchMobile";
 export default function AutoSlider() {
   return (
     <>
-      <div className="relative md:hidden  w-[95%] mx-auto  top-[14vh] h-auto z-2 rounded-full  ">
+      <div className="relative   w-[95%] mx-auto  top-[14vh] h-auto z-2 rounded-full  ">
         {/* <input
           type="text"
           placeholder="Search Place"

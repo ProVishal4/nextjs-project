@@ -12,12 +12,12 @@ export default function Navbar() {
 
 
   return (
-    <nav className="w-full px-6 py-4 flex justify-center z-4 fixed bg-transparent">
+    <nav className="w-full  px-6 py-4 flex justify-center z-4 fixed bg-transparent">
       <div
         className="
          max-w-6xl flex items-center justify-between   
         backdrop-blur-xl bg-white/10  absolute top-4 z-10  md:h-13 md:w-2/3 w-7/8
-        rounded-full px-1 py-3 shadow-lg border border-zinc-300  dark:border-white/20
+        rounded-full px-1 py-3 shadow-lg border border-zinc-300   dark:border-white/20
       "
       >
         {/* Left: Logo div */}
@@ -33,7 +33,7 @@ export default function Navbar() {
             </div>
           </Link>
         </div>
-<SearchBar />
+        <SearchBar />
       </div>
     </nav>
   );

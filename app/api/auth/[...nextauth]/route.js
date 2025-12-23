@@ -27,16 +27,21 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { connectDB } from "@/lib/mongodb";
 import User from "@/models/user";
+//import { auth, handlers } from "@/auth";
 
 export const authOptions = {
     providers: [
         Credentials({
-            name: "credentials",
+            name: "credentials", 
             credentials: {
-                name: { type: "text" },
-                email: { type: "email" }, 
-                password: { type: "password" },
-                isSignup: { type: "text" },
+                // name: { type: "text" },
+                // email: { type: "email" }, 
+                // password: { type: "password" },
+                // isSignup: { type: "text" },
+                name: {},
+                email: {},
+                password: {},
+                isSignup: {},
             },
 
             async authorize(credentials) {
@@ -72,7 +77,7 @@ export const authOptions = {
                 if (!isMatch) throw new Error("Invalid password");
 
                 return {
-                    id: user._id,
+                    id: user._id.toString(),
                     name: user.name,
                     email: user.email,
                 };
@@ -80,10 +85,17 @@ export const authOptions = {
         }),
     ],
     session: { strategy: "jwt" },
-    pages: {
-        signIn: "/login",
-    },
+    // pages: {
+    //     signIn: "/login",
+    // },
 };
+
+// const {handlers, auth} = NextAuth(authOptions);
+// export {  GET,  POST };
+
+// export const { handlers, auth } = NextAuth(authOptions);
+// export const { GET, POST } = handlers;
+
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

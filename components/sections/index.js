@@ -9,8 +9,8 @@ export {
     Section1,
     Section2,
     Section3,
-Section5,
-Section4,
-Section6
+    Section5,
+    Section4,
+    Section6
 
 }

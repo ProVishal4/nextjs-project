@@ -1,4 +1,5 @@
 "use client";
+
 import { articleStore } from "@/store/articleStore";
 import axios from "axios";
 import Link from "next/link";
@@ -10,6 +11,7 @@ export default function page() {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  
   //const { articles, fetchArticles, loading } = articleStore();
 
 
@@ -46,7 +48,7 @@ const [loadingDelete, setLoadingDelete] = useState(false);
 const [loadingFetch, setLoadingFetch] = useState(false);
 
 const fetchArticlesNow = async () => {
-    try {
+    try { 
         setLoadingFetch(true);
         const res = await axios.get(`/api/v1-limit?page=${page}&limit=${limit}`);
         setArticles(res.data.articles || []);

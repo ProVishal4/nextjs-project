@@ -14,7 +14,7 @@ export default function ClinetLayout({ children }) {
     
       <body>
      
-          <Navbar />
+        <Navbar />
        
           {children}
           <Footer2 />
