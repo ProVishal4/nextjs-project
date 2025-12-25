@@ -12,7 +12,7 @@ export async function GET() {
 export async function POST(request) {
   await connectDB();
   try {
-    const { title, description, slug, metaContent, popular, category, imageAtl, imageUrl } = await request.json();
+    const { title, description, slug, metaDescription, tags, popular, category, imageAtl, imageUrl } = await request.json();
     const artical = await Database.find();
     
     // for each article, if category has _id, move it into 'field' (if missing) and remove _id
@@ -56,7 +56,8 @@ export async function POST(request) {
       imageAtl,
       popular,
       imageUrl,
-      metaContent
+      metaDescription,
+      tags
     });
 
     //console.log(newData);

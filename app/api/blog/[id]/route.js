@@ -3,11 +3,11 @@ import Database from "@/models/database";
 
 export async function PUT(request, { params }) {
     await connectDB();
-    const { title, description, metaContent, slug, category, popular, imageAtl, fileId, imageUrl } = await request.json();
-
+    const { title, description, metaDescription, tags, slug, category, popular, imageAtl, fileId, imageUrl } = await request.json();
+  
     const updatedDatabase = await Database.findByIdAndUpdate(
         params.id,
-        { title, description, slug, metaContent, category, popular, imageAtl, fileId, imageUrl },
+        { title, description, metaDescription, tags, slug, category, popular, imageAtl, fileId, imageUrl },
         { new: true }
     );
 

@@ -9,16 +9,17 @@ export default function page({ id }) {
   const { category, fetchCategory } = categoryStore();
   const [dwonMenu, setDwonMenu] = useState(true);
   const [imgSection, setImgSection] = useState(true);
- 
 
   const [form, setForm] = useState({
     title: "",
     description: "",
     slug: "",
-    // popular: false,
     category: "",
     imageAtl: "",
     imageUrl: "",
+    metaDescription: "",
+    tags: "",
+    popular: false,
   });
 
   const arrowUp = "/icons/arrowup.png";
@@ -38,8 +39,14 @@ export default function page({ id }) {
     setImgSection(!imgSection);
   };
 
- 
- const hedleSubmit = async (e) => {
+  const handleChange = (e) => {
+    const { name, type, value, checked } = e.target;
+
+    setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+  };
+  console.log("form data is ", form);
+
+  const hedleSubmit = async (e) => {
     e.preventDefault();
     console.log("form submitted", e);
     if (id) {
@@ -52,18 +59,17 @@ export default function page({ id }) {
       title: "",
       description: "",
       slug: "",
-      //  popular: false,
       category: "",
       imageAtl: "",
       imageUrl: "",
+      metaDescription: "",
+      tags: "",
+      popular: false,
     });
-
   };
-
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e) => {
+  //   setForm({ ...form, [e.target.name]: e.target.value });
+  // };
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -78,8 +84,8 @@ export default function page({ id }) {
     },
   });
 
-console.log(form)
-  
+  console.log(form);
+
   if (!editor) return null;
 
   return (
@@ -125,7 +131,8 @@ console.log(form)
                   onChange={handleChange}
                 >
                   <option
-                    value=""
+                    selected
+                    disabled
                     className=" h-10 pl-3 w-[90%] mx-auto  bg-[#ebe3e3] dark:bg-[#201414] "
                   >
                     ---Selact---
@@ -141,24 +148,12 @@ console.log(form)
                   ))}
                 </select>
               </div>
-              {/* <div className="scoName mt-3 flex flex-col ">
-                <label htmlFor="sconame" className=" pl-3 w-full">
-                  sco Keywords
-                </label>
-                <input
-                  type="text"
-                  name="scoName"
-                  id="sconame"
-                  className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
-                  autocomplete="off"
-                  placeholder="SCO for Routes"
-                />
-              </div> */}
+
               <div
                 className=" font-medium bg-[#ebe3e3] dark:bg-[#201414] rounded-3xl w-[90%] mx-auto py-2 mt-2 active:bg-[#0b3f53] active:scale-90 flex gap-2 transition ease-in justify-center items-center"
                 onClick={() => change()}
               >
-                <h2 className="w-[70%] ">SCO Section</h2>
+                <h2 className="w-[70%] ">SEO Section</h2>
                 <img
                   src={`${dwonMenu ? arrowDown : arrowUp}`}
                   alt="arrow key"
@@ -169,32 +164,46 @@ console.log(form)
               <div className={` ${dwonMenu ? "hidden" : "block"}`}>
                 <div className="slugName mt-3 flex flex-col ">
                   <label htmlFor="slugname" className=" pl-3 w-full">
-                    sco slug Keywords
+                    SEO slug Keywords
                   </label>
                   <input
                     type="text"
                     name="slug"
                     id="slugname"
                     className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
-                    placeholder="SCO for Routes"
+                    placeholder="SEO for Routes"
                     value={form.slug}
                     onChange={handleChange}
                   />
                 </div>
-                {/* <div className="description mt-3 flex flex-col ">
-                  <label htmlFor="meta_desc" className=" pl-3 w-full">
+                <div className="tags mt-3 flex flex-col ">
+                  <label htmlFor="tags" className=" pl-3 w-full">
+                    Keywords Tags
+                  </label>
+                  <input
+                    type="text"
+                    name="tags"
+                    id="tags"
+                    className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb]"
+                    placeholder="Keyword tags "
+                    value={form.tags}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="metaDescription mt-3 flex flex-col ">
+                  <label htmlFor="meta_description" className="pl-3 w-full">
                     Meta Description
                   </label>
                   <input
                     type="text"
-                    name="description"
-                    id="meta_desc"
-                    className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
-                    placeholder="Page meta Dec for SCO"
-                    value={form.description}
+                    name="metaDescription"
+                    id="meta_description"
+                    className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb]"
+                    placeholder="Meta Description"
+                    value={form.metaDescription}
                     onChange={handleChange}
                   />
-                </div> */}
+                </div>
 
                 <div className="imageAtl mt-3 flex flex-col ">
                   <label htmlFor="imageAtl_desc" className=" pl-3 w-full">
@@ -207,9 +216,26 @@ console.log(form)
                     className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
                     value={form.imageAtl}
                     onChange={handleChange}
-                    placeholder="Image Name for SCO"
+                    placeholder="Image Name for SEO"
                   />
                 </div>
+              </div>
+
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="popular"
+                  name="popular"
+                  checked={form.popular}
+                  onChange={handleChange}
+                  className="w-4 h-4 text-blue-600 dark:text-blue-400 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                />
+                <label
+                  htmlFor="popular"
+                  className="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer"
+                >
+                  Mark as Popular
+                </label>
               </div>
 
               <div

@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar5 from "@/components/sidebar-menu/Sidebar5.";
+//import Sidebar5 from "@/components/sidebar-menu/Sidebar5.";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -11,7 +11,6 @@ import { ArrowDown } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { ChevronUp } from "lucide-react";
 export default function FieldPage() {
-  const [cards, setCards] = useState([]);
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -19,7 +18,7 @@ export default function FieldPage() {
   const { category, fetchCategory } = categoryStore();
   const router = useRouter();
 const [filter, setFilter] = useState(false)
-const [reload, setReload] = useState("")
+
 
   const [flow, setFlow] = useState(""); 
   const limit = 5;

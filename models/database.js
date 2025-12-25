@@ -1,20 +1,22 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema(
+const articleSchema = new mongoose.Schema(
     {
         title: String,
         description: String,
         slug: String,
         imageAtl: String,
-        popular:Boolean,
+        metaDescription: String,
+        tags: String,
+        popular: Boolean,
         category: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "category"
         },
         imageUrl: String,
-        metaContent: String
+
     },
     { timestamps: true }
 );
 
-export default mongoose.models.Articals || mongoose.model("Articals", UserSchema);
+export default mongoose.models.articals || mongoose.model("articals", articleSchema);

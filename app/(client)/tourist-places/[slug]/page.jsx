@@ -3,9 +3,48 @@ import { connectDB } from "@/lib/mongodb";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import Description from "./description";
+//import Description from "./description";
 import { HomeIcon } from "lucide-react";
+import parser from "html-react-parser";
 
+
+export async function generateMetadata({params}){
+  const {slug} = await params;
+
+  const article = await database.findOne({slug});
+  if (!article) {
+    return {
+      title: "Article Not Found",
+      description: "The requested article does not exist.",
+    };
+  }
+  return {
+    title: article.title,
+    description: article.metaDescription,
+    // image: article.imageUrl,
+    openGraph: {
+      title: article.title,
+      description: article.metaDescription,
+      images: [
+        {
+          url: article.imageUrl,
+          width: 1200,
+          height: 630,
+          alt: article.imageAlt,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.description,
+      images: [article.image],
+    },
+  };
+}
+
+//parser(String()).slice(0, 160)"test for meta Description"
 export default async function FieldPage(context) {
   connectDB();
   const { slug } = await context.params;
@@ -58,8 +97,9 @@ export default async function FieldPage(context) {
         </Link></div>
         <div className="border-b mb-6 mt-4 border-slate-200 dark:border-slate-700 w-full"></div>
 
-        {/* <div className="text-lime-400 font-bold">{description}</div> */}
-        <Description description={description} />
+        <div className="text-lime-400 font-bold">{parser(String(description))}</div>
+        {/* <div className="text-red-400 font-medium">{article.metaDescription || "metaDescription not working"}</div> */}
+        {/* <Description description={description} /> */}
       </article>
     </div>
   );
