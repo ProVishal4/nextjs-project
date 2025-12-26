@@ -33,7 +33,7 @@ export const SearchBar = () => {
       setLoading(false);
       //console.log("searchBar3 data is:- ", results);
     }
-
+console.log("fetch data form results:- ",results)
 // Debounce logic
     useEffect(() => {
       const timeout = setTimeout(() => {
@@ -87,22 +87,25 @@ export const SearchBar = () => {
             `}
           />
           {/* {loading && <div className="mt-2 text-sm">Searching...</div>} */}
-          {results.length > 0 && (
+          {
             <ul
               className={`absolute w-[100%] overflow-hidden rounded-2xl mt-2  bg-white/20  dark:bg-zinc-600/90 shadow ${
                 increas ? "block" : "hidden"
               } `}
             >
-              {results.map((r, i) => (
-                <li
-                  key={i}
-                  className="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 dark:active:bg-gray-100/20 dark:hover:bg-gray-100/20  cursor-pointer dark:text-white/60 active:text-zinc-500 hover:text-zinc-500  dark:hover:text-black/90 text-blue-100 "
-                >
-                  {r}
-                </li>
+              {results.map((r) => (
+                <Link key={r._id} href={`/tourist-places/${r.slug}`}>
+                  <li
+                
+                    onClick={() => setQuery("")}
+                    className="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 dark:active:bg-gray-100/20 dark:hover:bg-gray-100/20  cursor-pointer dark:text-white/60 active:text-zinc-500 hover:text-zinc-500  dark:hover:text-black/90 text-blue-100 "
+                  >
+                    {r.title}
+                  </li>
+                </Link>
               ))}
             </ul>
-          )}
+          }
 
           <button
             className="
@@ -130,7 +133,7 @@ export const SearchBar = () => {
           className="h-9 w-10 md:hidden absolute right-3 dark:invert-0 invert -mt-[16px]"
           alt="menu icon"
         /> */}
-     <NewSidebar />
+        <NewSidebar />
       </div>
     </>
   );

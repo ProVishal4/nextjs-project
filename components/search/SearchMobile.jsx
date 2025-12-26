@@ -94,13 +94,14 @@ const [increas, setIncreas] = useState(false)
                 increas ? "block" : "hidden"
               } `}
             >
-              {results.map((r, i) => (
+              {results.map((r) => (
+                   <Link key={r._id} href={`/tourist-places/${r.slug}`}>
                 <li
-                  key={i}
+                  onClick={() => setQuery("")}
                   className="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 dark:active:bg-gray-100/20 dark:hover:bg-gray-100/20  cursor-pointer dark:text-white/60 active:text-zinc-500 hover:text-zinc-500  dark:hover:text-black/90 text-blue-100"
                 >
-                  {r}
-                </li>
+                  {r.title}
+                </li></Link>
               ))}
             </ul>
           )}

@@ -76,28 +76,6 @@
 // }
 
 // suggetion api. sugget  typing searh reslutes
-// import { connectDB } from "@/lib/mongodb";
-// import database from "@/models/database";
-// import { NextResponse } from "next/server";
-
-// export async function GET(req) {
-//     await connectDB();
-//     const { searchParams } = new URL(req.url);
-//     const q = searchParams.get("q")?.toLowerCase() || "";
-
-//     const items = (await database.find().select("title slug")).map(({ title }) => title);
-      
-//     // console.log("Items from database:", items);
-//     // return NextResponse.json(artical)
-
-
-//     const filtered = items.filter((item) =>
-//         item.toLowerCase().includes(q)
-//     );
-
-//     return NextResponse.json({ results: filtered });
-//}
-// suggetion api sugget search typing time searh reslutes
 import { connectDB } from "@/lib/mongodb";
 import database from "@/models/database";
 import { NextResponse } from "next/server";
@@ -105,16 +83,71 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
     await connectDB();
     const { searchParams } = new URL(req.url);
-    const q = searchParams.get("q")?.toLowerCase() || "";
+    const q = searchParams.get("q")?.trim() || "";
 
-    const items = (await database.find().limit(10)).map(({ title }) => title);
-    // console.log("Items from database:", items);
-    // return NextResponse.json(artical)
-
-
-    const filtered = items.filter((item) =>
-        item.toLowerCase().includes(q)
-    );
-
-    return NextResponse.json({ results: filtered });
+    try {
+        const items = await database.find({
+            title: { $regex: q, $options: "i" },
+        }).limit(5).select("title slug _id");
+         return NextResponse.json({results:items});
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({error: "Server error" });
+    }
 }
+
+
+
+
+
+// export const dynamic = "force-dynamic";
+
+// import { connectDB } from "@/lib/mongodb";
+// import database from "@/models/database";
+// import { NextResponse } from "next/server";
+
+// export async function GET(req) {
+//     await connectDB();
+
+//     const { searchParams } = new URL(req.url);
+//     const q = searchParams.get("q")?.trim();
+
+//     if (!q) {
+//         return NextResponse.json([]);
+//     }
+
+//     try {
+//         const items = await database
+//             .find({ title: { $regex: q, $options: "i" } })
+//             .select("title slug")
+//             .limit(10);
+
+//         return NextResponse.json({results:items});
+//     } catch (error) {
+//         console.error(error);
+//         return NextResponse.json({ error: "Server error" }, { status: 500 });
+//     }
+// }
+
+
+//suggetion api sugget search typing time searh reslutes
+// import { connectDB } from "@/lib/mongodb";
+// import database from "@/models/database";
+// import { NextResponse } from "next/server";
+
+// export async function GET(req) { 
+//     await connectDB();
+//     const { searchParams } = new URL(req.url);
+//     const q = searchParams.get("q")?.toLowerCase() || "";
+//     const data = (await database.find().limit(10)).map(({ title }) => title);
+//       const docs = await database
+//         .find({}, { title: 1, slug: 1, _id: 0 })
+//         .lean()
+//         .limit(5);
+  
+//     const filtered = docs.filter(
+//       ({ title = "", slug = "" }) =>
+//         title.toLowerCase().includes(q) || slug.toLowerCase().includes(q)
+//     );
+//     return NextResponse.json({ results: filtered });
+// }
