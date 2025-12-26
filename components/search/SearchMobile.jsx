@@ -3,7 +3,7 @@
 import axios from "axios";
 import { X } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react"; 
 import { useRouter } from "next/navigation";
 
 export const SearchMobile = () => {
@@ -33,6 +33,7 @@ const [increas, setIncreas] = useState(false)
       console.log("searchBar3 data is:- ", results);
     }
 
+    console.log(results)
 
     // Debounce logic
     useEffect(() => {

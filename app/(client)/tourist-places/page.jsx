@@ -10,6 +10,7 @@ import { ArrowBigDown } from "lucide-react";
 import { ArrowDown } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { ChevronUp } from "lucide-react";
+import SearchMobile from "@/components/search/SearchMobile";
 export default function FieldPage() {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
@@ -106,7 +107,7 @@ setFilter(!filter)
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white/90 md:mb-6 my-12   text-center">
               {flow ? flow : "Tourist Places"}
             </h1>
-
+<div className="my-5  w-full h-auto md:hidden "><SearchMobile /></div>
             <div
               className={`md:hidden w-full border border-zinc-500/20 rounded-md h-10 flex flex-col mb-6   ${
                 filter

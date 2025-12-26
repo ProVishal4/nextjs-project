@@ -247,10 +247,129 @@ or use App Router layout
 Tell me 👍
 
 
+import { connectDB } from "@/lib/mongodb";
+import database from "@/models/database";
+import { NextResponse } from "next/server";
+
+export async function GET(req) {
+  await connectDB();
+  const { searchParams } = new URL(req.url);
+  const q = (searchParams.get("search") || "").toLowerCase();
+
+  // fetch only title and slug (use lean() if using Mongoose)
+  const docs = await database
+    .find({}, { title: 1, slug: 1, _id: 0 })
+    .limit(5)
+    .lean();
+
+  // return objects with title and slug and filter by title or slug
+  const filtered = docs.filter(
+    ({ title = "", slug = "" }) =>
+      title.toLowerCase().includes(q) || slug.toLowerCase().includes(q)
+  );
+
+  return NextResponse.json(filtered);
+}
 
 
+================================================================
 
 
+import { connectDB } from "@/lib/mongodb";
+import database from "@/models/database";
+import { NextResponse } from "next/server";
+
+export async function GET(req) {
+  await connectDB();
+  const { searchParams } = new URL(req.url);
+  const q = (searchParams.get("search") || "").toLowerCase();
+
+  // fetch only title and slug (use lean() if using Mongoose)
+  const docs = await database
+    .find({}, { title: 1, slug: 1, _id: 0 })
+    .lean()
+    .limit(5);
+
+  // return objects with title and slug and filter by title or slug
+  const filtered = docs.filter(
+    ({ title = "", slug = "" }) =>
+      title.toLowerCase().includes(q) || slug.toLowerCase().includes(q)
+  );
+
+  return NextResponse.json(filtered);
+}
+import { connectDB } from "@/lib/mongodb";
+import database from "@/models/database";
+import { NextResponse } from "next/server";
+
+function escapeRegExp(str = "") {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+export async function GET(req) {
+  await connectDB();
+  const { searchParams } = new URL(req.url);
+  const q = (searchParams.get("search") || "").trim();
+  if (!q) return NextResponse.json({ results: [] });
+
+  const regex = new RegExp(escapeRegExp(q), "i");
+
+  const docs = await database
+    .find({ title: regex }, { title: 1, slug: 1, _id: 0 })
+    .limit(10)
+    .lean();
+
+  // destructure / normalize shape before sending
+  const results = docs.map(({ title, slug }) => ({ title, slug }));
+
+  return NextResponse.json({ results });
+}
+
++======================================================
+old working code:- 
+// display all search data card format
+
+import { connectDB } from "@/lib/mongodb";
+import database from "@/models/database";
+import { NextResponse } from "next/server";
+
+export async function GET(req) {
+  await connectDB();
+  const { searchParams } = new URL(req.url);
+  const search = searchParams.get("search") || "not working!";
+  const data = (await database.find()).map(({ title }) => title);
+  //console.log("Items from database:", data);
+  // return NextResponse.json(artical)
+
+  const filtered = data.filter((item) =>
+    item.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return NextResponse.json(filtered);
+}
+
+
+// suggetion api sugget search typing time searh reslutes
+import { connectDB } from "@/lib/mongodb";
+import database from "@/models/database";
+import { NextResponse } from "next/server";
+ 
+export async function GET(req) {
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const q = searchParams.get("q")?.toLowerCase() || "";
+
+    const items = (await database.find().limit(10)).map(({ title }) => title);
+   // console.log("Items from database:", items);
+    // return NextResponse.json(artical)
+
+
+    const filtered = items.filter((item) =>
+        item.toLowerCase().includes(q)
+    );
+
+    return NextResponse.json({ results: filtered });
+}
 
 
 

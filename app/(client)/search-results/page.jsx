@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { articleStore } from "@/store/articleStore";
 // /app/search-results/page.jsx
  
 export default function SearchResultsPage() {
+  const { articles, fetchArticles } = articleStore();
   const searchParams = useSearchParams();
   const search = searchParams.get("search") || "";
   const [results, setResults] = useState([]);
@@ -15,12 +17,15 @@ export default function SearchResultsPage() {
       const res = await fetch(`/api/search?search=${search}`, { cache: "no-store" });
       const data = await res.json();
       setResults(data); // filtered
-     // console.log(results);
+    
     }
     load();
+    fetchArticles()
   }, [search]);
-// console.log(results)
-
+//console.log("article store data:- ",articles);
+//  const filteredArticles = articles.filter((item) => item.title === results);
+// console.log(filteredArticles); 
+console.log(results);
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
@@ -39,7 +44,7 @@ export default function SearchResultsPage() {
              {/* <Link href={"/tourist-places"}> <button className=" sm:inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-sm rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition">
             Blog
           </button> </Link>  */}
-          <Link href={"/"}>
+          <Link href={`/`}>
             <button className="inline-flex items-center gap-2 px-3 py-1.5 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700 transition">
               Home
             </button>
@@ -87,11 +92,12 @@ export default function SearchResultsPage() {
             const image = typeof item === "string" ? null : item.image;
             const author = typeof item === "string" ? null : item.author;
             const date = typeof item === "string" ? null : item.date;
-
+            const keyword = typeof item === "string" ? item.tags : "keyword";
+{/* <Link href={`/tourist-places/${results.slug}`}></Link> */}
             return (
               <a
                 key={i}
-                href={url}
+                href={`/tourist-places/${item.slug}`}
                 className="block bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition overflow-hidden"
               >
                 <div className="h-44 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-end">
@@ -104,7 +110,7 @@ export default function SearchResultsPage() {
                   ) : (
                     <div className="w-full h-full flex items-end p-4">
                       <div className="bg-white/60 dark:bg-black/30 px-3 py-1 rounded text-xs text-gray-800 dark:text-gray-100">
-                        {title.slice(0, 40)}
+                        {keyword.slice(0, 40) }
                       </div>
                     </div>
                   )}
@@ -117,7 +123,7 @@ export default function SearchResultsPage() {
 
                   {excerpt ? (
                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
-                      {excerpt}
+                      {excerpt.substring(0, 100)}
                     </p>
                   ) : (
                     <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
@@ -141,7 +147,7 @@ export default function SearchResultsPage() {
                       {item.tags.slice(0, 3).map((t, idx) => (
                         <span
                           key={idx}
-                          className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded"
+                          className="text-xs bg-gray-100  dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded"
                         >
                           {t}
                         </span>

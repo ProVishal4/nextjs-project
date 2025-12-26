@@ -1,6 +1,6 @@
 
 import Navbar from "@/components/header/Navbar";
-import "../../globals.css";
+import "../globals.css";
 //import Sidebar from "@/components/sidebar-menu/Sidebar";
 import Footer from "@/components/ui/Footer";
 import { ThemeProvider } from "next-themes";
