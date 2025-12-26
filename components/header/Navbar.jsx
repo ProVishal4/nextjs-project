@@ -29,7 +29,7 @@ export default function Navbar() {
             rounded-full  dark:text-white font-semibold tracking-wide
           "
             >
-              Logo
+              Logo 
             </div>
           </Link>
         </div>

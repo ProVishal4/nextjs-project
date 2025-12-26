@@ -11,12 +11,12 @@ export const SearchBar = () => {
    
 
   const [query, setQuery] = useState("");
-const router = useRouter();
+  const router = useRouter();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-const [increas, setIncreas] = useState(false)
+  const [increas, setIncreas] = useState(false)
 
-      
+       
   const handleSearch = () => {
     if (!query.trim()) return;
     router.push(`/search-results?search=${encodeURIComponent(query)}`);
