@@ -7,7 +7,12 @@ import { ThemeProvider } from "next-themes";
 import Footer2 from "@/components/ui/Footer2";
 import { SessionProvider } from "next-auth/react";
 import Providers from "@/components/eliments/providers";
+import { Inter } from "next/font/google"
 
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+})
 export const metadata = {
   title: "blog page",
   description: "Learn Next.js SEO with App Router",
@@ -35,7 +40,7 @@ export const metadata = {
 };
 export default function ClinetLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning >
+    <html className={inter.className} lang="en" suppressHydrationWarning >
     
       <body>
      

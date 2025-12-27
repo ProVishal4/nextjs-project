@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import Slider from "@/components/eliments/swepSlider/Slider";
 import React from "react";
 import {
@@ -16,7 +16,8 @@ import Navbar from "@/components/header/Navbar";
 import Footer from "@/components/ui/Footer";
 import Footer2 from "@/components/ui/Footer2";
 
-export default function HomePage() {
+export async function HomePage() {
+  
   return (
     <>
       <Navbar />

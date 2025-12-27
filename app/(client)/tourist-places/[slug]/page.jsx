@@ -6,6 +6,8 @@ import { ArrowLeft } from "lucide-react";
 //import Description from "./description";
 import { HomeIcon } from "lucide-react";
 import parser from "html-react-parser";
+import Image from "next/image"
+
 
 
 export async function generateMetadata({params}){
@@ -60,9 +62,12 @@ export default async function FieldPage(context) {
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors">
       {/* Hero Section */}
       <div className="relative w-full mx-auto lg:w-[65vw] h-64 md:h-96 lg:h-[500px] overflow-hidden bg-gray-200 dark:bg-slate-800">
-        <img
+        <Image
           src={article.imageUrl || "/card1.jpeg"}
-          alt={article.slugImage}
+          alt={article.imageAtl || "image content"}
+          width={1200}
+          height={630}
+          priority
           className="w-full h-full object-cover"
         />
       </div>
@@ -97,7 +102,7 @@ export default async function FieldPage(context) {
         </Link></div>
         <div className="border-b mb-6 mt-4 border-slate-200 dark:border-slate-700 w-full"></div>
 
-        <div className="text-lime-400 font-bold">{parser(String(description))}</div>
+        <p className="text-lime-400 font-bold">{parser(String(description))}</p>
         {/* <div className="text-red-400 font-medium">{article.metaDescription || "metaDescription not working"}</div> */}
         {/* <Description description={description} /> */}
       </article>

@@ -1,4 +1,6 @@
 //import { auth } from "@/app/api/auth/[...nextauth]/route";
+export const dynamic = "force-dynamic";
+
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";

@@ -27,7 +27,12 @@ export default function page({ id }) {
 
   useEffect(() => {
     if (id) {
-      axios.get(`/api/blog/${id}`).then((res) => setForm(res.data));
+      axios
+        .get(`/api/blog/${id}`, {
+          cache: "no-store",
+        })
+        .then((res) => setForm(res.data))
+        .catch((err) => console.log(err));
     }
     fetchCategory();
   }, [id]);

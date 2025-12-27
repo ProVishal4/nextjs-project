@@ -1,16 +1,16 @@
 "use client";
-
-//import Sidebar5 from "@/components/sidebar-menu/Sidebar5.";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { categoryStore } from "@/store/categoryStore";
-import { ArrowBigDown } from "lucide-react";
-import { ArrowDown } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { ChevronUp } from "lucide-react";
 import SearchMobile from "@/components/search/SearchMobile";
+import Image from "next/image";
+
+
+import useSWR from "swr";
 export default function FieldPage() {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
@@ -23,9 +23,18 @@ const [filter, setFilter] = useState(false)
 
   const [flow, setFlow] = useState(""); 
   const limit = 5;
+
+// const axiosFetcher = (url) => axios.get(url).then((res) =>{
+//   setArticles(res.articles);
+//   setTotalPages(res.totalPages);
+// });
+
+
   useEffect(() => {
     const categoryQuery =
       activeCategory !== "All" ? `&category=${activeCategory}` : "";
+
+      // const { data , isLoading } = useSWR(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`, axiosFetcher);
 
     axios
       .get(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`)
@@ -36,6 +45,8 @@ const [filter, setFilter] = useState(false)
       .catch((err) => {
         console.log("Error in fetching articles Cards", err);
       });
+
+
     //  fetchArticles();
     fetchCategory();
   }, [page, activeCategory]);
@@ -107,7 +118,9 @@ setFilter(!filter)
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white/90 md:mb-6 my-12   text-center">
               {flow ? flow : "Tourist Places"}
             </h1>
-<div className="my-5  w-full h-auto md:hidden "><SearchMobile /></div>
+            <div className="my-5  w-full h-auto md:hidden ">
+              <SearchMobile />
+            </div>
             <div
               className={`md:hidden w-full border border-zinc-500/20 rounded-md h-10 flex flex-col mb-6   ${
                 filter
@@ -164,9 +177,12 @@ setFilter(!filter)
                   >
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-[23rem] duration-300 overflow-hidden hover:-translate-y-1">
                       <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                        <img
-                          src={item.imageUrl}
-                          alt={item.title}
+                        <Image
+                          src={item.imageUrl || "card2.jpg"}
+                          alt={"image content"}
+                          width={1200}
+                          height={630}
+                          // unoptimized item.imageAtl ||`${encodeURIComponent(item.imageUrl)}`
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         />
                       </div>
@@ -177,9 +193,9 @@ setFilter(!filter)
                         <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
                           {htmlToText(item.description)}
                         </p>
-                        <p className="text-gray-400 dark:text-gray-500 text-xs font-medium">
+                        <time className="text-gray-400 dark:text-gray-500 text-xs font-medium">
                           {new Date(item.createdAt).toLocaleDateString()}
-                        </p>
+                        </time>
                         {/* <p>{item._id}</p> */}
                       </div>
                     </div>
