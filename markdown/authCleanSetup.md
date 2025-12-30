@@ -49,7 +49,7 @@ This fixes **all errors** discussed in previous messages (including `getServerSe
 📄 `.env.local`
 
 ```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/mydb
+<!-- MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/mydb -->
 
 NEXTAUTH_SECRET=GENERATE_A_STRONG_SECRET
 NEXTAUTH_URL=http://localhost:3000

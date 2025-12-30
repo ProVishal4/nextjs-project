@@ -178,8 +178,8 @@ setFilter(!filter)
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-[23rem] duration-300 overflow-hidden hover:-translate-y-1">
                       <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
                         <Image
-                          src={item.imageUrl || "card2.jpg"}
-                          alt={"image content"}
+                          src={item.imageUrl || "/card2.jpg" }
+                          alt={item.imageAtl || "image content"}
                           width={1200}
                           height={630}
                           // unoptimized item.imageAtl ||`${encodeURIComponent(item.imageUrl)}`

@@ -28,7 +28,7 @@ const data = await res.json();
 
 ---
 
-## 2️⃣ Disable Cache (Always Fresh Data)
+## 2️⃣ Disable Cache (Always Fresh Data) 
 
 Use this when data changes frequently (dashboard, admin, live search):
 

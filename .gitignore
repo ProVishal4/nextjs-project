@@ -42,4 +42,5 @@ next-env.d.ts
 
 README copy.md
 
-
+markdown/*
+#markdown/cache.md
