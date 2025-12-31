@@ -135,13 +135,13 @@ export default function page({ id }) {
                   value={form.category}
                   onChange={handleChange}
                 >
-                  <option
+                  {/* <option
                     selected
                     disabled
                     className=" h-10 pl-3 w-[90%] mx-auto  bg-[#ebe3e3] dark:bg-[#201414] "
                   >
                     ---Selact---
-                  </option>
+                  </option> */}
                   {category.map((item) => (
                     <option
                       key={item._id}

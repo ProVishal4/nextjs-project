@@ -7,6 +7,6 @@ export default function robots() {
                 disallow: ['/admin', '/dashboard/*', '/login'],
             },
         ],
-        sitemap: 'https://yourdomain.com/sitemap.xml',
+        // sitemap: 'https://yourdomain.com/sitemap.xml',
     };
 }
