@@ -1,6 +1,6 @@
 
 import { NextResponse } from "next/server";
-import { storage } from "@/lib/appwrite-server";
+import { storage } from "@/lib/appwrite";
 import { connectDB } from "@/lib/mongodb";
 import Image from "@/models/Image";
 

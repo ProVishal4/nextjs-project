@@ -30,10 +30,10 @@ const [increas, setIncreas] = useState(false)
 
       setResults(data.results);
       setLoading(false);
-      console.log("searchBar3 data is:- ", results);
+      ////console.log("searchBar3 data is:- ", results);
     }
 
-    console.log(results)
+    //console.log(results)
 
     // Debounce logic
     useEffect(() => {

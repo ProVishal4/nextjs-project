@@ -49,11 +49,11 @@ export default function page({ id }) {
 
     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
   };
-  console.log("form data is ", form);
+  //console.log("form data is ", form);
 
   const hedleSubmit = async (e) => {
     e.preventDefault();
-    console.log("form submitted", e);
+    //console.log("form submitted", e);
     if (id) {
       await axios.put(`/api/blog/${id}`, form);
     } else {
@@ -89,7 +89,7 @@ export default function page({ id }) {
     },
   });
 
-  console.log(form);
+  //console.log(form);
 
   if (!editor) return null;
 

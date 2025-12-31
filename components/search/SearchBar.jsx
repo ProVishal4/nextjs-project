@@ -33,7 +33,7 @@ export const SearchBar = () => {
       setLoading(false);
       //console.log("searchBar3 data is:- ", results);
     }
-console.log("fetch data form results:- ",results)
+//console.log("fetch data form results:- ",results)
 // Debounce logic
     useEffect(() => {
       const timeout = setTimeout(() => {

@@ -32,7 +32,7 @@ export default function AutoSlider() {
   useEffect(() => {
     fetchPoplarPlace();
   }, []);
-  console.log("popular place card is :- ", popular);
+  //console.log("popular place card is :- ", popular);
 
   const filtered = popular.filter((item) => item.popular === true);
   // let filteredItem = articles.filter((item) => {

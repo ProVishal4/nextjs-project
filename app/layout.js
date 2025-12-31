@@ -7,16 +7,16 @@ import { ThemeProvider } from "next-themes";
 import Footer2 from "@/components/ui/Footer2";
 import { SessionProvider } from "next-auth/react";
 import Providers from "@/components/eliments/providers";
-import { Inter } from "next/font/google"
+//import { Inter } from "next/font/google"
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-})
+// const inter = Inter({
+//   subsets: ["latin"],
+//   display: "swap",
+// })
 
 export default function RootLayout({ children }) {
   return (
-    <html className={inter.className} lang="en" suppressHydrationWarning >
+    <html  lang="en" suppressHydrationWarning >
       <Providers>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
