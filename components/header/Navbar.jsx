@@ -1,15 +1,15 @@
 "use client"
-import React from "react";
+import React,{lazy,Suspense, useState} from "react";
 import  SearchBar  from "../search/SearchBar";
 import Link from "next/link";
 //import SearchBar2 from "../search/SearchBar2.";
 //import { Link } from "next/link";
-
+const Search =lazy(()=> import('../search/SearchBar'))
 
 
 // Navbar for all devieses ✅
 export default function Navbar() { 
-
+const [load, setLoad] = useState(false)
 
   return (
     <nav className="w-full  px-6 py-4 flex justify-center z-4 fixed bg-transparent">
@@ -33,7 +33,10 @@ export default function Navbar() {
             </div>
           </Link>
         </div>
-        <SearchBar />
+        {/* {
+load? :null
+        } */}
+       <Suspense fallback={<h3>Loading...</h3>}> <Search /></Suspense>
       </div>
     </nav>
   );
