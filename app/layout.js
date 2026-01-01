@@ -13,7 +13,34 @@ import Providers from "@/components/eliments/providers";
 //   subsets: ["latin"],
 //   display: "swap",
 // })
+export const metadata = {
+  title: "chhattisgarh wild explore",
+  description: "chhattisgarh all best tourist places waterfall, temple ets. in one place know more",
+  keywords: ["chhattisgarh", "cg-tourist-places", "waterfall"],
+  authors: [{ name: "vishal" }],
+  metadataBase: new URL('https://cgwildexplore.vercel.app'),
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/web-app-manifest-192x192.png",
 
+  },
+  openGraph: {
+    title: "chhattisgarh tourist places",
+    description: "SEO friendly Next.js app in blh",
+    url: "https://cgwildexplore.vercel.app",
+    siteName: "chhattisgarh wild explore",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Chhattisgarh tourist places"
+      },
+    ],
+    type: "website",
+  },
+};
 export default function RootLayout({ children }) {
   return (
     <html  lang="en" suppressHydrationWarning >

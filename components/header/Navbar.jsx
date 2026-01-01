@@ -4,6 +4,7 @@ import  SearchBar  from "../search/SearchBar";
 import Link from "next/link";
 //import SearchBar2 from "../search/SearchBar2.";
 //import { Link } from "next/link";
+import Image from "next/image"
 const Search =lazy(()=> import('../search/SearchBar'))
 
 
@@ -21,22 +22,31 @@ const [load, setLoad] = useState(false)
       "
       >
         {/* Left: Logo div */}
-        <div className="flex  gap-3">
-          <Link href="/">
-            <div
+        <div className="flex justify-between items-center  lg:w-[20%] md:w-[40%] w-[55%] gap-3">
+          <Link
+            className="w-full flex justify-between px-2 md:px-1 items-center"
+            href="/"
+          >
+            <Image
               className="
-            bg-white/20 backdrop-blur-md px-5  py-2  w-15 h-8 
+            bg-white/20 backdrop-blur-md   content-center w-10 lg:w-12 md:w-1/4 h-10 
             rounded-full  dark:text-white font-semibold tracking-wide
           "
-            >
-              Logo 
-            </div>
+              src={"/favicon.ico"}
+              width={50}
+              height={50}
+              alt="logo"
+            />
+            <h5>CG Wild Explore</h5>
           </Link>
         </div>
         {/* {
 load? :null
         } */}
-       <Suspense fallback={<h3>Loading...</h3>}> <Search /></Suspense>
+        <Suspense fallback={<h3>Loading...</h3>}>
+          {" "}
+          <Search />
+        </Suspense>
       </div>
     </nav>
   );

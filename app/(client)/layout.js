@@ -14,25 +14,28 @@ import Providers from "@/components/eliments/providers";
 //   display: "swap",
 // })
 export const metadata = {
-  title: "blog page",
-  description: "Learn Next.js SEO with App Router",
-  keywords: ["Next.js", "SEO", "React"],
-  authors: [{ name: "Your Name" }],
-  // icons: {
-  //   icon: "/favicon.ico",
-  //   shortcut: "/favicon.ico",
-  //   apple: "/apple-touch-icon.png",
-  // },
+  title: "chhattisgarh | blog page",
+  description: "chhattisgarh all best tourist places waterfall, temple ets. in one place know more",
+  keywords: ["chhattisgarh", "cg-tourist-places", "waterfall"],
+  authors: [{ name: "vishal" }],
+  metadataBase: new URL('https://cgwildexplore.vercel.app'),
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/web-app-manifest-192x192.png",
+
+  },
   openGraph: {
-    title: "My Website blog page",
+    title: "chhattisgarh tourist places",
     description: "SEO friendly Next.js app in blh",
     url: "https://example.com",
-    siteName: "My Website",
+    siteName: "chhattisgarh wild explore",
     images: [
       {
-        url: "https://example.com/og-image.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
+        alt: "Chhattisgarh tourist places"
       },
     ],
     type: "website",

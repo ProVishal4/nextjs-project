@@ -73,9 +73,9 @@ export default async function FieldPage(context) {
       </div>
 
       {/* Content Section */}
-      <article className="lg:w-[65vw] border border-lime-600 mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <article className="lg:w-[65vw]  mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Title */}
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-600 dark:text-[#e8f8d5e0] mb-4">
           {article.title}
         </h1>
 
@@ -89,20 +89,20 @@ export default async function FieldPage(context) {
             })}
           </time>
         </div>
-        <div className="flex">
+        <div className="flex gap-2">
         <Link href="/tourist-places">
-          <button className="py-3 px-6 w-28 border border-red-500 rounded-lg bg-amber-400 text-black active:scale-90 gap-2 hover:bg-amber-600 flex  justify-center items-center text-center">
+          <button className="py-3 px-6 w-28  rounded-lg bg-amber-400 text-black active:scale-90 gap-2 hover:bg-amber-600 flex  justify-center items-center text-center">
             <ArrowLeft size={20} /> <p>Back</p>
           </button>
         </Link>
         <Link href="/">
-          <button className="py-3 px-6 w-28 border border-red-500 rounded-lg bg-amber-400 text-black active:scale-90 gap-2 hover:bg-amber-600 flex  justify-center items-center text-center">
+          <button className="py-3 px-6 w-28  rounded-lg bg-amber-400 text-black active:scale-90 gap-2 hover:bg-amber-600 flex  justify-center items-center text-center">
             <HomeIcon size={20} className="text-2xl" /> <p>Home</p>
           </button>
         </Link></div>
         <div className="border-b mb-6 mt-4 border-slate-200 dark:border-slate-700 w-full"></div>
 
-        <p className="text-lime-400 font-bold">{parser(String(description))}</p>
+        <p className="dark:text-zinc-300/90 indent-5 text-zinc-600/90 font-bold">{parser(String(description))}</p>
         {/* <div className="text-red-400 font-medium">{article.metaDescription || "metaDescription not working"}</div> */}
         {/* <Description description={description} /> */}
       </article>

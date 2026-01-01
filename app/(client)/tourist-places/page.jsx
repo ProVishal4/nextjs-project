@@ -10,7 +10,7 @@ import SearchMobile from "@/components/search/SearchMobile";
 import Image from "next/image";
 
 
-import useSWR from "swr";
+
 export default function FieldPage() {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
@@ -34,10 +34,14 @@ const [filter, setFilter] = useState(false)
     const categoryQuery =
       activeCategory !== "All" ? `&category=${activeCategory}` : "";
 
-      // const { data , isLoading } = useSWR(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`, axiosFetcher);
+      // const { data , isLoading } = useSWR(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`, axiosFetcher);, {
+      //   cache: "force-cache",
+      // }
 
     axios
-      .get(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`)
+      .get(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`, {
+        cache: "force-cache", // default
+      })
       .then((res) => {
         setArticles(res.data.articles);
         setTotalPages(res.data.totalPages);
