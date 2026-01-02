@@ -43,16 +43,16 @@ export const metadata = {
 };
 export default function ClinetLayout({ children }) {
   return (
-    <html  lang="en" suppressHydrationWarning >
+    // <html  lang="en" suppressHydrationWarning >
     
-      <body>
-     
+    //   <body>
+     <>
         <Navbar />
        
           {children}
           <Footer2 />
-    
-      </body>
-    </html>
+    </>
+    //   </body>
+    // </html>
   );
 }

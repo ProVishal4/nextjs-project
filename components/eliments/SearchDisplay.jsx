@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 export default function SearchDisplay({results, search}) {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+      <div className="flex flex-col mt-15 sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
             Search results for{" "}
@@ -81,19 +82,22 @@ export default function SearchDisplay({results, search}) {
                 className="block bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition overflow-hidden"
               >
                 <div className="h-44 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-end">
-                  {image ? (
-                    <img
-                      src={results.imageUrl}
+                   <Image
+                      src={results.imageUrl || "/placeholder.jpg"}
                       alt={title}
+                      width={1200}
+                      height={630}
                       className="w-full h-full object-cover"
                     />
+                  {/* {image ? (
+                   
                   ) : (
                     <div className="w-full h-full flex items-end p-4">
                       <div className="bg-white/60 dark:bg-black/30 px-3 py-1 rounded text-xs text-gray-800 dark:text-gray-100">
                         {keyword.slice(0, 40)}
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
 
                 <div className="p-4 sm:p-5">

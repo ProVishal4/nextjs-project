@@ -17,9 +17,17 @@ export const SearchBar = () => {
   const [increas, setIncreas] = useState(false)
 
        
+
+  
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL ||
+  `http://localhost:3000`;
+
   const handleSearch = () => {
     if (!query.trim()) return;
-    router.push(`/search-results?search=${encodeURIComponent(query)}`);
+    router.push(
+      `/search-results?search=${encodeURIComponent(query)}`
+    );
     setIncreas(false);
   
   };

@@ -104,7 +104,7 @@ export async function GET(req) {
         title: { $regex: search, $options: "i" }, // case-insensitive search
       })
       .limit(6)
-      .select("title slug description tags");
+      .select("title slug description imageUrl");
   return  Response.json(result); // send JSON to frontend
   } catch (err) {
     Response.status(500).json({ error: "Server error" });
