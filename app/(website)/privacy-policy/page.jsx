@@ -48,7 +48,7 @@ export default function page() {
           choose to disable cookies through your individual browser options.
           Third-Party Privacy Policies{" "}
           <a href="https://cgwildexplore.vercel.app">
-            https://cgwildexplore.vercel.app/
+            https://cgwildexplore.vercel.app
           </a>{" "}
           Privacy Policy does not apply to other advertisers or websites. We
           advise you to consult the respective Privacy Policies of third-party
@@ -59,7 +59,7 @@ export default function page() {
           Settings.
         </p>
 
-        <h1 className="md:text-2xl text-gray-600 dark:text-gray-200 mt-[1rem] sm:text-4xl font-bold mb-4">
+        <h1 className="md:text-xl text-gray-600 dark:text-gray-200/90 mt-[1rem] sm:text-4xl font-bold mb-4">
           Data Protection Rights
         </h1>
         <p className="indent-6 text-[#6b6b6b] md:text-[18px] dark:text-gray-300 sm:text-xl mb-6 leading-relaxed">
@@ -68,8 +68,8 @@ export default function page() {
           Information CG Wild Explore does not knowingly collect personal
         </p>
 
-        <h1 className="md:text-2xl text-gray-600 dark:text-gray-200 mt-[1rem] sm:text-4xl font-bold mb-4">
-          7. Childrens Privacy
+        <h1 className="md:text-xl text-gray-600 dark:text-gray-200/90 mt-[1rem] sm:text-4xl font-bold mb-4">
+          Childrens Privacy
         </h1>
         <p className="indent-6 text-[#6b6b6b] md:text-[18px] dark:text-gray-300 sm:text-xl mb-6 leading-relaxed">
           information from children under the age of 13. If you believe your
@@ -84,7 +84,7 @@ export default function page() {
           reproduce, or distribute any content without proper permission.
         </p>
 
-        <h1 className="md:text-2xl text-gray-600 dark:text-gray-200 mt-[1rem] sm:text-4xl font-bold mb-4">
+        <h1 className="md:text-xl text-gray-600 dark:text-gray-200/90 mt-[1rem] sm:text-4xl font-bold mb-4">
           Intellectual Property Rights
         </h1>
         <p className="indent-6 text-[#6b6b6b] md:text-[18px] dark:text-gray-300 sm:text-xl mb-6 leading-relaxed">
@@ -97,14 +97,14 @@ export default function page() {
           content, you grant CG Wild Explore a non-exclusive right to use,
           modify, and display it. External Links Our website may contain links
           to external websites. We are not responsible for the content or
-          policies of these websites. Limitation of Liability
-          <span className='font-medium'>CG Wild Explore</span>
+          policies of these websites. Limitation of Liability 
+          <span className="font-medium"> CG Wild Explore </span>
           shall not be held liable for any loss or damage arising from the use
           of the website. Disclaimer All information on this website is provided
           "as is" without any warranties. We do not guarantee accuracy or
           completeness. Changes to Terms We may revise these Terms & Conditions
           at any time. By continuing to use the website, you agree to the
-          updated terms. <span className="font-medium">Governing Law</span>
+          updated terms. <span className="font-medium">Governing Law </span>
           These terms shall be governed and interpreted according to the laws of
           India. Contact Us If you have any questions regarding these Terms or
           Privacy Policy, please contact us at:
@@ -117,8 +117,8 @@ export default function page() {
         <div className="indent-6 text-[#6b6b6b] md:text-[18px] dark:text-gray-300 sm:text-xl mb-6 leading-relaxed">
           <br />
           🌐
-          <a href="https://pcpartinformer.vercel.app">
-            https://pcpartinformer.vercel.app
+          <a href="https://cgwildexplore.vercel.app">
+            https://cgwildexplore.vercel.app
           </a>
         </div>
       </section>

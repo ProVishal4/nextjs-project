@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="w-full min-h-screen  flex flex-col md:flex-row items-center justify-center px-6 md:px-16 gap-10 py-16 relative">
-    
       {/* Left Image Grid */}
       <motion.div
         initial={{ opacity: 0, x: -60 }}
@@ -14,12 +13,18 @@ export default function Hero() {
       >
         <div
           className="w-60 h-72 bg-cover bg-center rounded-3xl"
-          style={{ backgroundImage: "url('/card1.jpeg')" }}
+          style={{
+            backgroundImage:
+              "url('https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/6958c98800358b1ab89f/view?project=6939424c00043b18ebb5')",
+          }}
         ></div>
 
         <div
           className="w-60 h-72 bg-cover bg-center rounded-3xl"
-          style={{ backgroundImage: "url('/card2.jpg')" }}
+          style={{
+            backgroundImage:
+              "url('https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/695539fe00371f159ba2/view?project=6939424c00043b18ebb5')",
+          }}
         ></div>
         {/* <div
           className="w-60 h-72 bg-cover bg-center rounded-3xl"
@@ -44,16 +49,15 @@ export default function Hero() {
         className="max-w-xl absolute top-[20%] md:static"
       >
         <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-          Welcome to the <br />
-          greatest <span className="text-pink-500">designers</span> <br />
-          <span className="text-pink-500">conference 2024</span>
+          Welcome to <br />
+          <span className="text-pink-500">Chhattisgarh</span> <br />
+          <span className="text-pink-500">Explore Tourist Attractions</span>
         </h1>
 
-        <p className="mt-4 text-gray-700 text-lg">
-          Embark on a transformative journey at the{" "}
-          <strong>Design Summit</strong>, an immersive convergence of creativity
-          and innovation. Join industry pioneers, thought leaders, and
-          visionaries as we explore the forefront of design.
+        <p className="mt-4 text-gray-700 dark:text-gray-300 text-lg">
+          Discover the rich cultural heritage and natural beauty of
+          <span className="text-pink-500"> Chhattisgarh</span> through its
+          stunning landscapes, vibrant traditions, and warm hospitality.
         </p>
       </motion.div>
     </section>

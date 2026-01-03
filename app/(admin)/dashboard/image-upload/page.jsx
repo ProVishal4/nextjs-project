@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { storage } from "@/lib/appwrite";
 import { ID } from "appwrite";
+import axios from "axios";
 
 export default function UploadPage() {
   const [file, setFile] = useState(null);
@@ -11,13 +12,7 @@ export default function UploadPage() {
   const uploadImage = async () => {
     if (!file) return alert("Select image");
 
-    // 1️⃣ Upload to Appwrite
-    //  const uploaded = await storage.createFile({
-    //    bucketId: process.env.APPWRITE_IMAGE_ID,
-    //    fileId: ID.unique(),
-    //    file: file,
-    //  });
-
+  
     const uploaded = await storage.createFile(
       process.env.NEXT_PUBLIC_APPWRITE_IMAGE_ID,
       ID.unique(),
@@ -30,17 +25,21 @@ export default function UploadPage() {
     );
 
     setImageUrl(url);
-
+ 
   
 
-    // 2️⃣ Save image info to MongoDB
-    await fetch("/api/image", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        fileId: uploaded.$id,
-        imageUrl: url,
-      }),
+    // saving image url in MongoDB
+    // await fetch("/api/image", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     fileId: uploaded.$id,
+    //     imageUrl: url,
+    //   }),
+    // });
+    await axios.post("/api/image", {
+      fileId: uploaded.$id,
+      imageUrl: url,
     });
   };
 const copyText = async () => {
@@ -72,7 +71,7 @@ const copyText = async () => {
         className="w-full h-15 dark:bg-zinc-700 bg-blue-200/30 rounded-lg px-5 content-center  overflow-x-auto overflow-y-hidden"
         id="copy-text"
       >
-        {imageUrl ? imageUrl : "URL is not to Available"}{" "}
+        {imageUrl ? imageUrl : "URL is not to Available"}
       </div>
       <button
         className="py-3 px-6 rounded-lg w-[20%]  bg-amber-400/70 dark:bg-zinc-100/90 text-black  active:scale-90 hover:bg-amber-600 mr-auto  cursor-pointer "

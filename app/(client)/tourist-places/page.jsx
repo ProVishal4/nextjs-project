@@ -24,20 +24,12 @@ const [filter, setFilter] = useState(false)
   const [flow, setFlow] = useState(""); 
   const limit = 5;
 
-// const axiosFetcher = (url) => axios.get(url).then((res) =>{
-//   setArticles(res.articles);
-//   setTotalPages(res.totalPages);
-// });
-
 
   useEffect(() => {
     const categoryQuery =
       activeCategory !== "All" ? `&category=${activeCategory}` : "";
 
-      // const { data , isLoading } = useSWR(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`, axiosFetcher);, {
-      //   cache: "force-cache",
-      // }
-
+    
     axios
       .get(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`, {
         cache: "force-cache", // default
@@ -55,12 +47,10 @@ const [filter, setFilter] = useState(false)
     fetchCategory();
   }, [page, activeCategory]);
 
-  //const datas =   new DOMParser().parseFromString(cards, "text/html");
-
   const handleCategoryClick = (cat) => {
-    //let result = cat.replace("%20", "")
+   
     setActiveCategory(cat);
-    setPage(1); // reset pagination when category changes
+    setPage(1); 
     //console.log("This is cat data: - " , cat)
   };
 
@@ -74,17 +64,12 @@ setFlow("")
     return doc.body.textContent || "";
   }
 
-  // const handlePush = (e) => {
-  //  // router.push(`/api/find-one/${e}`, { cache: 'no-store' })
-  //   console.log(e)
-  // }
-
 const fillterMenu = () =>{
 setFilter(!filter)
   return 
 }
 
-  //console.log(cards.slug)min-h-screen
+  
   return (
     <>
       <div className="flex w-full justify-evenly ">
@@ -186,7 +171,7 @@ setFilter(!filter)
                           alt={item.imageAtl || "image content"}
                           width={1200}
                           height={630}
-                          // unoptimized item.imageAtl ||`${encodeURIComponent(item.imageUrl)}`
+                    
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         />
                       </div>
@@ -200,7 +185,7 @@ setFilter(!filter)
                         <time className="text-gray-400 dark:text-gray-500 text-xs font-medium">
                           {new Date(item.createdAt).toLocaleDateString()}
                         </time>
-                        {/* <p>{item._id}</p> */}
+                      
                       </div>
                     </div>
                   </Link>

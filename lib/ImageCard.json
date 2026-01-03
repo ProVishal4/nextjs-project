@@ -1,22 +1,22 @@
  [
     {
-      "title": "Mystic Mountains",
-      "button": "Explore Component",
-      "src": "card2.jpg"
+      "title": "Chhattisgarh Mountains",
+      "button": "Explore Now",
+      "src": "https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/6958c98800358b1ab89f/view?project=6939424c00043b18ebb5"
     },
     {
-      "title": "Urban Dreams",
-      "button": "Explore Component",
-      "src": "card1.jpeg"
+      "title": "Rivers in chhattisgarh",
+      "button": "Explore Now",
+      "src": "https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/6958c7cd0030cb4a7cef/view?project=6939424c00043b18ebb5"
     },
     {
-      "title": "Neon Nights",
-      "button": "Explore Component",
-      "src": "card3.jpg"
+      "title": "Forest Types in Chhattisgarh",
+      "button": "Explore Now",
+      "src": "https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/6958c690002840666256/view?project=6939424c00043b18ebb5"
     },
     {
-      "title": "Desert Whispers",
-      "button": "Explore Component",
-      "src": "card2.jpg"
+      "title": "Chhattisgarh Soil",
+      "button": "Explore Now",
+      "src": "https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/6958ccd5002dc025d264/view?project=6939424c00043b18ebb5"
     }
   ]

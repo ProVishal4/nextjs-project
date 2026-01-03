@@ -14,10 +14,6 @@ export async function GET(req) {
 
     const skip = (page - 1) * limit;
 
-    //const query = category ? { _id } : {};
-    //console.log("this is query of category:- ", category)
-    // .find({_id: query})
-    // build a filter that matches articles whose `category` field equals the category _id (if provided)
     const filter = {};
     if (category) {
         try {
@@ -39,7 +35,7 @@ export async function GET(req) {
     // replace the later countDocuments(query) with this to use the same filter
     const total = await database.countDocuments(filter);
 
-    //const total = await database.countDocuments(query);
+ 
 
     return Response.json({
         articles,

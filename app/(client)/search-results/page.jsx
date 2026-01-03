@@ -7,9 +7,7 @@ const baseUrl =
   `http://localhost:${process.env.PORT || 3000}`;
 
 export default async function SearchResultsPage({searchParams}) {
-// const search = (searchParams && searchParams.search) || "";
 const {search} = await searchParams
-  const url = `/api/search?search=n`;
   const res = await fetch(
     `${baseUrl}/api/search?search=${encodeURIComponent(search)}`,
     {

@@ -3,7 +3,6 @@ import { connectDB } from "@/lib/mongodb";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-//import Description from "./description";
 import { HomeIcon } from "lucide-react";
 import parser from "html-react-parser";
 import Image from "next/image"
@@ -23,7 +22,6 @@ export async function generateMetadata({params}){
   return {
     title: article.title,
     description: article.metaDescription,
-    // image: article.imageUrl,
     openGraph: {
       title: article.title,
       description: article.metaDescription,
@@ -103,8 +101,7 @@ export default async function FieldPage(context) {
         <div className="border-b mb-6 mt-4 border-slate-200 dark:border-slate-700 w-full"></div>
 
         <p className="dark:text-zinc-300/90 indent-5 text-zinc-600/90 font-bold">{parser(String(description))}</p>
-        {/* <div className="text-red-400 font-medium">{article.metaDescription || "metaDescription not working"}</div> */}
-        {/* <Description description={description} /> */}
+    
       </article>
     </div>
   );

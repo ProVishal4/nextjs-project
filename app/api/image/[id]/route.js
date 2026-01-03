@@ -13,13 +13,13 @@ export async function DELETE(req, { params }) {
             return NextResponse.json({ message: "Not found" }, { status: 404 });
         }
 
-        // 1️⃣ Delete from Appwrite
+        // Delete from Appwrite
         await storage.deleteFile(
             process.env.APPWRITE_BUCKET_ID,
             image.fileId
         );
 
-        // 2️⃣ Delete from MongoDB
+        // Delete from MongoDB
         await Image.findByIdAndDelete(params.id);
 
         return NextResponse.json({ success: true });

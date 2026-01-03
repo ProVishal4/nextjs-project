@@ -1,20 +1,10 @@
 
 import Navbar from "@/components/header/Navbar";
 import "../globals.css";
-//import Sidebar from "@/components/sidebar-menu/Sidebar";
-import Footer from "@/components/ui/Footer";
-import { ThemeProvider } from "next-themes";
 import Footer2 from "@/components/ui/Footer2";
-import { SessionProvider } from "next-auth/react";
-import Providers from "@/components/eliments/providers";
-// import { Inter } from "next/font/google"
 
-// const inter = Inter({
-//   subsets: ["latin"],
-//   display: "swap",
-// })
 export const metadata = {
-  title: "chhattisgarh | blog page",
+  title: "CG Wild Explore",
   description: "chhattisgarh all best tourist places waterfall, temple ets. in one place know more",
   keywords: ["chhattisgarh", "cg-tourist-places", "waterfall"],
   authors: [{ name: "vishal" }],
@@ -27,8 +17,8 @@ export const metadata = {
   },
   openGraph: {
     title: "chhattisgarh tourist places",
-    description: "SEO friendly Next.js app in blh",
-    url: "https://example.com",
+    description: "chhattisgarh tourist loctions, places blog. Know more about blogs",
+    url: "https://cgwildexplore.vercel.app",
     siteName: "chhattisgarh wild explore",
     images: [
       {
@@ -40,19 +30,22 @@ export const metadata = {
     ],
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "chhattisgarh blog and tourist places",
+    description: "know more about chhattisgarh tourist loctions, places ",
+    images: ["/og-image.png"],
+  },
 };
 export default function ClinetLayout({ children }) {
   return (
-    // <html  lang="en" suppressHydrationWarning >
-    
-    //   <body>
+  
      <>
         <Navbar />
        
           {children}
           <Footer2 />
     </>
-    //   </body>
-    // </html>
+
   );
 }

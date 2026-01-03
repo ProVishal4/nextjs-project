@@ -22,28 +22,28 @@ export async function generateMetadata() {
 
   
   return {
-    title: "home page",
-    description: "Learn Next.js SEO with App Router",
-    // image: article.imageUrl,
+    title: "CG Wild Explore",
+    description: "chhattisgarh tourist loctions, places and blog website",
     openGraph: {
-      title: "home title og",
-      description: "article.metaDescription",
-      // images: [
-      //   {
-      //     url: article.imageUrl,
-      //     width: 1200,
-      //     height: 630,
-      //     alt: article.imageAlt,
-      //   },
-      // ],
+      title: "chhattisgarh blog and tourist places",
+      description:
+        "chhattisgarh tourist loctions, places blog and  informations",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "cg wild explore logo",
+        },
+      ],
       type: "website",
     },
-    // twitter: {
-    //   card: "summary_large_image",
-    //   title: article.title,
-    //   description: article.description,
-    //   images: [article.image],
-    // },
+    twitter: {
+      card: "summary_large_image",
+      title: "chhattisgarh blog and tourist places",
+      description: "know more about chhattisgarh tourist loctions, places ",
+      images: ["/og-image.png"],
+    },
   };
 }
 

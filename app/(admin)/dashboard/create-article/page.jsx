@@ -49,11 +49,11 @@ export default function page({ id }) {
 
     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
   };
-  //console.log("form data is ", form);
+
 
   const hedleSubmit = async (e) => {
     e.preventDefault();
-    //console.log("form submitted", e);
+
     if (id) {
       await axios.put(`/api/blog/${id}`, form);
     } else {
@@ -72,16 +72,13 @@ export default function page({ id }) {
       popular: false,
     });
   };
-  // const handleChange = (e) => {
-  //   setForm({ ...form, [e.target.name]: e.target.value });
-  // };
 
   const editor = useEditor({
     extensions: [StarterKit],
-    content: "<p>Hello Tiptap!</p>",
+   // content: "<p>Hello Tiptap!</p>",
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
-      // Every time user types → update blog field
+   
       setForm((prev) => ({
         ...prev,
         description: editor.getHTML(),
@@ -95,7 +92,7 @@ export default function page({ id }) {
 
   return (
     <div>
-      {/* <h1 className="text-2xl font-semibold w-full mb-1">Add New Article</h1> */}
+      
       <div className="relative md:h-[80vh]   md:mt-8 w-[95%] m-auto  bg-[linear-gradient(45deg,#e8f5f6,#f9decc)] dark:bg-[linear-gradient(220deg,#100358,#302F2F)] dark:bg-[#201d1d] border-[0.5px] border-[#dbdbdb] dark:border-[#312f2f] rounded-2xl">
         <div className="w-[98%] m-auto ">
           {/*     action="/admin/add-article" enctype="multipart/form-data"
@@ -135,13 +132,7 @@ export default function page({ id }) {
                   value={form.category}
                   onChange={handleChange}
                 >
-                  {/* <option
-                    selected
-                    disabled
-                    className=" h-10 pl-3 w-[90%] mx-auto  bg-[#ebe3e3] dark:bg-[#201414] "
-                  >
-                    ---Selact---
-                  </option> */}
+             
                   {category.map((item) => (
                     <option
                       key={item._id}
@@ -275,17 +266,7 @@ export default function page({ id }) {
                     />
                   </div>
                 </div>
-                {/* <div className="mt-3 flex flex-col">
-                  <label htmlFor="article_image_webp" className="pl-3">
-                    Uplaod webP image
-                  </label>
-                  <input
-                    type="file"
-                    name="imageWebp"
-                    id="article_image_webp"
-                    className="outline-[#dbdbdb] pt-2 h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
-                  />
-                </div> */}
+              
               </div>
               <button
                 type="submit"
@@ -298,29 +279,10 @@ export default function page({ id }) {
             </div>
 
             {/* right side blog titles:-  */}
-            {/* <div className="border-l-1 w-[2px] h-[100%] mx-[1%] hidden md:block bg-[#dd2424] border-[#dbdbdb]"></div> */}
+          
             <div className="rightSideContent mx-auto rounded-2xl bg-[linear-gradient(220deg,#deecf7,#f3d0cf)] dark:bg-[linear-gradient(180deg,#100358,#302F2F)] md:mt-[1vh] md:h-[78vh] md:w-[73.9%] ">
               <div className="mt-3 w-[100%]  flex flex-col gap-2 blogbox">
-                {/* <label
-                  htmlFor="summernote"
-                  className="font-medium text-center py-1 rounded-2xl md:w-[20%] px-4 mx-auto bg-[#ecebea]"
-                >
-                  Blog Description
-                </label>
-                <textarea
-                  type="text"
-                  name="blog"
-                  id="summernote"
-                  className="outline-[#dbdbdb] break-after-all border-[0.5px] border-[#dbdbdb] rounded-[4px]"
-                  rows="5"
-                ></textarea> */}
-                {/* <div>{form || "no data avaliable"}</div> */}
-                {/* <div>{form.map((i) => (
-                  <p>{i.title}</p>
-                ))}</div> */}
-
-                {/* ======================================================================================================================================================================================================== */}
-
+               
                 <div>
                   {/* Toolbar */}
                   <div className="flex gap-2 mb-3 md:h-12 flex-wrap  justify-evenly border-zinc-600/50 items-center text-zinc-800/90 border  rounded-md bg-[#e2ecfa] dark:bg-zinc-800 dark:text-white/80">
