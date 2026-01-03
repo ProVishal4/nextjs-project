@@ -9,7 +9,7 @@ export const categoryStore = create((set) => ({
         set({ loading: true });
 
         try {
-            const res = await axios.get("http://localhost:3000/api/category");
+            const res = await axios.get("/api/category");
     
             set({
                
