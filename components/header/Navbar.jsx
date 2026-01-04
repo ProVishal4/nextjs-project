@@ -34,7 +34,7 @@ export default function Navbar() {
               alt="logo"
             />
             <h5
-              className="  text-[11px]
+              className=" text-[11px]
     sm:text-sm
     md:text-base
     lg:text-lg

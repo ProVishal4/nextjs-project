@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react"; 
 import { useRouter } from "next/navigation";
+import { Search } from "lucide-react";
 
 export const SearchMobile = () => {
   const [query, setQuery] = useState("");
@@ -80,7 +81,9 @@ const [increas, setIncreas] = useState(false)
 
              ${increas ? "w-[66%]" : "w-2/3"}  rounded-full px-4
              text-zinc-300
-               h-11 placeholder:text-white/50
+               h-11 dark:placeholder:text-white/50
+               placeholder:text-black/40
+               border border-zinc-300/50 dark:border-zinc-700/90
               focus:outline-none 
               transition-all decoration-2 ease-in  md:hidden
             `}
@@ -95,13 +98,14 @@ const [increas, setIncreas] = useState(false)
               } `}
             >
               {results.map((r) => (
-                   <Link key={r._id} href={`/tourist-places/${r.slug}`}>
-                <li
-                  onClick={() => setQuery("")}
-                  className="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 dark:active:bg-gray-100/20 dark:hover:bg-gray-100/20  cursor-pointer dark:text-white/60 active:text-zinc-500 hover:text-zinc-500  dark:hover:text-black/90 text-blue-100"
-                >
-                  {r.title}
-                </li></Link>
+                <Link key={r._id} href={`/tourist-places/${r.slug}`}>
+                  <li
+                    onClick={() => setQuery("")}
+                    className="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 dark:active:bg-gray-100/20 dark:hover:bg-gray-100/20  cursor-pointer dark:text-white/60 active:text-zinc-500 hover:text-zinc-500  dark:hover:text-black/90 text-blue-100"
+                  >
+                    {r.title}
+                  </li>
+                </Link>
               ))}
             </ul>
           )}
@@ -110,11 +114,11 @@ const [increas, setIncreas] = useState(false)
             className="
             absolute right-1 top-1/2 -translate-y-1/2
             bg-zinc-300/20 hover:bg-lime-400 active:bg-lime-400
-            rounded-full h-full text-[#f8f7f6] dark:text-zinc-800 transition  w-20 md:hidden
+            rounded-full h-full flex justify-center items-center text-[#242322] dark:text-zinc-300 transition  w-20 md:hidden
           "
             onClick={() => handleSearch()}
           >
-            ➜
+            <Search />
           </button>
         </form>
         <div

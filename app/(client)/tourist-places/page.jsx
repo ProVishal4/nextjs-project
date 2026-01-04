@@ -8,6 +8,7 @@ import { ChevronDown } from "lucide-react";
 import { ChevronUp } from "lucide-react";
 import SearchMobile from "@/components/search/SearchMobile";
 import Image from "next/image";
+import menuStatusStore from "@/store/menuStatusStore";
 
 
 
@@ -19,20 +20,25 @@ export default function FieldPage() {
   const { category, fetchCategory } = categoryStore();
   const router = useRouter();
 const [filter, setFilter] = useState(false)
-
-
+const status = menuStatusStore((s) => s.status)
+const [counter, setCounter] = useState(0)
   const [flow, setFlow] = useState(""); 
   const limit = 5;
+let a = 3;
+  console.log("zustand value is status:- ", status)
 
-
+// setCounter(counter + 1)
+// console.log(counter)
   useEffect(() => {
     const categoryQuery =
-      activeCategory !== "All" ? `&category=${activeCategory}` : "";
+      activeCategory !== "All"
+        ? `&category=${activeCategory}` 
+        : `&category=${status}`;
 
-    
+    //
     axios
       .get(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`, {
-        cache: "force-cache", // default
+        cache: "no-store", // default${categoryQuery}cache: "force-cache",
       })
       .then((res) => {
         setArticles(res.data.articles);
@@ -43,9 +49,9 @@ const [filter, setFilter] = useState(false)
       });
 
 
-    //  fetchArticles();
+    //  fetchArticles();activeCategory,
     fetchCategory();
-  }, [page, activeCategory]);
+  }, [page, status, activeCategory ]);
 
   const handleCategoryClick = (cat) => {
    
@@ -107,7 +113,7 @@ setFilter(!filter)
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white/90 md:mb-6 my-12   text-center">
               {flow ? flow : "Tourist Places"}
             </h1>
-            <div className="my-5  w-full h-auto md:hidden ">
+            <div className="my-5   h-auto md:hidden ">
               <SearchMobile />
             </div>
             <div

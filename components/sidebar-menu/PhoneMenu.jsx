@@ -6,26 +6,19 @@ import { Menu, X, Home, User, Settings } from "lucide-react";
 import { categoryStore } from "@/store/categoryStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-const menuItems = [
-  { id: 1, label: "Waterfall", link: "/tourist-places/url3-test-slug" },
-  { id: 2, label: "Mountain", link: "" },
-  { id: 3, label: "Temple", link: "" },
-  { id: 4, label: "Rivers", link: "" },
-  {
-    id: 5,
-    label: "Archaeologicle Places",
-  link: ""
-  },
-  { id: 6, label: "Histrorical", link: "/tourist-places/test-img" },
-];
+import axios from "axios";
+import menuStatusStore from "@/store/menuStatusStore";
 
 export default function NewSidebar() {
-    const router = useRouter();
+  const router = useRouter();
   const { category, fetchCategory } = categoryStore();
   const [open, setOpen] = useState(false);
   const firstLinkRef = useRef(null);
-const [saveCategory, setSaveCategory] = useState("")
-  // prevent background scroll when menu is open on mobile
+  const [saveCategory, setSaveCategory] = useState("");
+  const [clickCategory, setClickCategory] = useState("");
+const setStatus = menuStatusStore((s) => s.setStatus);
+  //useEffect(() => {}, []);
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     fetchCategory();
@@ -50,6 +43,15 @@ const [saveCategory, setSaveCategory] = useState("")
     }
   }, [open]);
 
+  const sendCategory = () => {
+    router.push(
+      // if (!clickCategory.trim()) return;
+      `/api/v1-limit?page=1&limit=5&category=${encodeURIComponent(
+        clickCategory
+      )}`
+    );
+  };
+
   const backdropVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -62,14 +64,12 @@ const [saveCategory, setSaveCategory] = useState("")
 
   //router.push(`/search-results?search=${encodeURIComponent(query)}`);
   //`/api/v1-limit?page=${page}&limit=${limit}&category=${categoryQuery}`
-  const handleSearch = () => {
-    if (!query.trim()) return;
+  const handleSearch =(id) => {
+    //if (!query.trim()) return;
     router.push(
-      `/api/v1-limit?page=1&limit=5&category=${encodeURIComponent(
-        saveCategory
-      )}`
+      `/api/v1-limit?page=1&limit=5&category=${encodeURIComponent(id)}`
     );
-    setIncreas(false);
+    // setIncreas(false);
   };
 
   return (
@@ -89,31 +89,11 @@ const [saveCategory, setSaveCategory] = useState("")
         {/* <Menu className="w-6 h-6 text-orange-500" /> */}
       </button>
 
-      {/* Desktop sidebar (always visible on md+) */}
-      {/* <aside className="hidden md:flex md:flex-col md:sticky md:top-0 md:w-60 md:h-screen md:bg-zinc-100 md:dark:bg-zinc-900 md:border-r md:border-zinc-200 dark:md:border-zinc-800 md:shadow-sm">
-        <div className="p-4 flex items-center justify-between border-b dark:border-zinc-700">
-          <h2 className="text-lg font-semibold dark:text-white">Dashboard</h2>
-        </div>
-
-        <nav className="p-4 space-y-2">
-          {menuItems.map((it, i) => (
-            <a
-              key={it.id}
-              href={"#" + it.id}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 dark:text-white transition"
-            >
-              {it.icon}
-              <span>{it.label}</span>
-            </a>
-          ))}
-        </nav>
-      </aside> */}
-
       {/* Mobile overlay + sliding sidebar */}
       <AnimatePresence>
         {open && (
           <>
-            {/* <motion.div
+            <motion.div
               initial="hidden"
               animate="visible"
               exit="hidden"
@@ -122,7 +102,7 @@ const [saveCategory, setSaveCategory] = useState("")
               className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
               transition={{ duration: 0.18 }}
               aria-hidden="true"
-            /> */}
+            />
 
             <motion.aside
               initial="closed"
@@ -137,11 +117,11 @@ const [saveCategory, setSaveCategory] = useState("")
               <div className="flex items-center justify-between p-4 border-b dark:border-zinc-700">
                 <div>
                   <h2 className="text-lg font-semibold dark:text-white">
-                    Dashboard
+                    Menu
                   </h2>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  {/* <p className="text-xs text-zinc-500 dark:text-zinc-400">
                     Quick actions
-                  </p>
+                  </p> */}
                 </div>
 
                 <button
@@ -161,14 +141,13 @@ const [saveCategory, setSaveCategory] = useState("")
                     ref={i === 0 ? firstLinkRef : null}
                     onClick={() => {
                       setOpen(false);
-                      setSaveCategory(it.field)
+                      //setSaveCategory(it.field);
+                      //handleSearch(it._id);
+                      setStatus(it._id)
                     }}
                     whileTap={{ scale: 0.98 }}
                     className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 dark:text-white transition"
                   >
-                    {/* <span className="text-zinc-600 dark:text-zinc-300">
-                      {it.icon}
-                    </span> */}
                     <Link href={`/tourist-places`}>
                       <span className="font-medium">{it.field}</span>
                     </Link>

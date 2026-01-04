@@ -11,13 +11,12 @@ import {
 import AutoSlider from "@/components/eliments/autoSlider/AutoSlider";
 import Sidebar from "@/components/sidebar-menu/Sidebar";
 import ImageCard from "@/components/ui/ImageCard";
-import NewSidebar from "@/components/sidebar-menu/NewSidebar";
+import NewSidebar from "@/components/sidebar-menu/PhoneMenu";
 import Navbar from "@/components/header/Navbar";
 import Footer from "@/components/ui/Footer";
 import Footer2 from "@/components/ui/Footer2";
 
 export async function HomePage() {
-  
   return (
     <>
       <Navbar />
@@ -47,6 +46,4 @@ export async function HomePage() {
       </footer>
     </>
   );
-};
-
-
+}

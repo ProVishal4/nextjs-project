@@ -100,7 +100,7 @@ export default async function FieldPage(context) {
         </Link></div>
         <div className="border-b mb-6 mt-4 border-slate-200 dark:border-slate-700 w-full"></div>
 
-        <p className="dark:text-zinc-300/90 indent-5 text-zinc-600/90 font-bold">{parser(String(description))}</p>
+        <article className="dark:text-zinc-300/90 indent-5 text-zinc-600/90 font-bold">{parser(String(description))}</article>
     
       </article>
     </div>

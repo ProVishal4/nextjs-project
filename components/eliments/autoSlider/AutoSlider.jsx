@@ -8,13 +8,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import data from "../../../lib/hero.json"
+import data from "../../../lib/hero.json";
 
-import style from  "./AutoSlider.module.css";
+import style from "./AutoSlider.module.css";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import Sidebar from "@/components/sidebar-menu/NewSidebar";
+import Sidebar from "@/components/sidebar-menu/PhoneMenu";
 import SearchBar from "@/components/search/SearchBar";
 import { SearchMobile } from "@/components/search/SearchMobile";
 import axios from "axios";
@@ -22,12 +22,12 @@ import axios from "axios";
 export default function AutoSlider() {
   const [popular, setPopular] = useState([]);
   const fetchPoplarPlace = async () => {
-   try {
-     const res = await axios.get("/api/cards-api");
-     setPopular(res.data);
-   } catch (error) {
-    console.log("autoslider not working",error)
-   }
+    try {
+      const res = await axios.get("/api/cards-api");
+      setPopular(res.data);
+    } catch (error) {
+      console.log("autoslider not working", error);
+    }
   };
   useEffect(() => {
     fetchPoplarPlace();
@@ -38,7 +38,6 @@ export default function AutoSlider() {
   // let filteredItem = articles.filter((item) => {
   //   return item.category === flow;
   // });
-
 
   //   console.log(filteredItem)
   //   let resultArray = filteredItem.map(item =>{

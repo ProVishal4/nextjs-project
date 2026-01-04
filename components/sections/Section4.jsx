@@ -3,6 +3,7 @@ import React from 'react'
 import data from "../../lib/hero.json"
 import { BackgroundGradient } from '../ui/background-gradient'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 
 
@@ -58,13 +59,15 @@ export default function Section4() {
                 </p>
 
                 <div className="mt-3">
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/30 bg-opacity-10 hover:bg-opacity-20 backdrop-blur-sm rounded-full text-sm font-medium border border-white/10"
-                    aria-label={`Read more about ${e.heading}`}
-                  >
-                    Read more
-                  </button>
+                  <Link href={`/tourist-places/${e.slug}`}>
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/30 bg-opacity-10 hover:bg-opacity-20 backdrop-blur-sm rounded-full text-sm font-medium border border-white/10"
+                      aria-label={`Read more about ${e.heading}`}
+                    >
+                      Read more
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -74,3 +77,13 @@ export default function Section4() {
     </>
   );
 }
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+//           </BackgroundGradient>
+//         ))}
+//       </motion.div>
+//     </>
+//   );
+// }

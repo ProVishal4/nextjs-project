@@ -1,5 +1,4 @@
 // "use client";
-import Slider from "@/components/eliments/swepSlider/Slider";
 import React from "react";
 import {
   Section1,
@@ -9,14 +8,9 @@ import {
   Section4,
 } from "@/components/sections/index.js";
 import AutoSlider from "@/components/eliments/autoSlider/AutoSlider";
-import Sidebar from "@/components/sidebar-menu/Sidebar";
 import ImageCard from "../components/ui/ImageCard";
-import NewSidebar from "@/components/sidebar-menu/NewSidebar";
 import Navbar from "@/components/header/Navbar";
-import Footer from "@/components/ui/Footer";
 import Footer2 from "@/components/ui/Footer2";
-
-import HomePage from "@/components/home/HomePage";
 
 export async function generateMetadata() {
 

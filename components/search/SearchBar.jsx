@@ -1,70 +1,56 @@
-"use client"
+"use client";
 //import SearchCard from "@/components/search/SearchCard"; ✅
 import axios from "axios";
 import { X } from "lucide-react";
-import Link from "next/link";
+import Link from "next/link"; 
 import { useRouter } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
-import NewSidebar from "../sidebar-menu/NewSidebar";
-
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
+const NewSidebar = lazy(() => import("../sidebar-menu/PhoneMenu"));
 export const SearchBar = () => {
-   
-
   const [query, setQuery] = useState("");
   const router = useRouter();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [increas, setIncreas] = useState(false)
+  const [increas, setIncreas] = useState(false);
 
-       
-
-  
-const baseUrl =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  `http://localhost:3000`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:3000`;
 
   const handleSearch = () => {
     if (!query.trim()) return;
-    router.push(
-      `/search-results?search=${encodeURIComponent(query)}`
-    );
+    router.push(`/search-results?search=${encodeURIComponent(query)}`);
     setIncreas(false);
-  
   };
 
-    async function search() {
-      setLoading(true);
-      const res = await fetch(`/search-route?q=${query}`);
-      const data = await res.json();
+  async function search() {
+    setLoading(true);
+    const res = await fetch(`/search-route?q=${query}`);
+    const data = await res.json();
 
-      setResults(data.results);
-      setLoading(false);
-      //console.log("searchBar3 data is:- ", results);
-    }
-//console.log("fetch data form results:- ",results)
-// Debounce logic
-    useEffect(() => {
-      const timeout = setTimeout(() => {
-        if (query.trim().length > 0) {
-          search(query);
-        } else {
-          setResults([]);
-        }
-      }, 300);
-      return () => clearTimeout(timeout);
-    }, [query]);
-
-
-    const increase = () =>{
-       
-        setIncreas(false)
-         setQuery("")
-    }
-  const formHandle = (e) =>{
-        e.preventDefault()
-    setIncreas(!increas) 
-
+    setResults(data.results);
+    setLoading(false);
+    //console.log("searchBar3 data is:- ", results);
   }
+  //console.log("fetch data form results:- ",results)
+  // Debounce logic
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (query.trim().length > 0) {
+        search(query);
+      } else {
+        setResults([]);
+      }
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, [query]);
+
+  const increase = () => {
+    setIncreas(false);
+    setQuery("");
+  };
+  const formHandle = (e) => {
+    e.preventDefault();
+    setIncreas(!increas);
+  };
   return (
     <>
       <div
@@ -104,7 +90,6 @@ const baseUrl =
               {results.map((r) => (
                 <Link key={r._id} href={`/tourist-places/${r.slug}`}>
                   <li
-                
                     onClick={() => setQuery("")}
                     className="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 dark:active:bg-gray-100/20 dark:hover:bg-gray-100/20  cursor-pointer dark:text-white/60 active:text-zinc-500 hover:text-zinc-500  dark:hover:text-black/90 text-blue-100 "
                   >
@@ -141,7 +126,9 @@ const baseUrl =
           className="h-9 w-10 md:hidden absolute right-3 dark:invert-0 invert -mt-[16px]"
           alt="menu icon"
         /> */}
-        <NewSidebar />
+        <Suspense fallback={<h3></h3>}>
+          <NewSidebar />
+        </Suspense>
       </div>
     </>
   );
