@@ -18,6 +18,7 @@ export const metadata = {
   description: "chhattisgarh all best tourist places waterfall, temple ets. in one place know more",
   keywords: ["chhattisgarh", "cg-tourist-places", "waterfall"],
   authors: [{ name: "vishal" }],
+  
   metadataBase: new URL('https://cgwildexplore.vercel.app'),
   icons: {
     icon: "/favicon.ico",
@@ -25,6 +26,7 @@ export const metadata = {
     apple: "/web-app-manifest-192x192.png",
 
   },
+
   openGraph: {
     title: "chhattisgarh tourist places",
     description: "SEO friendly Next.js app in blh",
@@ -40,11 +42,21 @@ export const metadata = {
     ],
     type: "website",
   },
+  verification:{
+    google: 'Swu1UG94mTULEbLI7ua4Z__1MFDDl7J30RxKS5HQxFY'
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "cg_wild_explore",
+    title: "chhattisgarh tourist places",
+    description: "Explore the best tourist places in Chhattisgarh",
+    image: "/og-image.png"
+  }
 };
 export default function RootLayout({ children }) {
   return (
     <html  lang="en" suppressHydrationWarning >
-      <meta name="google-site-verification" content="Swu1UG94mTULEbLI7ua4Z__1MFDDl7J30RxKS5HQxFY" />
+     
       <Providers>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
