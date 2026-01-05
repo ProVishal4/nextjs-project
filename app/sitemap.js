@@ -4,7 +4,7 @@ import database from "@/models/database";
 // app/sitemap.js
 export default async function sitemap() {
     await connectDB()
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
     /* ---------- Static Routes ---------- */
     const staticRoutes = [
@@ -16,7 +16,7 @@ export default async function sitemap() {
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
         changeFrequency: "monthly",
-        priority: 0.8,
+        priority: 0.8, 
     }));
 
     /* ---------- Dynamic Routes ---------- */

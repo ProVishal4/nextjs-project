@@ -21,11 +21,11 @@ export default function FieldPage() {
   const router = useRouter();
 const [filter, setFilter] = useState(false)
 const status = menuStatusStore((s) => s.status)
-const [counter, setCounter] = useState(0)
+
   const [flow, setFlow] = useState(""); 
   const limit = 5;
-let a = 3;
-  console.log("zustand value is status:- ", status)
+
+  //console.log("zustand value is status:- ", status)
 
 // setCounter(counter + 1)
 // console.log(counter)
@@ -75,7 +75,8 @@ setFilter(!filter)
   return 
 }
 
-  
+  // window.addEventListener("online", () => console.log("Became online"));
+  // window.addEventListener("offline", () => console.log("Became offline local host running"));
   return (
     <>
       <div className="flex w-full justify-evenly ">
