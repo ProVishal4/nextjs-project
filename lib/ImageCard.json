@@ -2,6 +2,7 @@
     {
       "title": "Chhattisgarh Mountains",
       "button": "Explore Now",
+      "slug":"/mountains-in-chhattisgarh",
       "src": "https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/6958c98800358b1ab89f/view?project=6939424c00043b18ebb5"
     },
     {
@@ -13,11 +14,13 @@
     {
       "title": "Forest Types in Chhattisgarh",
       "button": "Explore Now",
+      "slug": "/chhattisgarh-forest-types-in-hindi",
       "src": "https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/6958c690002840666256/view?project=6939424c00043b18ebb5"
     },
     {
-      "title": "Chhattisgarh Soil",
+      "title": "Know Chhattisgarh ?",
       "button": "Explore Now",
-      "src": "https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/6958ccd5002dc025d264/view?project=6939424c00043b18ebb5"
+      "slug": "/physical-features-of-chhattisgarh-explain-in-hindi",
+      "src": "https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/6958c64e0033ca55f409/view?project=6939424c00043b18ebb5"
     }
   ]

@@ -17,7 +17,7 @@ delay:0.2
          }}
         className="md:text-3xl  mb-3 font-bold text-2xl text-gray-700 dark:text-zinc-300 top-0  absolute left-[40%] -translate-x-1/2"
       >
-        Smooth Transition Text
+       Know More Tourist Attractions
       </motion.h1>
       {/* <Carousel>
       {jsonData.map((item) => (

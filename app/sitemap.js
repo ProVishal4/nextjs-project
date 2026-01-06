@@ -1,40 +1,45 @@
 import { connectDB } from "@/lib/mongodb";
 import database from "@/models/database";
 
+  function escapeXml(value = "") {
+        return value
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&apos;");
+    }
 // app/sitemap.js
 export default async function sitemap() {
     await connectDB()
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-
-    /* ---------- Static Routes ---------- */
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    
+    
     const staticRoutes = [
-        "",
+        "/privacy-policy",
         "/about",
-        "/contact",
-        "/blog",
+        "/terms-conditions",
     ].map((route) => ({
-        url: `${baseUrl}${route}`,
+        url: `${baseUrl}${encodeURI(route)}`,
         lastModified: new Date(),
         changeFrequency: "monthly",
-        priority: 0.8, 
+        priority: 0.8,
     }));
 
-    /* ---------- Dynamic Routes ---------- */
-    // Example: blog posts, products, categories
-    // const posts = await fetch(`${baseUrl}/api/posts`, {
-    //     cache: "no-store",
-    // }).then((res) => res.json());  images:`${post.imgUrl}` post.map((img) => img.imageUrl),
+    
 
 const routeName = await database.find({}, "slug updatedAt imageUrl");
 
+  
+
 
     const dynamicRoutes = routeName.map((post) => ({
-        url: `${baseUrl}/tourist-places/${post.slug}`,
+        //url: `${process.env.NEXT_PUBLIC_BASE_URL}/tourist-places/${post.slug}`,
+        url: escapeXml(`${baseUrl}/tourist-places/${encodeURIComponent(post.slug)}`),
         lastModified: new Date(post.updatedAt),
-        images: post.imageUrl ? [post.imageUrl] : [],
+        images: post.imageUrl ? [escapeXml(post.imageUrl)] : [],
         changeFrequency: "weekly",
         priority: 0.7,
     }));
-
     return [...staticRoutes, ...dynamicRoutes];
 }

@@ -22,7 +22,7 @@ export default function Section4() {
         
         className="md:text-3xl ml-[25%] mb-3 font-bold text-2xl text-gray-700 dark:text-white/80   left-1/2 -translate-x-1/2"
       >
-        Smooth Transition Text
+         chhattisgarh popular places
       </motion.h1>
       {/* <h1 className="ml-[5%] mb-3 font-bold text-2xl text-black dark:text-white">
         Explore more place
