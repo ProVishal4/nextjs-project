@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import Footer2 from "@/components/ui/Footer2";
 import { SessionProvider } from "next-auth/react";
 import Providers from "@/components/eliments/providers";
+import NetworkListener from "@/components/eliments/NetworkListener";
 //import { Inter } from "next/font/google"
 
 // const inter = Inter({
@@ -59,6 +60,7 @@ export default function RootLayout({ children }) {
      
       <Providers>
       <body>
+          <NetworkListener />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {/* <Navbar /> */}
        

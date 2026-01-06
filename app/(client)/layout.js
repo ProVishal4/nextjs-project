@@ -2,6 +2,7 @@
 import Navbar from "@/components/header/Navbar";
 import "../globals.css";
 import Footer2 from "@/components/ui/Footer2";
+import NetworkListener from "@/components/eliments/NetworkListener";
 
 export const metadata = {
   title: "CG Wild Explore",
@@ -41,6 +42,7 @@ export default function ClinetLayout({ children }) {
   return (
   
      <>
+      <NetworkListener />
         <Navbar />
        
           {children}

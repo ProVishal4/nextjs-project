@@ -17,7 +17,8 @@ export default function FieldPage() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [activeCategory, setActiveCategory] = useState("All");
-  const { category, fetchCategory } = categoryStore();
+  //const { category, fetchCategory } = categoryStore();
+  const [category, setCategory] = useState([])
   const router = useRouter();
 const [filter, setFilter] = useState(false)
 const status = menuStatusStore((s) => s.status)
@@ -48,9 +49,16 @@ const status = menuStatusStore((s) => s.status)
         console.log("Error in fetching articles Cards", err);
       });
 
+      axios.get("/api/category")
+        .then((res) => {
+          setCategory(res.data);
+        })
+        .catch((err) => {
+          console.log("Error in fetching categories", err);
+        });
 
     //  fetchArticles();activeCategory,
-    fetchCategory();
+   // fetchCategory();
   }, [page, status, activeCategory ]);
 
   const handleCategoryClick = (cat) => {

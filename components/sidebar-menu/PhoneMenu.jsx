@@ -3,25 +3,33 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Home, User, Settings } from "lucide-react";
-import { categoryStore } from "@/store/categoryStore";
+//import { categoryStore } from "@/store/categoryStore";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 import axios from "axios";
 import menuStatusStore from "@/store/menuStatusStore";
 
 export default function NewSidebar() {
-  const router = useRouter();
-  const { category, fetchCategory } = categoryStore();
+ // const router = useRouter();
+  //const { category, fetchCategory } = categoryStore();
   const [open, setOpen] = useState(false);
   const firstLinkRef = useRef(null);
-  const [saveCategory, setSaveCategory] = useState("");
-  const [clickCategory, setClickCategory] = useState("");
+  const [category, setCategory] = useState([]);
+  //const [clickCategory, setClickCategory] = useState("");
 const setStatus = menuStatusStore((s) => s.setStatus);
   //useEffect(() => {}, []);
 
   useEffect(() => {
+    axios.get("/api/category")
+      .then((res) => {
+        setCategory(res.data);
+      })
+      .catch((err) => {
+        console.log("Error in fetching categories", err);
+      });
+
     document.body.style.overflow = open ? "hidden" : "";
-    fetchCategory();
+   // fetchCategory();
     return () => {
       document.body.style.overflow = "";
     };
@@ -43,14 +51,14 @@ const setStatus = menuStatusStore((s) => s.setStatus);
     }
   }, [open]);
 
-  const sendCategory = () => {
-    router.push(
-      // if (!clickCategory.trim()) return;
-      `/api/v1-limit?page=1&limit=5&category=${encodeURIComponent(
-        clickCategory
-      )}`
-    );
-  };
+  // const sendCategory = () => {
+  //   router.push(
+  //     // if (!clickCategory.trim()) return;
+  //     `/api/v1-limit?page=1&limit=5&category=${encodeURIComponent(
+  //       clickCategory
+  //     )}`
+  //   );
+  // };
 
   const backdropVariants = {
     hidden: { opacity: 0 },
@@ -64,13 +72,13 @@ const setStatus = menuStatusStore((s) => s.setStatus);
 
   //router.push(`/search-results?search=${encodeURIComponent(query)}`);
   //`/api/v1-limit?page=${page}&limit=${limit}&category=${categoryQuery}`
-  const handleSearch =(id) => {
-    //if (!query.trim()) return;
-    router.push(
-      `/api/v1-limit?page=1&limit=5&category=${encodeURIComponent(id)}`
-    );
-    // setIncreas(false);
-  };
+  // const handleSearch =(id) => {
+  //   //if (!query.trim()) return;
+  //   router.push(
+  //     `/api/v1-limit?page=1&limit=5&category=${encodeURIComponent(id)}`
+  //   );
+  //   // setIncreas(false);
+  // };
 
   return (
     <>
@@ -156,9 +164,11 @@ const setStatus = menuStatusStore((s) => s.setStatus);
               </nav>
 
               <div className="mt-auto p-4 border-t dark:border-zinc-700">
-                <button className="w-full px-3 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-600">
-                  New Post
-                </button>
+                <Link href="/tourist-places">
+                  <button className="w-full px-3 py-2 rounded-md bg-orange-500 text-white active:bg-orange-600">
+                   Blogs 
+                  </button>
+                </Link>
               </div>
             </motion.aside>
           </>
