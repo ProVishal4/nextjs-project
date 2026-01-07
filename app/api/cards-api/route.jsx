@@ -7,7 +7,7 @@ export async function GET(req) {
   const article = await Database.find()
     .limit(5)
     .sort({ createdAt: -1 })
-    .select("title _id imageUrl imageAlt popular");
+    .select("title _id imageUrl imageAtl popular");
   return Response.json(article);
 }
 

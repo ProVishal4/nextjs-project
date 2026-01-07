@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { connectDB } from "@/lib/mongodb";
 import database from "@/models/database";
 
@@ -7,30 +8,40 @@ import database from "@/models/database";
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
-            .replace(/'/g, "&apos;");
+            .replace(/'/g, "&apos;")
+            .replace(/%2F/g, "")
+            .replace(/%20/g, "");
     }
 // app/sitemap.js
+
+// const res = fetch(`${baseUrl}/api/v2-limit`)
+// const data = res.json()
+
 export default async function sitemap() {
     await connectDB()
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     
     
     const staticRoutes = [
+        "/tourist-places",
         "/privacy-policy",
         "/about",
-        "/terms-conditions",
+        "/terms-conditions"
+       
     ].map((route) => ({
-        url: `${baseUrl}${encodeURI(route)}`,
+        url: escapeXml(`${baseUrl}/${encodeURIComponent(route)}`),
         lastModified: new Date(),
-        changeFrequency: "monthly",
+        changeFrequency: route === "/tourist-places" ? "weekly" : "monthly",
         priority: 0.8,
-    }));
+    })
+);
 
     
 
 const routeName = await database.find({}, "slug updatedAt imageUrl");
 
   
+
 
 
     const dynamicRoutes = routeName.map((post) => ({

@@ -87,7 +87,7 @@ export default function AutoSlider() {
           <SwiperSlide key={text._id}>
             <img
               src={text.imageUrl || "placeholder.jpg"}
-              alt={text.imageAlt || " best tourist place image in cg"}
+              alt={text.imageAtl || " best tourist place image in cg"}
               className="w-full h-full"
             />
             <div className="text-zinc-700 dark:text-zinc-300 absolute bottom-5  w-[97%]  md:h-50 h-30 ml-[1.5%] rounded-2xl backdrop-blur-lg font-bold text-2xl z-10">
