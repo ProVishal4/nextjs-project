@@ -1,4 +1,5 @@
 // "use client";
+
 import React from "react";
 import {
   Section1,
@@ -11,6 +12,7 @@ import AutoSlider from "@/components/eliments/autoSlider/AutoSlider";
 import ImageCard from "../components/ui/ImageCard";
 import Navbar from "@/components/header/Navbar";
 import Footer2 from "@/components/ui/Footer2";
+import { Suspense } from "react";
 
 export async function generateMetadata() {
 
@@ -18,6 +20,9 @@ export async function generateMetadata() {
   return {
     title: "CG Wild Explore",
     description: "chhattisgarh tourist loctions, places and blog website",
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    },
     openGraph: {
       title: "chhattisgarh blog and tourist places",
       description:

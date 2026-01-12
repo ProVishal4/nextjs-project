@@ -1,4 +1,7 @@
-"use client";
+
+"use client"
+export const dynamic = "force-static";
+
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -10,36 +13,34 @@ import SearchMobile from "@/components/search/SearchMobile";
 import Image from "next/image";
 import menuStatusStore from "@/store/menuStatusStore";
 
-
-
 export default function FieldPage() {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [activeCategory, setActiveCategory] = useState("All");
   //const { category, fetchCategory } = categoryStore();
-  const [category, setCategory] = useState([])
+  const [category, setCategory] = useState([]);
   const router = useRouter();
-const [filter, setFilter] = useState(false)
-const status = menuStatusStore((s) => s.status)
+  const [filter, setFilter] = useState(false);
+  const status = menuStatusStore((s) => s.status);
 
-  const [flow, setFlow] = useState(""); 
+  const [flow, setFlow] = useState("");
   const limit = 5;
 
   //console.log("zustand value is status:- ", status)
 
-// setCounter(counter + 1)
-// console.log(counter)
+  // setCounter(counter + 1)
+  // console.log(counter)
   useEffect(() => {
     const categoryQuery =
       activeCategory !== "All"
-        ? `&category=${activeCategory}` 
+        ? `&category=${activeCategory}`
         : `&category=${status}`;
 
     //
     axios
       .get(`/api/v1-limit?page=${page}&limit=${limit}${categoryQuery}`, {
-        cache: "no-store", // default${categoryQuery}cache: "force-cache",
+        cache: "force-cache", // default${categoryQuery}cache: "force-cache",
       })
       .then((res) => {
         setArticles(res.data.articles);
@@ -49,39 +50,41 @@ const status = menuStatusStore((s) => s.status)
         console.log("Error in fetching articles Cards", err);
       });
 
-      axios.get("/api/category")
-        .then((res) => {
-          setCategory(res.data);
-        })
-        .catch((err) => {
-          console.log("Error in fetching categories", err);
-        });
+    axios
+      .get("/api/category", {
+        cache: "force-cache",
+      })
+      .then((res) => {
+        setCategory(res.data);
+      })
+      .catch((err) => {
+        console.log("Error in fetching categories", err);
+      });
 
     //  fetchArticles();activeCategory,
-   // fetchCategory();
-  }, [page, status, activeCategory ]);
+    // fetchCategory();
+  }, [page, status, activeCategory]);
 
   const handleCategoryClick = (cat) => {
-   
     setActiveCategory(cat);
-    setPage(1); 
+    setPage(1);
     //console.log("This is cat data: - " , cat)
   };
 
-const reloads = () =>{
-setActiveCategory("All");
-setFlow("")
-}
+  const reloads = () => {
+    setActiveCategory("All");
+    setFlow("");
+  };
 
   function htmlToText(html) {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
   }
 
-const fillterMenu = () =>{
-setFilter(!filter)
-  return 
-}
+  const fillterMenu = () => {
+    setFilter(!filter);
+    return;
+  };
 
   // window.addEventListener("online", () => console.log("Became online"));
   // window.addEventListener("offline", () => console.log("Became offline local host running"));
@@ -182,11 +185,10 @@ setFilter(!filter)
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all h-[50vh] md:h-[23rem] duration-300 overflow-hidden hover:-translate-y-1">
                       <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
                         <Image
-                          src={item.imageUrl || "/card2.jpg" }
+                          src={item.imageUrl || "/card2.jpg"}
                           alt={item.imageAtl || "image content"}
                           width={1200}
                           height={630}
-                    
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         />
                       </div>
@@ -200,7 +202,6 @@ setFilter(!filter)
                         <time className="text-gray-400 dark:text-gray-500 text-xs font-medium">
                           {new Date(item.createdAt).toLocaleDateString()}
                         </time>
-                      
                       </div>
                     </div>
                   </Link>

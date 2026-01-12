@@ -1,10 +1,7 @@
 import React, { Suspense } from "react";
 import SearchDisplay from '../../../components/eliments/SearchDisplay';
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  `http://localhost:${process.env.PORT || 3000}`;
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||  `http://localhost:3000`;
 
 export default async function SearchResultsPage({searchParams}) {
 const {search} = await searchParams

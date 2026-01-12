@@ -2,7 +2,7 @@
 import Navbar from "@/components/header/Navbar";
 import "../globals.css";
 import Footer2 from "@/components/ui/Footer2";
-import NetworkListener from "@/components/eliments/NetworkListener";
+
 
 export const metadata = {
   title: "CG Wild Explore",
@@ -10,6 +10,9 @@ export const metadata = {
   keywords: ["chhattisgarh", "cg-tourist-places", "waterfall"],
   authors: [{ name: "vishal" }],
   metadataBase: new URL('https://cgwildexplore.vercel.app'),
+  alternates: {
+    canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/tourist-places`,
+  },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
@@ -42,7 +45,7 @@ export default function ClinetLayout({ children }) {
   return (
   
      <>
-      <NetworkListener />
+    
         <Navbar />
        
           {children}

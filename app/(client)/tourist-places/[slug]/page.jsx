@@ -13,18 +13,25 @@ export async function generateMetadata({params}){
   const {slug} = await params;
 
   const article = await database.findOne({slug});
-  if (!article) {
-    return {
-      title: "Article Not Found",
-      description: "The requested article does not exist.",
-    };
-  }
+  // if (!article) {
+  //   return {
+  //     title: "Article Not Found",
+  //     description: "The requested article does not exist.",
+  //   };
+  // }
   return {
-    title: article.title,
-    description: article.metaDescription,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    title: `${article.title}`,
+    description: `${article.metaDescription}`,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/tourist-places/${slug}`,
+    },
     openGraph: {
-      title: article.title,
-      description: article.metaDescription,
+      title: `${article.title}`,
+      description: `${article.metaDescription}`,
       images: [
         {
           url: article.imageUrl,
