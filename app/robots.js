@@ -3,7 +3,7 @@ export default function robots() {
         rules: {
             userAgent: "*",
             allow: "/",
-            disallow: ["/admin", "/dashboard/*", "/login"],
+            disallow: ["/dashboard/*", "/api/*", "/login"],
         },
 
         sitemap: "https://cgwildexplore.vercel.app/sitemap.xml",
