@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { HomeIcon } from "lucide-react";
 import parser from "html-react-parser";
 import Image from "next/image"
+import BlogSchema from "./BlogSchema";
 
 
 
@@ -50,7 +51,7 @@ export async function generateMetadata({params}){
     },
   };
 }
-
+ 
 //parser(String()).slice(0, 160)"test for meta Description"
 export default async function FieldPage(context) {
   connectDB();
@@ -64,6 +65,8 @@ export default async function FieldPage(context) {
 
   
   return (
+  <>
+<BlogSchema post={article} />
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors">
       {/* Hero Section */}
       <div className="relative w-full mx-auto lg:w-[65vw] h-64 md:h-96 lg:h-[500px] overflow-hidden bg-gray-200 dark:bg-slate-800">
@@ -110,6 +113,6 @@ export default async function FieldPage(context) {
         <article className="dark:text-zinc-300/90 indent-5 text-zinc-600/90 font-bold">{parser(String(description))}</article>
     
       </article>
-    </div>
+    </div> </>
   );
 }

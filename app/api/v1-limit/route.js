@@ -13,7 +13,7 @@ export async function GET(req) {
     const category = searchParams.get("category");
 
     const skip = (page - 1) * limit;
-
+ 
     const filter = {};
     if (category) {
         try {

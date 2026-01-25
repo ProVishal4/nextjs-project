@@ -195,7 +195,7 @@ return (
                       </button>
 
                       <Link
-                        href={`/api/blog/${item._id}`}
+                        href={`/dashboard/update-article/${item._id}`}
                         className="no-underline"
                       >
                         <button className="px-3 py-2 rounded-md bg-yellow-500 text-white text-sm hover:bg-yellow-600">
