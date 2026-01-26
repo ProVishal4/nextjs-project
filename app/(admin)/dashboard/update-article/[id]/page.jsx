@@ -15,7 +15,7 @@ export default async function page({ params }) {
 const article = JSON.parse(JSON.stringify(rawArticle));
 //return <ClientComponent article={sanitizedArticle} />;
 
-  console.log("server comp obj is - ", article)
+  //console.log("server comp obj is - ", article)
   //console.log(id)
   return (
     <>
