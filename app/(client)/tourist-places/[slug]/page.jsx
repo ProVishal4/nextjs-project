@@ -25,14 +25,14 @@ export async function generateMetadata({params}){
       index: true,
       follow: true,
     },
-    title: `${article.title.substring(0, 50)}`,
-    description: `${article.metaDescription.substring(0, 150)}`,
+    title: article.title,
+    description: article.metaDescription || "Error in description Load",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/tourist-places/${slug}`,
     },
     openGraph: {
       title: `${article.title}`,
-      description: `${article.metaDescription.substring(0, 150)}`,
+      description: article.metaDescription || "Error in description Load",
       images: [
         {
           url: article.imageUrl,
@@ -46,7 +46,7 @@ export async function generateMetadata({params}){
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.description.substring(0, 150),
+      description: article.metaDescription || "Error in twitter description Load",
       images: [article.image],
     },
   };
