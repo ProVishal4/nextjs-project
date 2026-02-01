@@ -197,7 +197,7 @@ export default function FieldPage() {
                           {item.title}
                         </h2>
                         <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
-                          {htmlToText(item.description)}
+                          {htmlToText(item.description.substring(0, 150))}...
                         </p>
                         <time className="text-gray-400 dark:text-gray-500 text-xs font-medium">
                           {new Date(item.createdAt).toLocaleDateString()}

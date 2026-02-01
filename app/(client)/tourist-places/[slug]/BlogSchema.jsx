@@ -2,12 +2,12 @@ export default function BlogSchema({ post }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": post.title,
-   "description": post.description,
-    "datePublished": post.createdAt,
-    "author": {
+    headline: post.title.substring(0, 50),
+    description: post.description.substring(0, 150),
+    datePublished: post.createdAt,
+    author: {
       "@type": "Person",
-      "name": "Admin",
+      name: "Admin",
     },
   };
 

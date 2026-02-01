@@ -25,14 +25,14 @@ export async function generateMetadata({params}){
       index: true,
       follow: true,
     },
-    title: `${article.title}`,
-    description: `${article.metaDescription}`,
+    title: `${article.title.substring(0, 50)}`,
+    description: `${article.metaDescription.substring(0, 150)}`,
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/tourist-places/${slug}`,
     },
     openGraph: {
       title: `${article.title}`,
-      description: `${article.metaDescription}`,
+      description: `${article.metaDescription.substring(0, 150)}`,
       images: [
         {
           url: article.imageUrl,
@@ -46,7 +46,7 @@ export async function generateMetadata({params}){
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.description,
+      description: article.description.substring(0, 150),
       images: [article.image],
     },
   };
@@ -75,6 +75,7 @@ export default async function FieldPage(context) {
           alt={article.imageAtl || "image content"}
           width={1200}
           height={630}
+          loading="eager"
           priority
           className="w-full h-full object-cover"
         />

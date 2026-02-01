@@ -5,41 +5,18 @@ import Footer2 from "@/components/ui/Footer2";
 
 
 export const metadata = {
-  title: "CG Wild Explore",
-  description: "chhattisgarh all best tourist places waterfall, temple ets. in one place know more",
-  keywords: ["chhattisgarh", "cg-tourist-places", "waterfall"],
-  authors: [{ name: "vishal" }],
-  metadataBase: new URL('https://cgwildexplore.vercel.app'),
-  alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/tourist-places`,
+  title:{
+    default: "CG Wild Explore" ,
+    template: "%s | CG Wild Explore",
   },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/web-app-manifest-192x192.png",
-
+  description: "chhattisgarh all best tourist places waterfall, temple ets. and chhattisgarh geography in one place know more",
+  alternates: {
+    canonical: "https://cgwildexplore.vercel.app/tourist-places",
   },
   openGraph: {
-    title: "chhattisgarh tourist places",
-    description: "chhattisgarh tourist loctions, places blog. Know more about blogs",
-    url: "https://cgwildexplore.vercel.app",
     siteName: "chhattisgarh wild explore",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Chhattisgarh tourist places"
-      },
-    ],
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "chhattisgarh blog and tourist places",
-    description: "know more about chhattisgarh tourist loctions, places ",
-    images: ["/og-image.png"],
-  },
+  }
 };
 export default function ClinetLayout({ children }) {
   return (

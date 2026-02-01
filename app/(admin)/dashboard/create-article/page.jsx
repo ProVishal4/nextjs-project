@@ -6,7 +6,7 @@ import axios from "axios";
 import React, { useState, useRef, useEffect } from "react";
 
 export default function page({ id }) {
-  const { category, fetchCategory } = categoryStore();
+  const [ category, setCategory ] = useState([]);
   const [dwonMenu, setDwonMenu] = useState(true);
   const [imgSection, setImgSection] = useState(true);
 
@@ -24,7 +24,11 @@ export default function page({ id }) {
 
   const arrowUp = "/icons/arrowup.png";
   const arrowDown = "/icons/arrow-down.png";
+ const getCagetory = async () => {
+   const res = await axios.get('/api/category')
 
+    setCategory(res.data);
+ }
   useEffect(() => {
     if (id) {
       axios
@@ -34,7 +38,7 @@ export default function page({ id }) {
         .then((res) => setForm(res.data))
         .catch((err) => console.log(err));
     }
-    fetchCategory();
+   getCagetory()
   }, [id]);
 
   const change = () => {
