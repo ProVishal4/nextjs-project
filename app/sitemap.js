@@ -31,7 +31,7 @@ export default async function sitemap() {
     ].map((route) => ({
         url: escapeXml(`${baseUrl}/${encodeURIComponent(route)}`),
         lastModified: new Date(),
-        changeFrequency: route === "/tourist-places" ? "weekly" : "monthly",
+        changeFrequency: route === "/tourist-places" ? "daily" : "weekly",
         priority: 0.8,
     })
 );

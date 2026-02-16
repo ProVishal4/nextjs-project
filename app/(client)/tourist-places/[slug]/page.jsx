@@ -27,6 +27,7 @@ export async function generateMetadata({params}){
     },
     title: article.title,
     description: article.metaDescription || "Error in description Load",
+    keywords: article.tags || "Error in keywords Load",
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/tourist-places/${slug}`,
     },
@@ -46,7 +47,8 @@ export async function generateMetadata({params}){
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.metaDescription || "Error in twitter description Load",
+      description:
+        article.metaDescription || "Error in twitter description Load",
       images: [article.image],
     },
   };
