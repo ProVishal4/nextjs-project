@@ -49,7 +49,7 @@ const routeName = await database.find({}, "slug updatedAt imageUrl");
         url: escapeXml(`${baseUrl}/tourist-places/${encodeURIComponent(post.slug)}`),
         lastModified: new Date(post.updatedAt),
         images: post.imageUrl ? [escapeXml(post.imageUrl)] : [],
-        changeFrequency: "weekly",
+        changeFrequency: "daily",
         priority: 0.7,
     }));
     return [...staticRoutes, ...dynamicRoutes];

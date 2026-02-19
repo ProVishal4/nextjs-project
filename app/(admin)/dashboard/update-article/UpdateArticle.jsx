@@ -1,4 +1,6 @@
-"use client";
+"use client"
+import { IconH2, IconItalic, IconBold, IconList } from "@tabler/icons-react";
+import { Redo2, Undo2, ListOrdered, Strikethrough } from "lucide-react";
 import React, {
   useState,
   useEffect,
@@ -12,18 +14,17 @@ import axios from "axios";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 //import { set } from "mongoose";
-import { categoryStore } from "@/store/categoryStore";
+//import { categoryStore } from "@/store/categoryStore";
 
 export default function UpdateArticle({ article }) {
   // const { id } =
   //const { BaseUrl } = confing;
-  const API =
-    process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+  const API =  process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL;
   //const { category, fetchCategory } = categoryStore();
-  const [isDark, setIsDark] = useState(false);
-  const [oneArticle, setOneArticle] = useState({});
+//  const [isDark, setIsDark] = useState(false);
+  //const [oneArticle, setOneArticle] = useState({});
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+//  const [loading, setLoading] = useState(false);
   const arrowUp = "/icons/arrowup.png";
   const arrowDown = "/icons/arrow-down.png";
   const [dwonMenu, setDwonMenu] = useState(true);
@@ -183,7 +184,7 @@ export default function UpdateArticle({ article }) {
                   Category
                 </label>
                 <select
-                  className="py-1  outline-[#dbdbdb] dark:bg-[#353434]    h-10 pl-3 w-[98%] mx-auto  rounded-4xl bg-[#ebe3e3] ] "
+                  className="py-1  outline-[#dbdbdb] dark:bg-[#353434]    h-10 pl-3 w-[98%] mx-auto  rounded-4xl bg-[#ebe3e3]  "
                   name="category"
                   id="article_category"
                   value={form.category}
@@ -349,68 +350,68 @@ export default function UpdateArticle({ article }) {
                   <div className="flex gap-2 mb-3 md:h-12 flex-wrap  justify-evenly border-zinc-600/50 items-center text-zinc-800/90 border  rounded-md bg-[#e2ecfa] dark:bg-zinc-800 dark:text-white/80">
                     <div
                       onClick={() => editor.chain().focus().toggleBold().run()}
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      Bold
+                      <IconBold />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleItalic().run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      Italic
+                      <IconItalic />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleStrike().run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      Strike
+                      <Strikethrough />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleHeading({ level: 2 }).run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      H2
+                      <IconH2 />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleBulletList().run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      • List
+                      <IconList />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleOrderedList().run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      1. List
+                      <ListOrdered />
                     </div>
                     <div className="w-[20%] flex gap-2">
                       <div
                         onClick={() => editor.chain().focus().undo().run()}
                         className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#767879] bg-black/90 dark:bg-[#fcfbfb] font-medium rounded-full text-white/90 dark:text-black/90 active:scale-95 cursor-pointer"
                       >
-                        Undo
+                        <Undo2 />
                       </div>
 
                       <div
                         onClick={() => editor.chain().focus().redo().run()}
                         className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#767879] bg-black/90 dark:bg-[#fcfbfb] font-medium text-white/90 dark:text-black/90 rounded-full active:scale-95 cursor-pointer"
                       >
-                        Redo
+                        <Redo2 />
                       </div>
                     </div>
                   </div>

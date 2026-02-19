@@ -81,7 +81,7 @@ const confirmDelete = async () => {
 // view image popup handler
 const openImage = (item) => {
     // try item.image or fallback
-    const src = item.image || "/card2.jpg";
+    const src = item.imageUrl || "/card2.jpg";
     setViewImage({ src, title: item.title });
 };
 
@@ -163,7 +163,7 @@ return (
                                  border-zinc-200 dark:border-zinc-700 rounded-lg p-4 shadow-sm"
               >
                 <img
-                  src={item.image || "/card2.jpg"}
+                  src={item.imageUrl || "/card2.jpg"}
                   alt={item.title}
                   className="w-full sm:w-36 h-36 rounded-md object-cover flex-shrink-0"
                 />

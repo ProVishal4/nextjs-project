@@ -1,8 +1,10 @@
 "use client";
-import { categoryStore } from "@/store/categoryStore";
+import { IconH2, IconItalic, IconBold ,IconList } from "@tabler/icons-react";
+import { Redo2, Undo2,ListOrdered, Strikethrough} from "lucide-react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import axios from "axios";
+
 import React, { useState, useRef, useEffect } from "react";
 
 export default function page({ id }) {
@@ -96,8 +98,7 @@ export default function page({ id }) {
 
   return (
     <div>
-      
-      <div className="relative md:h-[80vh]   md:mt-8 w-[95%] m-auto  bg-[linear-gradient(45deg,#e8f5f6,#f9decc)] dark:bg-[linear-gradient(220deg,#100358,#302F2F)] dark:bg-[#201d1d] border-[0.5px] border-[#dbdbdb] dark:border-[#312f2f] rounded-2xl">
+      <div className="relative md:h-[80vh]   md:mt-8 w-[95%] m-auto dark:bg-[#201d1d] border-[0.5px] border-[#dbdbdb] dark:border-[#312f2f] rounded-2xl">
         <div className="w-[98%] m-auto ">
           {/*     action="/admin/add-article" enctype="multipart/form-data"
             method="post" */}
@@ -106,37 +107,38 @@ export default function page({ id }) {
             onSubmit={hedleSubmit}
           >
             {/* left side content  */}
-            <div className="leftSideContent overflow-y-auto overflow-x-hidden dark:bg-[linear-gradient(0deg,gray,black)] bg-[linear-gradient(0deg,#ffebcc,#fbf6fd)] md:h-[78vh] mt-[1vh] rounded-2xl pt-1   md:w-[24.8%]">
+            <div className="leftSideContent overflow-y-auto overflow-x-hidden dark:bg-[#2c2b2b] bg-[#fdf8e9] md:h-[78vh] mt-[1vh] rounded-2xl pt-1   md:w-[24.8%]">
               <h3 className="bg-[#faecf4] dark:bg-[#201414] text-md ml-[5%] rounded-2xl h-[3rem] pt-3 w-[90%] text-center items-center mt-3 font-medium">
-                Add new article
+                Create Article
               </h3>
 
-              <div className="mt-3 flex flex-col ">
-                <label htmlFor="article_title" className=" ml-4 w-full">
-                  Title
-                </label>
+              <div className="flex items-center w-[90%] border border-[#413f3f] mx-auto py-2 mt-2 active:bg-[#0b3f53] justify-center  active:scale-90 transition ease-in  rounded-md gap-2">
                 <input
-                  type="text"
-                  name="title"
-                  id="article_title"
-                  className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] "
-                  placeholder="Title for article"
-                  value={form.title}
+                  type="checkbox"
+                  id="popular"
+                  name="popular"
+                  checked={form.popular}
                   onChange={handleChange}
+                  className="w-4 h-4 text-blue-600 dark:text-blue-400 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
                 />
+                <label
+                  htmlFor="popular"
+                  className="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer"
+                >
+                  Mark as Popular
+                </label>
               </div>
               <div className="mt-3 flex flex-col gap-2">
                 <label htmlFor="article_category" className="pl-3">
                   Category
                 </label>
                 <select
-                  className="py-1  outline-[#dbdbdb] dark:bg-[#353434]    h-10 pl-3 w-[90%] mx-auto  rounded-4xl bg-[#ebe3e3] ] "
+                  className="py-1   outline-none dark:bg-[#353434]    h-10 pl-3 w-[90%] mx-auto  rounded-4xl bg-[#ebe3e3] ] "
                   name="category"
                   id="article_category"
                   value={form.category}
                   onChange={handleChange}
                 >
-             
                   {category.map((item) => (
                     <option
                       key={item._id}
@@ -170,7 +172,7 @@ export default function page({ id }) {
                     type="text"
                     name="slug"
                     id="slugname"
-                    className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
+                    className=" outline-none h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3]  dark:bg-[#201414] dark:border-[#dbdbdb] "
                     placeholder="SEO for Routes"
                     value={form.slug}
                     onChange={handleChange}
@@ -184,7 +186,7 @@ export default function page({ id }) {
                     type="text"
                     name="tags"
                     id="tags"
-                    className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb]"
+                    className=" outline-none h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb]"
                     placeholder="Keyword tags "
                     value={form.tags}
                     onChange={handleChange}
@@ -198,7 +200,7 @@ export default function page({ id }) {
                     type="text"
                     name="metaDescription"
                     id="meta_description"
-                    className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb]"
+                    className=" outline-none h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb]"
                     placeholder="Meta Description"
                     value={form.metaDescription}
                     onChange={handleChange}
@@ -213,29 +215,12 @@ export default function page({ id }) {
                     type="text"
                     name="imageAtl"
                     id="imageAtl_desc"
-                    className="outline-[#dbdbdb] h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
+                    className=" outline-none h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
                     value={form.imageAtl}
                     onChange={handleChange}
                     placeholder="Image Name for SEO"
                   />
                 </div>
-              </div>
-
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="popular"
-                  name="popular"
-                  checked={form.popular}
-                  onChange={handleChange}
-                  className="w-4 h-4 text-blue-600 dark:text-blue-400 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
-                />
-                <label
-                  htmlFor="popular"
-                  className="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer"
-                >
-                  Mark as Popular
-                </label>
               </div>
 
               <div
@@ -258,7 +243,7 @@ export default function page({ id }) {
                     type="text"
                     name="imageUrl"
                     id="article_image"
-                    className="outline-[#dbdbdb]  h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
+                    className=" outline-none  h-10 pl-3 w-[90%] mx-auto rounded-4xl bg-[#ebe3e3] dark:bg-[#201414] dark:border-[#dbdbdb] "
                     onChange={handleChange}
                     placeholder="Enter Image URL "
                   />
@@ -270,12 +255,11 @@ export default function page({ id }) {
                     />
                   </div>
                 </div>
-              
               </div>
               <button
                 type="submit"
                 name="submit"
-                className="bg-[#c379ee] rounded-2xl my-10 hover:font-bold hover:bg-[#993dbd] w-[40%] ml-[29%] h-[2rem]  text-white"
+                className="dark:bg-[#b1afb3] bg-[#494849] dark:text-[#3b3a3a] font-bold  rounded-md my-10 hover:font-bold dark:hover:bg-[#eceaec] w-[90%] ml-[5%] h-[2.5rem]  text-white"
                 value="Save"
               >
                 Save
@@ -283,84 +267,109 @@ export default function page({ id }) {
             </div>
 
             {/* right side blog titles:-  */}
-          
-            <div className="rightSideContent mx-auto rounded-2xl bg-[linear-gradient(220deg,#deecf7,#f3d0cf)] dark:bg-[linear-gradient(180deg,#100358,#302F2F)] md:mt-[1vh] md:h-[78vh] md:w-[73.9%] ">
+
+            <div className="rightSideContent mx-auto rounded-2xl bg-[linear-gradient(220deg,#deecf7,#f3d0cf)] dark:bg-[linear-gradient(180deg,#302F2F,#302F2F)] md:mt-[1vh] md:h-[78vh] md:w-[73.9%]">
               <div className="mt-3 w-[100%]  flex flex-col gap-2 blogbox">
-               
+                <div className="mt-3 flex flex-col ">
+                  <label
+                    htmlFor="article_title"
+                    className="text-center ml-4 w-full"
+                  >
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    id="article_title"
+                    className="outline-none h-10 pl-3 w-[98%] mx-auto rounded-md border  bg-[#ebe3e3] dark:bg-[#333131] "
+                    placeholder="Title for article"
+                    value={form.title}
+                    onChange={handleChange}
+                  />
+                </div>
                 <div>
                   {/* Toolbar */}
                   <div className="flex gap-2 mb-3 md:h-12 flex-wrap  justify-evenly border-zinc-600/50 items-center text-zinc-800/90 border  rounded-md bg-[#e2ecfa] dark:bg-zinc-800 dark:text-white/80">
                     <div
                       onClick={() => editor.chain().focus().toggleBold().run()}
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      Bold
+                      <IconBold />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleItalic().run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      Italic
+                      <IconItalic />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleStrike().run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      Strike
+                      <Strikethrough />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleHeading({ level: 2 }).run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      H2
+                      <IconH2 />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleBulletList().run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      • List
+                      <IconList />
                     </div>
 
                     <div
                       onClick={() =>
                         editor.chain().focus().toggleOrderedList().run()
                       }
-                      className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#1b8cc0] bg-transparent dark:bg-[#42404067] rounded-xl active:scale-95"
+                      className="px-3 py-1 h-9 border border-lime-400 dark:border-[#4a4b4bd3] bg-transparent cursor-pointer hover:bg-[#ffffff57] dark:bg-[#42404067] dark:hover:bg-[#afadad38] rounded-md active:scale-95"
                     >
-                      1. List
+                      <ListOrdered />
                     </div>
                     <div className="w-[20%] flex gap-2">
                       <div
                         onClick={() => editor.chain().focus().undo().run()}
                         className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#767879] bg-black/90 dark:bg-[#fcfbfb] font-medium rounded-full text-white/90 dark:text-black/90 active:scale-95 cursor-pointer"
                       >
-                        Undo
+                        <Undo2 />
                       </div>
 
                       <div
                         onClick={() => editor.chain().focus().redo().run()}
                         className="px-3 py-1 h-9 border-r-2 border-b-2 border-lime-400 dark:border-[#767879] bg-black/90 dark:bg-[#fcfbfb] font-medium text-white/90 dark:text-black/90 rounded-full active:scale-95 cursor-pointer"
                       >
-                        Redo
+                        <Redo2 />
                       </div>
                     </div>
                   </div>
 
-                  {/* Editor */}
-                  <div className="border p-4 h-[15rem] rounded border-amber-600">
-                    <EditorContent className="border h-[90%]" editor={editor} />
+                  <div className="h-[80vh] md:h-[58vh] overflow-hidden  overflow-y-auto   ">
+                    <h1 className="font-medium text-center my-1">
+                      Article Description Box
+                    </h1>
+                    {/* Editor */}
+                    {/* border border-amber-600 */}
+                    <div className=" p-4 h-auto rounded ">
+                      <EditorContent
+                        className="border h-[90%] "
+                        editor={editor}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
