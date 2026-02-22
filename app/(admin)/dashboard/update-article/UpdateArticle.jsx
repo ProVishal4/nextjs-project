@@ -9,6 +9,7 @@ import React, {
   useMemo,
 } from "react";
 import axios from "axios";
+import ImageExt from "@tiptap/extension-image";
 //import { useParams } from "react-router-dom";
 //import confing from "../../config/confing";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -88,13 +89,24 @@ export default function UpdateArticle({ article }) {
   //   , [])
   const editor = useEditor({
     immediatelyRender: false,
-    extensions: [StarterKit],
+    extensions: [StarterKit,
+      ImageExt.configure({
+            HTMLAttributes: {
+              class: "rounded-lg border border-gray-200 my-4 shadow-sm", // Tailwind classes for images
+            },
+          }),],
     content: article.description,
     onUpdate: ({ editor }) => {
       setForm((prev) => ({
         ...prev,
         description: editor.getHTML(),
       }));
+    },
+    editorProps: {
+      attributes: {
+        class:
+          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none border p-4 rounded-md min-h-[300px]",
+      },
     },
   });
   useEffect(() => {
@@ -147,6 +159,37 @@ export default function UpdateArticle({ article }) {
   const imgHendel = () => {
     setImgSection(!imgSection);
   };
+
+
+const addImageLoop = () => {
+  const url = window.prompt("Enter Image URL:");
+  const altText = window.prompt(
+    "Enter Image Alt Description"
+  );
+
+  if (!url) return;
+
+  // This command inserts the structured sequence in one go
+  editor
+    .chain()
+    .focus()
+    .insertContent([
+      {
+        type: "image",
+        attrs: { src: url, alt: altText || "" },
+      }
+      // ,
+      // {
+      //   type: "paragraph",
+      //   content: [
+      //     { type: "text", text: "Enter your related paragraph2 here..." },
+      //   ],
+      // }
+    ])
+    .run();
+};
+
+
   return (
     <div>
       <div className="relative md:h-[80vh]   md:mt-8 w-[95%] m-auto dark:bg-[#201d1d] border-[0.5px] border-[#dbdbdb] dark:border-[#312f2f] rounded-2xl">
@@ -344,6 +387,14 @@ export default function UpdateArticle({ article }) {
                     value={form.title}
                     onChange={handleChange}
                   />
+                </div>
+                <div className="flex gap-2 mb-4 border-b pb-2">
+                  <div
+                    onClick={addImageLoop}
+                    className="bg-[#bceaff4f] cursor-pointer ml-2 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                  >
+                    Add Image in Paragraph
+                  </div>
                 </div>
                 <div>
                   {/* Toolbar */}

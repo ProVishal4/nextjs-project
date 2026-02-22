@@ -4,6 +4,7 @@ import { Redo2, Undo2,ListOrdered, Strikethrough} from "lucide-react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import axios from "axios";
+import ImageExt from "@tiptap/extension-image";
 
 import React, { useState, useRef, useEffect } from "react";
 
@@ -80,25 +81,64 @@ export default function page({ id }) {
   };
 
   const editor = useEditor({
-    extensions: [StarterKit],
-   // content: "<p>Hello Tiptap!</p>",
+    extensions: [
+      StarterKit,
+      ImageExt.configure({
+        HTMLAttributes: {
+          class: "rounded-lg border border-gray-200 my-4 shadow-sm", // Tailwind classes for images
+        },
+      }),
+    ],
+    // content: "<p>Hello Tiptap!</p>",
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
-   
       setForm((prev) => ({
         ...prev,
         description: editor.getHTML(),
       }));
     },
+    editorProps: {
+      attributes: {
+        class:
+          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none border p-4 rounded-md min-h-[300px]",
+      },
+    },
   });
 
   //console.log(form);
+const addImageLoop = () => {
+  const url = window.prompt("Enter Image URL:");
+    const altText = window.prompt(
+      "Enter Image Alt Description (for accessibility):"
+    );
 
+  if (!url) return;
+
+  // This command inserts the structured sequence in one go
+  editor
+    .chain()
+    .focus()
+    .insertContent([
+      {
+        type: "image",
+        attrs: { src: url, alt: altText || "" },
+      }
+      // ,
+      // {
+      //   type: "paragraph",
+      //   content: [
+      //     { type: "text", text: "Enter your related paragraph2 here..." },
+      //   ],
+      // },
+    
+    ])
+    .run();
+};
   if (!editor) return null;
 
   return (
     <div>
-      <div className="relative md:h-[80vh]   md:mt-8 w-[95%] m-auto dark:bg-[#201d1d] border-[0.5px] border-[#dbdbdb] dark:border-[#312f2f] rounded-2xl">
+      <div className="relative md:h-[90vh]   md:mt-8 w-[95%] m-auto dark:bg-[#201d1d] border-[0.5px] border-[#dbdbdb] dark:border-[#312f2f] rounded-2xl">
         <div className="w-[98%] m-auto ">
           {/*     action="/admin/add-article" enctype="multipart/form-data"
             method="post" */}
@@ -107,7 +147,7 @@ export default function page({ id }) {
             onSubmit={hedleSubmit}
           >
             {/* left side content  */}
-            <div className="leftSideContent overflow-y-auto overflow-x-hidden dark:bg-[#2c2b2b] bg-[#fdf8e9] md:h-[78vh] mt-[1vh] rounded-2xl pt-1   md:w-[24.8%]">
+            <div className="leftSideContent overflow-y-auto overflow-x-hidden dark:bg-[#2c2b2b] bg-[#fdf8e9] md:h-[88vh] mt-[1vh] rounded-2xl pt-1   md:w-[24.8%]">
               <h3 className="bg-[#faecf4] dark:bg-[#201414] text-md ml-[5%] rounded-2xl h-[3rem] pt-3 w-[90%] text-center items-center mt-3 font-medium">
                 Create Article
               </h3>
@@ -268,7 +308,7 @@ export default function page({ id }) {
 
             {/* right side blog titles:-  */}
 
-            <div className="rightSideContent mx-auto rounded-2xl bg-[linear-gradient(220deg,#deecf7,#f3d0cf)] dark:bg-[linear-gradient(180deg,#302F2F,#302F2F)] md:mt-[1vh] md:h-[78vh] md:w-[73.9%]">
+            <div className="rightSideContent mx-auto rounded-2xl bg-[linear-gradient(220deg,#deecf7,#f3d0cf)] dark:bg-[linear-gradient(180deg,#302F2F,#302F2F)] md:mt-[1vh] md:h-[88vh] md:w-[73.9%]">
               <div className="mt-3 w-[100%]  flex flex-col gap-2 blogbox">
                 <div className="mt-3 flex flex-col ">
                   <label
@@ -286,6 +326,14 @@ export default function page({ id }) {
                     value={form.title}
                     onChange={handleChange}
                   />
+                </div>
+                <div className="flex gap-2 mb-4 border-b pb-2">
+                  <button
+                    onClick={addImageLoop}
+                    className="bg-[#44468be1] cursor-pointer ml-2 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                  >
+                    Add Image in Paragraph
+                  </button>
                 </div>
                 <div>
                   {/* Toolbar */}
