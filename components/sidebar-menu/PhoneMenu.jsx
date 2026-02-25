@@ -107,7 +107,7 @@ const setStatus = menuStatusStore((s) => s.setStatus);
               exit="hidden"
               variants={backdropVariants}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-40 bg-black/40  md:hidden"
               transition={{ duration: 0.18 }}
               aria-hidden="true"
             />

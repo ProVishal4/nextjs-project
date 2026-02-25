@@ -17,35 +17,25 @@ export default function Navbar() {
         className="
          max-w-6xl flex items-center justify-between   
         backdrop-blur-xl bg-white/10  absolute top-4 z-10  md:h-13 md:w-2/3 w-7/8
-        rounded-full px-1 py-3 shadow-lg border border-zinc-300   dark:border-white/20
+        rounded-full px-1 py-3 shadow-lg border border-zinc-300   dark:border-white/20 
       "
       >
         {/* Left: Logo div */}
-        <div className="flex justify-start items-center lg:w-1/5 md:w-2/5 w-auto gap-2 px-2 md:gap-3">
+        <div className="flex justify-start  relative md:static items-center   gap-2 px-2 md:gap-3">
           <Link
-            className="flex items-center justify-center gap-2 md:gap-3 px-2 md:px-3 "
+            className="flex items-center  justify-center gap-1 md:gap-1  md:px-3"
             href="/"
           >
             <Image
-              className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full bg-white/20 backdrop-blur-md "
+              className="rounded-full"
               src={"/favicon.ico"}
-              width={50}
-              height={50}
+              width={40}
+              height={40}
               alt="logo"
             />
-            <h5
-              className=" text-[11px]
-    sm:text-sm
-    md:text-base
-    lg:text-lg
-    xl:text-xl
-    font-semibold
-    tracking-wide
-    leading-tight
-    whitespace-nowrap"
-            >
+            <h1 className="font-medium w-[40vw] ml-[60vw] md:ml-3 md:w-auto absolute md:static opacity-95 ">
               CG wild Explore
-            </h5>
+            </h1>
           </Link>
         </div>
         {/* <div className="flex items-center w-full sm:w-auto lg:w-[20%] md:w-[40%] gap-3">

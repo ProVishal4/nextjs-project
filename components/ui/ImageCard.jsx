@@ -26,22 +26,8 @@ export default function Hero() {
               "url('https://sgp.cloud.appwrite.io/v1/storage/buckets/693942d60009b75c164b/files/695539fe00371f159ba2/view?project=6939424c00043b18ebb5')",
           }}
         ></div>
-        {/* <div
-          className="w-60 h-72 bg-cover bg-center rounded-3xl"
-          style={{ backgroundImage: "url('/card3.jpg')" }}
-        ></div> */}
       </motion.div>
 
-      {/* Center Image Todo:- this image bug */}
-      {/* <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-        className="w-60 h-80 bg-cover bg-center rounded-3xl  "
-        style={{ backgroundImage: "url('/card3.jpg')" }}
-      ></motion.div> */}
-
-      {/* Text Section */}
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -50,13 +36,13 @@ export default function Hero() {
       >
         <h1 className="text-4xl md:text-5xl font-bold leading-tight">
           Welcome to <br />
-          <span className="text-pink-500">Chhattisgarh</span> <br />
-          <span className="text-pink-500">Explore Tourist Attractions</span>
+          <span className="text-[#88e651]">Chhattisgarh</span> <br />
+          <span className="text-[#7af3e9bb]">Explore Tourist Attractions</span>
         </h1>
 
         <p className="mt-4 text-gray-700 dark:text-gray-300 text-lg">
           Discover the rich cultural heritage and natural beauty of
-          <span className="text-pink-500"> Chhattisgarh</span> through its
+          <span className="font-medium"> Chhattisgarh</span> through its
           stunning landscapes, vibrant traditions, and warm hospitality.
         </p>
       </motion.div>

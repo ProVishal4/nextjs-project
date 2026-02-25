@@ -77,13 +77,4 @@ export default function Section4() {
     </>
   );
 }
-//                   </button>
-//                 </div>
-//               </div>
-//             </div>
-//           </BackgroundGradient>
-//         ))}
-//       </motion.div>
-//     </>
-//   );
-// }
+
