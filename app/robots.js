@@ -6,6 +6,6 @@ export default function robots() {
             disallow: ["/dashboard/*", "/api/*", "/login"],
         },
 
-        sitemap: "https://cgwildexplore.vercel.app/sitemap.xml",
+        sitemap: "https://cgwildexplore.com/sitemap.xml",
     };
 }

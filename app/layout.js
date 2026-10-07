@@ -20,7 +20,7 @@ export const metadata = {
   keywords: ["chhattisgarh", "cg-tourist-places", "waterfall"],
   authors: [{ name: "vishal" }],
   
-  metadataBase: new URL('https://cgwildexplore.vercel.app'),
+  metadataBase: new URL('https://cgwildexplore.com'),
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
@@ -31,7 +31,7 @@ export const metadata = {
   openGraph: {
     title: "chhattisgarh tourist places",
     description: "SEO friendly Next.js app in blh",
-    url: "https://cgwildexplore.vercel.app",
+    url: "https://cgwildexplore.com",
     siteName: "chhattisgarh wild explore",
     images: [
       {

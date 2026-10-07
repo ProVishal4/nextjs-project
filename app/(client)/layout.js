@@ -11,7 +11,7 @@ export const metadata = {
   },
   description: "chhattisgarh all best tourist places waterfall, temple ets. and chhattisgarh geography in one place know more",
   alternates: {
-    canonical: "https://cgwildexplore.vercel.app/tourist-places",
+    canonical: "https://cgwildexplore.com/tourist-places",
   },
   openGraph: {
     siteName: "chhattisgarh wild explore",

@@ -97,7 +97,7 @@ export default function FieldPage() {
               className={`cursor-pointer px-3 py-2 rounded text-sm ${
                 flow ? "" : "bg-zinc-300/10 text-white"
               }`}
-              onClick={() => reloads()}
+              onClick={() => reloads()} 
             >
               All Category
             </li>

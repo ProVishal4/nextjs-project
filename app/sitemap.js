@@ -11,7 +11,7 @@ import database from "@/models/database";
             .replace(/'/g, "&apos;")
             .replace(/%2F/g, "")
             .replace(/%20/g, "");
-    }
+    } 
 // app/sitemap.js
 
 // const res = fetch(`${baseUrl}/api/v2-limit`)
