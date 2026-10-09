@@ -8,7 +8,9 @@ import Footer2 from "@/components/ui/Footer2";
 import { SessionProvider } from "next-auth/react";
 import Providers from "@/components/eliments/providers";
 import NetworkListener from "@/components/eliments/NetworkListener";
+import {GoogleAnalytics} from "@next/third-parties/google"
 //import { Inter } from "next/font/google"
+
 
 // const inter = Inter({
 //   subsets: ["latin"],
@@ -50,6 +52,7 @@ export const metadata = {
     }
 
   },
+  
   twitter: {
     card: "summary_large_image",
     site: "cg_wild_explore",
@@ -62,8 +65,9 @@ export default function RootLayout({ children }) {
   return (
     <html  lang="en" suppressHydrationWarning >
      
-      <Providers>
+      
       <body>
+        <Providers>
           <NetworkListener />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {/* <Navbar /> */}
@@ -71,7 +75,10 @@ export default function RootLayout({ children }) {
           {children}
           {/* <Footer2 /> */}
         </ThemeProvider>
-      </body></Providers>
+         </Providers>
+        <GoogleAnalytics gaId="G-4D1YPMMF7W" />
+      </body>
+     
     </html>
   );
 }
